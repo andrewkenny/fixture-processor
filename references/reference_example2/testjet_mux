@@ -1,0 +1,192 @@
+------------------------------------------------------------------------------
+AGILENT ICT FIXTURE TESTJET REPORT         Wed May 13 15:54:22 2020      
+
+C:/Agilent_ICT/boards/benchmark/58141/wa24_netzteil_io/fixture/testjet_mux
+------------------------------------------------------------------------------
+
+==============================================================
+REQUIRED TESTJET MUX CARDS
+==============================================================
+
+Module 2 Top side MUX 1 card
+Module 2 Bottom side MUX 2 card
+
+==============================================================
+TESTJET MUX CARD ADDRESS SWITCH SETTINGS
+==============================================================
+
+  Module |  Side   | Address | 4 3 2 1
+--------------------------------------------------------------
+    2    |   Top   |    1    | 0 0 0 1
+    2    | Bottom  |    2    | 0 0 1 0
+
+The customer must choose between VectorlessEP and original TestJet.
+Do not mix these in the same fixture.
+For VectorlessEP (N4300A MUX and N4307A MUX+REF cards)
+  Switch settings are (0 = OFF, 1 = ON)
+For original TestJet (E3849A MUX and E3969A MUX+REF cards)
+  Switch settings are (0 = OPEN, 1 = CLOSED)
+
+==============================================================
+TESTJET MUX CARD TO TESTHEAD PERSONALITY PIN WIRING
+==============================================================
+
+Module 2 Top side MUX 1 card
+  Pin (2 01.00  32.0) to Transfer [2 12.64  16.3] to MUX 1 J1.2
+  Pin (2 06.00  19.0) to Transfer [2 12.43  16.3] to MUX 1 J1.3
+  Pin (2 06.00  21.0) to Transfer [2 12.64  62.3] to MUX 1 J1.4
+  Pin (2 06.00  23.0) to Transfer [2 13.29  16.3] to MUX 1 J1.5
+  Pin (2 01.00  72.0) to Transfer [2 12.21  16.3] to MUX 1 J1.6
+  Pin (2 01.00  76.0) to Transfer [2 12.43  62.3] to MUX 1 J1.7
+  Pin (2 01.00  75.0) to Transfer [2 13.29  62.3] to MUX 1 J1.8
+  Pin (2 06.00  18.0) to Transfer [2 13.50  16.3] to MUX 1 J1.9
+
+
+
+Module 2 Bottom side MUX 2 card
+  Pin (2 01.00  32.0) to MUX 2 J1.2
+  Pin (2 06.00  19.0) to MUX 2 J1.3
+  Pin (2 06.00  21.0) to MUX 2 J1.4
+  Pin (2 06.00  23.0) to MUX 2 J1.5
+  Pin (2 01.00  72.0) to MUX 2 J1.6
+  Pin (2 01.00  76.0) to MUX 2 J1.7
+  Pin (2 01.00  75.0) to MUX 2 J1.8
+  Pin (2 06.00  18.0) to MUX 2 J1.9
+
+
+==============================================================
+TESTJET PROBE TO MUX CARD PORT WIRING
+==============================================================
+
+
+Page 2
+------------------------------------------------------------------------------
+AGILENT ICT FIXTURE TESTJET REPORT         Wed May 13 15:54:22 2020      
+
+C:/Agilent_ICT/boards/benchmark/58141/wa24_netzteil_io/fixture/testjet_mux
+------------------------------------------------------------------------------
+
+Module 2 Top side MUX 1 card
+  Probe d2000 [2 09.76  34.4] Top Side, Standard  to port 1
+  Probe d3020 [2 08.86  51.3] Top Side, Small  to port 2
+  Probe d3022 [2 09.43  51.4] Top Side, Small  to port 3
+  Probe u2500 [2 14.30  25.1] Top Side, Standard  to port 4
+  Probe u3004 [2 13.36  53.9] Top Side, Small  to port 5
+  Probe u3005 [2 09.52  54.6] Top Side, Small  to port 6
+  Probe u5000 [2 07.96  23.8] Top Side, Standard  to port 7
+  Probe u5200 [2 08.07  39.0] Top Side, Standard  to port 8
+  Probe u9300 [2 11.22  31.3] Top Side, Small  to port 9
+  Probe u9301 [2 15.67  35.2] Top Side, Standard  to port 10
+  Probe u9302 [2 10.77  43.9] Top Side, Small  to port 11
+
+Module 2 Bottom side MUX 2 card
+  Probe d3021 [2 08.28  52.9] Bottom Side, Small  to port 1
+  Probe d3023 [2 08.19  50.6] Bottom Side, Small  to port 2
+  Probe u3006 [2 12.54  26.7] Bottom Side, Small  to port 3
+  Probe u3012 [2 13.38  25.5] Bottom Side, Small  to port 4
+  Probe u5100 [2 06.08  49.9] Bottom Side, Standard  to port 5
+
+Page 3
+------------------------------------------------------------------------------
+AGILENT ICT FIXTURE TESTJET REPORT         Wed May 13 15:54:22 2020      
+
+C:/Agilent_ICT/boards/benchmark/58141/wa24_netzteil_io/fixture/testjet_mux
+------------------------------------------------------------------------------
+
+==============================================================
+DIAGRAM OF TESTJET/REFERENCE MUX CARD
+==============================================================
+Note: J6 exists only on the N4307A & E3969A MUX+REF cards.
+         __________________________________ 
+        |                                  |
+        |                            J3    |
+        |                           ____   |
+        |                  port 64 |o  o|  |
+        |                  port 63 |o  o|  |
+        |                  port 62 |o  o|  |
+        |                  port 61 |o  o|  |
+        |                  port 60 |o  o|  |
+        |                  port 59 |o  o|  |
+        |                  port 58 |o  o|  |
+        |                  port 57 |o  o|  |
+        |                  port 56 |o  o|  |
+        |                  port 55 |o  o|  |
+        |                  port 54 |o  o|  |
+        |                  port 53 |o  o|  |
+        |                  port 52 |o  o|  |
+        |                  port 51 |o  o|  |
+        |                  port 50 |o  o|  |
+        |                  port 49 |o  o|  |
+        |                  port 48 |o  o|  |
+        |                  port 47 |o  o|  |
+        |                  port 46 |o  o|  |
+        |                  port 45 |o  o|  |
+        |                  port 44 |o  o|  |
+        |                  port 43 |o  o|  |
+        |                  port 42 |o  o|  |
+        |                  port 41 |o  o|  |
+        |                  port 40 |o  o|  |
+        | N4300A & N4307A  port 39 |o  o|  |     E3849A & E3969A
+        |      switch      port 38 |o  o|  |	     switch
+        |   _____________  port 37 |o  o|  |      _____________ 
+        |  |  4  3  2  1 | port 36 |o  o|  |     |  4  3  2  1 |
+        |  | [] [] [] [] | port 35 |o  o|  |     | [] [] [] [] |
+        |  | [] [] [] [] | port 34 |o  o|  |     | [] [] [] [] |
+        |  |     ON      | port 33 |o  o|  |     |    OPEN     |
+        |  |_____________|         |____|  |     |_____________|
+        |                             GND  |
+        |       J1                         |
+        |   __________                     |
+        |  |          |                    |
+        |  | o 1  6 o |                    |
+        |  | o 2  7 o |                    |
+        |  | o 3  8 o |                    |
+        |  | o 4  9 o |                    |
+        |  | o 5 10 o |                    |
+        |  |__________|                    |
+        |                            J2    |
+        |                           ____   |
+        |                  port 32 |o  o|  |
+
+Page 4
+------------------------------------------------------------------------------
+AGILENT ICT FIXTURE TESTJET REPORT         Wed May 13 15:54:22 2020      
+
+C:/Agilent_ICT/boards/benchmark/58141/wa24_netzteil_io/fixture/testjet_mux
+------------------------------------------------------------------------------
+
+        |                  port 31 |o  o|  |
+        |                  port 30 |o  o|  |
+        |                  port 29 |o  o|  |
+        |                  port 28 |o  o|  |
+        |                  port 27 |o  o|  |
+        |                  port 26 |o  o|  |
+        |                  port 25 |o  o|  |
+        |                  port 24 |o  o|  |
+        |                  port 23 |o  o|  |
+        |                  port 22 |o  o|  |
+        |                  port 21 |o  o|  |
+        |                  port 20 |o  o|  |
+        |                  port 19 |o  o|  |
+        |                  port 18 |o  o|  |
+        |                  port 17 |o  o|  |
+        |                  port 16 |o  o|  |
+        |                  port 15 |o  o|  |
+        |                  port 14 |o  o|  |
+        |                  port 13 |o  o|  |
+        |                  port 12 |o  o|  |
+        |                  port 11 |o  o|  |
+        |   J5 (Vtep) /    port 10 |o  o|  |
+        |   J6 (Testjet)   port  9 |o  o|  |
+        |   __________     port  8 |o  o|  |
+        |  |          |    port  7 |o  o|  |
+        |  | o 1  6 o |    port  6 |o  o|  |
+        |  | o 2  7 o |    port  5 |o  o|  |
+        |  | o 3  8 o |    port  4 |o  o|  |
+        |  | o 4  9 o |    port  3 |o  o|  |
+        |  | o 5 10 o |    port  2 |o  o|  |
+        |  |__________|    port  1 |o  o|  |
+        |                          |____|  |
+        |                             GND  |
+        |__________________________________|
+==============================================================
