@@ -342,18 +342,25 @@ def add_probes(drawing, fixture_settings, fixture_data, flags):
                 if data.fix_id.startswith("custom"):
                     transfer_layer = f"{side}_CUSTOM_TRANSFER"
                     transfer_label_layer = f"{side}_CUSTOM_TRANSFER_LABEL"
+                    transfer_label_brc = f"{side}_CUSTOM_TRANSFER_B_R_C"
+                    
                     if not custom_transfer_flag:
                         drawing.add_layer(transfer_layer, color=2)
                         drawing.add_layer(transfer_label_layer, color=50)
+                        layer_object =  drawing.add_layer(transfer_label_brc, color=50)
+                        layer_object.off()
                         custom_transfer_flag = True
 
                 else:
                     transfer_layer = f"{side}_TRANSFER"
                     transfer_label_layer = f"{side}_TRANSFER_LABEL"
+                    transfer_label_brc = f"{side}_TRANSFER_B_R_C"
 
                     if not transfers_flag:
                         drawing.add_layer(transfer_layer, color=2)
                         drawing.add_layer(transfer_label_layer, color=50)
+                        layer_object = drawing.add_layer(transfer_label_brc, color=50)
+                        layer_object.off()
                         transfers_flag = True
 
                 if side == "BOTTOM":
@@ -372,6 +379,12 @@ def add_probes(drawing, fixture_settings, fixture_data, flags):
                 text = scaled_text(data.fix_id, coord +
                                    (x_offset, (-height) / 2), height)
                 text["layer"] = transfer_label_layer
+                drawing.add(text)
+                
+                # add the brc location.
+                text = scaled_text(data.brc, coord +
+                                   (x_offset, (-height) / 2), height)
+                text["layer"] = transfer_label_brc
                 drawing.add(text)
 
                 # draw old transfer on the plot.
@@ -412,6 +425,12 @@ def add_probes(drawing, fixture_settings, fixture_data, flags):
                     drawing.add_layer(f"{side}_PROBES", color=probe_colour)
                     drawing.add_layer(
                         f"{side}_PROBES_LABEL", color=label_colour)
+                        
+                    layer_object = drawing.add_layer(
+                        f"{side}_PROBES_B_R_C", color=label_colour)
+                    layer_object.off()    
+                        
+                        
                     probes_flag = True
 
                 probe_size_str = type.replace(" mil", "", 1)
@@ -429,6 +448,11 @@ def add_probes(drawing, fixture_settings, fixture_data, flags):
                 text = scaled_text(data.fix_id, coord +
                                    (x_offset, (-height) / 2), height)
                 text["layer"] = f"{side}_PROBES_LABEL"
+                drawing.add(text)
+                
+                text = scaled_text(data.brc, coord +
+                                   (x_offset, (-height) / 2), height)
+                text["layer"] = f"{side}_PROBES_B_R_C"
                 drawing.add(text)
 
                 if lookup_coord != coord:
@@ -451,6 +475,8 @@ def add_probes(drawing, fixture_settings, fixture_data, flags):
                     line = scaled_line(lookup_coord, coord)
                     line["layer"] = f"old_{side}_PROBES"
                     drawing.add(line)
+                    
+
 
 
 def add_wire(inserts, from_xy, to_xy, side):
@@ -528,7 +554,7 @@ def add_wires(drawing, fixture_settings, fixture_data, flags):
         layer_flags = {"BLACK": (False, 250),
                        "BLUE": (False, 5),
                        "RED": (False, 10),
-                       "CUSTOM": (False, 5)}
+                       "CUSTOM": (False, 254)}
 
         for wire in wires:
 
@@ -547,7 +573,7 @@ def add_wires(drawing, fixture_settings, fixture_data, flags):
                 flag = colour
                 line_colour = 256
 
-            (layer_added, colour_index) = layer_flags[flag]
+            (layer_added, colour_index) = layer_flags.get(flag, layer_flags["CUSTOM"])
 
             layer_name = f"{side}_WIRES_{flag}"
 
@@ -667,7 +693,7 @@ def output_fixture_plot(output_dir,
         mb.showerror(
             "Permission Error",
             "    '{}' has been opened by another process (Autocad?).\n"
-            "    Close this file and try again.".format(file_name))
+            "    Close this file and try again.".format(plot_filename))
         return False
 
     else:
