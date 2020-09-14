@@ -372,7 +372,7 @@ def parse_inserts_line(raw_line, pins_lookup, probe_dict, top_flag):
                      [ ]+                               # seperation spacing
                      (?P<y>-?\d+)                       # the Y coord
                      [ ]+                               # seperation spacing
-                     (?P<insert_type>Pin[ ]{0,3}|Tooling[ ]?|Transfer|\d{1,3}[ ]mil[ ]|Offset[ ]?)
+                     (?P<insert_type>Pin[ ]{0,3}|Tooling[ ]?|Transfer|\d{1,3}[ ]mil[ ]|(?P<probe_size>\d{1,3}Mil)Probe|Offset[ ]?)
                   """
 
     inserts_re = re.compile(inserts_re, re.VERBOSE)
@@ -395,7 +395,10 @@ def parse_inserts_line(raw_line, pins_lookup, probe_dict, top_flag):
         coord_y = int(re_lookup.group("y"))
         coord = CoordTuple(coord_x, coord_y)
         insert_type = re_lookup.group("insert_type").strip()
-
+        
+        if insert_type.endswith("Probe"):
+           insert_type = re_lookup.group("probe_size").strip().lower().replace("mil", " mil")
+        
         rest_of_line = line.replace(re_lookup[0], "", 1).strip()
 
         if insert_type == "Tooling":
@@ -416,6 +419,8 @@ def parse_inserts_line(raw_line, pins_lookup, probe_dict, top_flag):
 
         # only probes left
         else:
+            rest_of_line = re.sub(r"(\d{1,2} oz)([^ ])", r"\1 \2",
+                                  rest_of_line, count=1)
             split_line = rest_of_line.split()
             if len(split_line) == 4:
                 spring, _, node, device = split_line
