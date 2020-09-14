@@ -7,3 +7,4 @@ pylint_output.txt
 flake8_output.txt
 bin/fixture_processor/
 build/
+Git Bash.lnk
