@@ -740,7 +740,9 @@ def throughput_multiplier(fixture_data, ground_nodes):
         node_dict[node].update(pin_set)
 
     # iterate through the "node dict"
-
+    
+    fixture_module_list = set()
+    
     for node, pin_set in node_dict.items():
         fp_logger.debug("Node %s  has %d pins", node, len(pin_set))
         fp_logger.debug("%s", pin_set)
@@ -748,9 +750,16 @@ def throughput_multiplier(fixture_data, ground_nodes):
         brc_list = [pin.fix_id.brc for pin in pin_set]
 
         module_list = {brc.module for brc in brc_list}
+        
+        # add this module list to the fixtures module list.
+        fixture_module_list.update(module_list)
 
         if len(module_list) > 1:
             throughput_multiplier_flag = False
+            
+    # one module for the whole fixture means throughput multiplier is False.
+    if len(fixture_module_list) == 1:
+        throughput_multiplier_flag = False
 
         # fp_logger.debug("%s", [(brc,get_module(brc) ) for brc in brc_list])
 
