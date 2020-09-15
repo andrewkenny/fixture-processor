@@ -1111,7 +1111,7 @@ def get_custom_wire_removal_functions(fixture_dir, target):
         return None
 
     # get the contents of the csv, and store it to list of lines.
-    with remove_wires_path.open() as remove_wires:
+    with remove_wires_path.open(newline="") as remove_wires:
 
         # ensure every line is lower case.
         line_list = [line.lower() for line in remove_wires.readlines()]
@@ -1297,7 +1297,7 @@ def get_custom_insert_modification_functions(fixture_dir, target):
         return None
 
     # get the contents of the csv, and store it to list of lines.
-    with edit_inserts_path.open() as edit_inserts:
+    with edit_inserts_path.open(newline="") as edit_inserts:
 
         # ensure every line is lower case.
         line_list = [line.lower() for line in edit_inserts.readlines()]
@@ -1507,7 +1507,7 @@ def get_custom_wire_addition_functions(fixture_dir, target):
         return None
 
     # get the contents of the csv, and store it to list of lines.
-    with add_wires_path.open() as add_wires:
+    with add_wires_path.open(newline="") as add_wires:
 
         # ensure every line is lower case.
         line_list = [line.lower() for line in add_wires.readlines()]
