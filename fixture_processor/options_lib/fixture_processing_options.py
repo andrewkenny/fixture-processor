@@ -78,7 +78,7 @@ WIRE_REMOVAL_OPTIONS = \
      "hidden": False,
      "remove_custom_wires": of.CheckbuttonData("Remove user defined wires", False, False, dependants=["ignore_missing_wires", "cmd_open_remove_csv"]),
      "ignore_missing_wires": of.CheckbuttonData("Ignore missing wires", False, hidden=True),
-     "cmd_open_remove_csv": of.CmdbuttonData(f"Open '{wire_removal_filename}'\nfor editing", False, "open_remove_wires_config")}
+     "cmd_open_remove_csv": of.CmdbuttonData(f"Open '{wire_removal_filename}'\nfor editing", True, "open_remove_wires_config")}
 OPTIONS_COLLECTION.append(WIRE_REMOVAL_OPTIONS)
 
 inserts_modifier_filename = "modify_inserts.csv"
@@ -91,7 +91,7 @@ INSERTS_MODIFIER_OPTIONS = \
      "hidden": False,
      "modify_inserts": of.CheckbuttonData("Modify user defined inserts", False, False, dependants=["ignore_missing_inserts", "cmd_open_modify_csv"]),
      "ignore_missing_inserts": of.CheckbuttonData("Ignore missing inserts", False, disabled=None, hidden=True),
-     "cmd_open_modify_csv": of.CmdbuttonData(f"Open '{inserts_modifier_filename}'\nfor editing", False, "open_modify_inserts_config")}
+     "cmd_open_modify_csv": of.CmdbuttonData(f"Open '{inserts_modifier_filename}'\nfor editing", True, "open_modify_inserts_config")}
 OPTIONS_COLLECTION.append(INSERTS_MODIFIER_OPTIONS)
 
 new_wire_filename = "add_wires.csv"
@@ -104,7 +104,7 @@ NEW_WIRE_OPTIONS = \
      "hidden": False,
      "add_custom_wires": of.CheckbuttonData("Add user defined wires", False, False, dependants=["ignore_missing_custom_inserts", "cmd_open_add_csv"]),
      "ignore_missing_custom_inserts": of.CheckbuttonData("Ignore missing custom inserts", False, disabled=None, hidden=True),
-     "cmd_open_add_csv": of.CmdbuttonData(f"Open '{new_wire_filename}'\nfor editing", False, "open_add_wires_config")}
+     "cmd_open_add_csv": of.CmdbuttonData(f"Open '{new_wire_filename}'\nfor editing", True, "open_add_wires_config")}
 OPTIONS_COLLECTION.append(NEW_WIRE_OPTIONS)
 
 ENGINEERING_OPTIONS = \
