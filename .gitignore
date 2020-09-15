@@ -6,5 +6,6 @@ __pycache__/
 pylint_output.txt
 flake8_output.txt
 bin/fixture_processor/
+bin/fixture_processor_x86/
 build/
 Git Bash.lnk
