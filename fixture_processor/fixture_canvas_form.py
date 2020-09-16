@@ -1,80 +1,84 @@
-
+"""
+This module holds all of the code to
+extract relevent data from the fixture file
+and draw it to the turtle canvas
+"""
 
 import re
-
+import turtle
+from turtle import Vec2D
 
 import tkinter as tk
 
 from .fixture_functions import fixture_input as fi
 
-import turtle
-from turtle import Vec2D
 
-
-
-
-
-class FixtureCanvas(tk.Frame):
+class FixtureCanvas(tk.Frame):  # pylint: disable=too-many-ancestors
     """
     The frame showing the canvas of
     the fixture.
     """
-    
+
     def __init__(self, window, master):
         if master:
             tk.Frame.__init__(self, master)
-        
-     
+
         # define local variables.
         self.offset_outlines = {}
         self.offset_tooling = {}
         self.board_center = {}
         self.panel_fixture = {}
-        
+        self.program_options = {}
+        self.raw_fixture_data = tuple()
+
         self.window = window
         self.create_widgets()
-        
-        
-    @property    
+
+    @property
     def canvas_width(self):
+        "returns parent windows canvas width"
         return self.window.canvas_width
 
-    @property    
+    @property
     def canvas_height(self):
+        "returns parent windows canvas height"
         return self.window.canvas_height
-    
+
     @property
     def fixture_path(self):
+        "returns parent window fixture path"
         return self.window.fixture_path
-        
+
     @property
     def width_ratio(self):
+        "returns parent window width ratio"
         return self.window.width_ratio
-        
+
     def create_widgets(self):
-    
+        """
+        This method is called in __init__
+        in order to fill this frame with widgets.
+        """
         # create canvas for holding turtle screen
         self.cnv_plot = tk.Canvas(master=self, relief=tk.SUNKEN)
         self.cnv_plot["width"] = self.canvas_width
         self.cnv_plot["height"] = self.canvas_height
         self.cnv_plot.pack()
-        
-        
+
         # create turtle screen with which to place RawTurtle
         self.turtle_screen = turtle.TurtleScreen(self.cnv_plot)
         self.turtle_screen.bgcolor("#202020")
         self.turtle_screen.tracer(0)
-        
+
         # place raw turtle.
         self.pen = turtle.RawTurtle(self.turtle_screen)
         self.pen.hideturtle()
         self.pen.speed(0)
-        
+
     def get_program_options(self):
+        "loads the program options from the uni file."
         self.program_options = self.window.get_program_options()
-        
-        
-    
+
     def draw_fixture(self):
         """
         This method uses the alrady loaded raw_fixture_data,
@@ -84,17 +88,16 @@ class FixtureCanvas(tk.Frame):
         self.get_program_options()
         self.process_locations()
         self.update_plot()
-    
-    
+
     def load_fixture_and_draw(self):
         """
         This method parses the fixture file,
         and outputs the result on the canvas.
         """
-        
+
         self.raw_fixture_data = fi.get_outline_info(self.fixture_path)
         self.draw_fixture()
-        
+
     def process_locations(self):
         """
         This function scales all of the locations so that
@@ -188,12 +191,15 @@ class FixtureCanvas(tk.Frame):
         # in order to nicely fill the allotted area?
         multiplier = outline_edge / max_dim
 
+        def fit_to_canvas(loc):
+            return ((loc - center_offset) * multiplier) + manual_offset
+
         for name, locations in outlines.items():
 
             if name.startswith("P_") and not show_panel_outline:
                 continue
 
-            new_locations = [((loc - center_offset) * multiplier) + manual_offset
+            new_locations = [fit_to_canvas(loc)
                              for loc in locations]
 
             self.offset_outlines[name] = new_locations
@@ -233,7 +239,6 @@ class FixtureCanvas(tk.Frame):
         """
 
         plot_colours = self.program_options["Plot_Colours"]
-        plot_filters = self.program_options["Plot_Filters"]
 
         background_colour = plot_colours["background_colour"]
         panel_outline_colour = plot_colours["panel_outline_colour"]
@@ -325,14 +330,3 @@ class FixtureCanvas(tk.Frame):
                 self.pen.penup()
 
         self.turtle_screen.update()
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
