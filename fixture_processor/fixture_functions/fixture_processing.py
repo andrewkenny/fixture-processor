@@ -25,6 +25,8 @@ from tkinter import messagebox as mb
 import logging
 
 
+from ..options_lib import fixture_processing_options
+
 from . import fixture_maths as fm
 from . import fixture_modifications as fmod
 from . import extract_wires as ew
@@ -52,7 +54,10 @@ def remove_user_defined_wires(fixture_dir, fixture_data, flags, target):
     # if any of these functions return True, then the
     # wire should be removed.
     # The line which generated the function is the value
-    function_dict = fmod.get_custom_wire_removal_functions(fixture_dir, target)
+    wire_removal_options = fixture_processing_options.WIRE_REMOVAL_OPTIONS
+    
+    function_dict = fmod.get_custom_functions(fixture_dir, target,
+        wire_removal_options, fmod.generate_remove_wire_functions)
 
     # we must keep track of the functions which are used.
     # a function which applies to no wires often means

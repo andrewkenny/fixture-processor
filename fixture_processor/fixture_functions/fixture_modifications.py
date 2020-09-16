@@ -1114,7 +1114,7 @@ def get_custom_functions(fixture_dir, target, processing_options,
         line_list = [line.lower() for line in remove_wires.readlines()]
         
     # remove all spaces from the lines prior to csv processing.
-    csv_line_list = list(csv.reader(line.replace(" ", "") for line inline_list))
+    csv_line_list = list(csv.reader(line.replace(" ", "") for line in inline_list))
 
     # convert the csv entries into a dict of functions,
     # and also get a flag which gets us to skip a target.
@@ -1124,65 +1124,6 @@ def get_custom_functions(fixture_dir, target, processing_options,
     if return_value is None:
         return None
     
-    function_dict, skip_target = return_value
-
-    # give warning if function_dict is empty
-    if function_dict == dict() and not skip_target:
-        msg = f"    '{filename}' does not contain\n"\
-              f"    Any wire descriptions.\n" \
-              f"    Uncheck '{function}', or \n"\
-              f"    Add wire removal entries."
-        mb.showerror("ERROR", msg)
-        return None
-
-    return function_dict
-
-
-
-def get_custom_wire_removal_functions(fixture_dir, target):
-    """
-    This function opens the remove_wires.csv,
-    performs validiation on the inputs, then returns
-    a function which takes 2 inserts (of a wire), 
-    and returns true if the 'wire entry'
-    matches any of the 'remove wire entries'
-    """
-
-    wire_removal_options = fixture_processing_options.WIRE_REMOVAL_OPTIONS
-
-    filename = wire_removal_options["filename"]
-    remove_wires_path = fixture_dir / filename
-
-    function = wire_removal_options["remove_custom_wires"].description
-
-    if not remove_wires_path.exists():
-        err = f"    Cannot find '{filename}'\n"\
-              f"    '{filename}' is required for\n"\
-              f"    '{function}'. "
-
-        mb.showerror("ERROR", err)
-        return None
-
-    # get the contents of the csv, and store it to list of lines.
-    with remove_wires_path.open(newline="") as remove_wires:
-
-        # ensure every line is lower case.
-        line_list = [line.lower() for line in remove_wires.readlines()]
-
-    # remove all spaces from the lines prior to csv processing.
-    csv_input = (line.replace(" ", "") for line in line_list)
-    csv_line_list = list(csv.reader(csv_input))
-
-    # Convert the csv entries and tokens into a list of functions,
-    # one function per line, then return it.
-    # look for empty function_dict
-
-    return_value = generate_remove_wire_functions(
-        csv_line_list, line_list, target, filename)
-
-    if return_value is None:
-        return None
-
     function_dict, skip_target = return_value
 
     # give warning if function_dict is empty
@@ -1392,8 +1333,13 @@ def validate_modify_inserts_functions(fixture_dir, bottom_inserts, top_inserts, 
 
     # get a dictionary of the functions, which will check the
     # to and from inserts. also get functional flags.
-    function_dict = get_custom_insert_modification_functions(
-        fixture_dir, target)
+    insert_editing_options = fixture_processing_options.INSERTS_MODIFIER_OPTIONS
+    function_dict = get_custom_functions(
+        fixture_dir, 
+        target,
+        insert_editing_options,
+        generate_insert_modification_functions)
+
     if function_dict is None:
         return None
 
@@ -1532,59 +1478,6 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
     return function_dict,  skip_target
 
 
-def get_custom_wire_addition_functions(fixture_dir, target):
-    """
-    This function opens the add_wires.csv,
-    performs validation on the inputs, then returns
-    two functions, and some wire data.
-    The functions take an insert, and return True if
-    it matches the insert the user wants to add a wire to.
-    """
-
-    wire_addition_options = fixture_processing_options.NEW_WIRE_OPTIONS
-
-    filename = wire_addition_options["filename"]
-    add_wires_path = fixture_dir / filename
-
-    function = wire_addition_options["add_custom_wires"].description
-
-    if not add_wires_path.exists():
-        msg = f"    Cannot find '{filename}'\n"\
-              f"    '{filename}' is required for\n"\
-              f"    '{function}'. "
-
-        mb.showerror("ERROR", msg)
-        return None
-
-    # get the contents of the csv, and store it to list of lines.
-    with add_wires_path.open(newline="") as add_wires:
-
-        # ensure every line is lower case.
-        line_list = [line.lower() for line in add_wires.readlines()]
-
-    # remove all spaces from the lines prior to csv processing.
-    csv_input = (line.replace(" ", "") for line in line_list)
-    csv_line_list = list(csv.reader(csv_input))
-
-    return_value = generate_addition_wire_functions(
-        csv_line_list, line_list, target, filename)
-
-    if return_value is None:
-        return None
-
-    function_dict, skip_target = return_value
-
-    # give warning if function_dict is empty
-    if function_dict == dict() and not skip_target:
-        msg = f"    '{filename}' does not contain\n"\
-              f"    Any wire descriptions.\n" \
-              f"    Uncheck '{function}', or \n"\
-              f"    Add new wire entries."
-        mb.showerror("ERROR", msg)
-        return None
-
-    return function_dict
-
 
 def validate_add_token(function, bottom_inserts, top_inserts):
     """
@@ -1626,7 +1519,12 @@ def validate_add_wires_functions(fixture_dir, bottom_inserts, top_inserts, targe
     # function match one insert each (on the same side of the fixture)
     # and the matching to and from insert are not the same,
     # a wire will be added.
-    function_dict = get_custom_wire_addition_functions(fixture_dir, target)
+    
+    wire_addition_options = fixture_processing_options.NEW_WIRE_OPTIONS
+    function_dict = get_custom_functions(fixture_dir, 
+                                         target, 
+                                         wire_addition_options,
+                                         generate_addition_wire_functions )
     if function_dict is None:
         return None
 
