@@ -165,8 +165,8 @@ def get_section_comments():
     section_comments = OrderedDict()
 
     for option in OPTIONS_COLLECTION:
-        name = FIXTURE_CORRECTIONS_OPTIONS["name"]
-        comment = FIXTURE_CORRECTIONS_OPTIONS["comment"]
+        name = option["name"]
+        comment = option["comment"]
         section_comments[name] = comment
 
     return section_comments
