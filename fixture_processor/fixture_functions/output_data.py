@@ -670,9 +670,9 @@ def output_fixture_plot(output_dir,
                 brc_list = (gnd_ins.fix_id.brc for gnd_ins in gnd_inserts)
 
                 if flags.throughput_multiplier:
-                    f_output_path.write(
-                        "This fixture has throughput multiplier\n"
-                        "Ensure the ground plane is split along the modules.\n"
+                    f_output_path.write(\
+                        "This fixture has throughput multiplier\n"\
+                        "Ensure the ground plane is split along the modules.\n"\
                         "(Above row 13 on Bank 2, Below row 11 on Bank 1)\n")
                         
                 else:
