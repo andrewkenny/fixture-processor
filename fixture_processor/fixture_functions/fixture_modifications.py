@@ -1085,6 +1085,59 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
 
     return function_dict, skip_target
 
+def get_custom_functions(fixture_dir, target, processing_options,
+                         generate_functions):
+    """
+    This function opens the specified csv,
+    performs validation on the inputs,
+    
+    Then returns a matching function
+    """
+    
+    filename = processing_options.filename
+    csv_path = fixture_dir / filename
+    
+    description = processing_options.description
+
+    if not csv_path.exists():
+        err = f"    Cannot find '{filename}'\n"\
+              f"    '{filename}' is required for\n"\
+              f"    '{function}'. "
+
+        mb.showerror("ERROR", err)
+        return None
+        
+    # get the contents of the csv, and store it to list of lines.
+    with remove_wires_path.open(newline="") as remove_wires:
+
+        # ensure every line is lower case.
+        line_list = [line.lower() for line in remove_wires.readlines()]
+        
+    # remove all spaces from the lines prior to csv processing.
+    csv_line_list = list(csv.reader(line.replace(" ", "") for line inline_list))
+
+    # convert the csv entries into a dict of functions,
+    # and also get a flag which gets us to skip a target.
+    return_value = generate_functions(
+        csv_line_list, line_list, target, filename)
+        
+    if return_value is None:
+        return None
+    
+    function_dict, skip_target = return_value
+
+    # give warning if function_dict is empty
+    if function_dict == dict() and not skip_target:
+        msg = f"    '{filename}' does not contain\n"\
+              f"    Any wire descriptions.\n" \
+              f"    Uncheck '{function}', or \n"\
+              f"    Add wire removal entries."
+        mb.showerror("ERROR", msg)
+        return None
+
+    return function_dict
+
+
 
 def get_custom_wire_removal_functions(fixture_dir, target):
     """
@@ -1302,9 +1355,6 @@ def get_custom_insert_modification_functions(fixture_dir, target):
         # ensure every line is lower case.
         line_list = [line.lower() for line in edit_inserts.readlines()]
 
-    # remove all spaces from the lines prior to csv processing.
-    csv_input = (line.replace(" ", "") for line in line_list)
-    csv_line_list = list(csv.reader(csv_input))
 
     # remove all spaces from the lines prior to csv processing.
     csv_input = (line.replace(" ", "") for line in line_list)
