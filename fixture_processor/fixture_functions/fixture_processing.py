@@ -19,7 +19,7 @@ all of the transforms will be collected into a data structure containing:
 """
 
 
-from collections import namedtuple, OrderedDict
+from collections import namedtuple, OrderedDict, defaultdict
 from itertools import product
 from tkinter import messagebox as mb
 import logging
@@ -56,8 +56,11 @@ def remove_user_defined_wires(fixture_dir, fixture_data, flags, target):
     # The line which generated the function is the value
     wire_removal_options = fixture_processing_options.WIRE_REMOVAL_OPTIONS
     
+    file_name = wire_removal_options["filename"]
+    description = wire_removal_options["remove_custom_wires"].description
+    
     function_dict = fmod.get_custom_functions(fixture_dir, target,
-        wire_removal_options, fmod.generate_remove_wire_functions)
+        file_name, description, fmod.generate_remove_wire_functions)
 
     # we must keep track of the functions which are used.
     # a function which applies to no wires often means
@@ -469,16 +472,13 @@ def add_user_defined_wires(fixture_dir, fixture_data, flags, target):
     for wires, inserts, functions in zip(*loop_var):
 
         # store the matches to this dict
-        matched_inserts_lookup = {}
+        matched_inserts_lookup = defaultdict(list)
 
         for (from_func, to_func, _), (coord, insert) in product(functions.keys(), inserts.items()):
             for func in [from_func, to_func]:
                 # store the matching inserts in a dictionary for later reference
                 if func(insert):
-                    if func in matched_inserts_lookup:
                         matched_inserts_lookup[func].append(coord)
-                    else:
-                        matched_inserts_lookup[func] = [coord]
 
         for (from_func, to_func, addition_flags), (line_num, raw_line) in functions.items():
             raw_line = raw_line.rstrip()

@@ -1085,8 +1085,8 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
 
     return function_dict, skip_target
 
-def get_custom_functions(fixture_dir, target, processing_options,
-                         generate_functions):
+def get_custom_functions(fixture_dir, target, filename, 
+                         description, generate_functions):
     """
     This function opens the specified csv,
     performs validation on the inputs,
@@ -1094,27 +1094,26 @@ def get_custom_functions(fixture_dir, target, processing_options,
     Then returns a matching function
     """
     
-    filename = processing_options.filename
+
     csv_path = fixture_dir / filename
     
-    description = processing_options.description
 
     if not csv_path.exists():
         err = f"    Cannot find '{filename}'\n"\
               f"    '{filename}' is required for\n"\
-              f"    '{function}'. "
+              f"    '{description}'. "
 
         mb.showerror("ERROR", err)
         return None
         
     # get the contents of the csv, and store it to list of lines.
-    with remove_wires_path.open(newline="") as remove_wires:
+    with csv_path.open(newline="") as remove_wires:
 
         # ensure every line is lower case.
         line_list = [line.lower() for line in remove_wires.readlines()]
         
     # remove all spaces from the lines prior to csv processing.
-    csv_line_list = list(csv.reader(line.replace(" ", "") for line in inline_list))
+    csv_line_list = list(csv.reader(line.replace(" ", "") for line in line_list))
 
     # convert the csv entries into a dict of functions,
     # and also get a flag which gets us to skip a target.
@@ -1130,8 +1129,8 @@ def get_custom_functions(fixture_dir, target, processing_options,
     if function_dict == dict() and not skip_target:
         msg = f"    '{filename}' does not contain\n"\
               f"    Any wire descriptions.\n" \
-              f"    Uncheck '{function}', or \n"\
-              f"    Add wire removal entries."
+              f"    Uncheck '{description}', or \n"\
+              f"    Add valid entries."
         mb.showerror("ERROR", msg)
         return None
 
@@ -1334,10 +1333,14 @@ def validate_modify_inserts_functions(fixture_dir, bottom_inserts, top_inserts, 
     # get a dictionary of the functions, which will check the
     # to and from inserts. also get functional flags.
     insert_editing_options = fixture_processing_options.INSERTS_MODIFIER_OPTIONS
+    
+    filename = insert_editing_options["filename"]
+    description = insert_editing_options["modify_inserts"].description
+    
     function_dict = get_custom_functions(
         fixture_dir, 
         target,
-        insert_editing_options,
+        filename, description,
         generate_insert_modification_functions)
 
     if function_dict is None:
@@ -1521,9 +1524,12 @@ def validate_add_wires_functions(fixture_dir, bottom_inserts, top_inserts, targe
     # a wire will be added.
     
     wire_addition_options = fixture_processing_options.NEW_WIRE_OPTIONS
+    filename = wire_addition_options["filename"]
+    description = wire_addition_options["add_custom_wires"].description
+    
     function_dict = get_custom_functions(fixture_dir, 
                                          target, 
-                                         wire_addition_options,
+                                         filename, description,
                                          generate_addition_wire_functions )
     if function_dict is None:
         return None
