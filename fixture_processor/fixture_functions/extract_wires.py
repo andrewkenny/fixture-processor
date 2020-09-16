@@ -775,7 +775,7 @@ def get_fixture_info(fixture_path):
     throughput_multiplier, module_list = fm.throughput_multiplier(
         fixture_data, ground_nodes)
 
-    return fixture_data, throughput_multiplier
+    return fixture_data, throughput_multiplier, module_list
 
 
 def clean_targets(fixture_dir):

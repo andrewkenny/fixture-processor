@@ -636,7 +636,7 @@ def throughput_multiplier(fixture_data, ground_nodes):
     if len(ground_nodes) <= 1:
         fp_logger.info(
             "Single boards (or only one grounded board) cannot have throughput multiplier")
-        return False
+        return False, set()
 
     # get the bottom wires and inserts
     wires, inserts = fixture_data._bottom
