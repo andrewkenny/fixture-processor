@@ -630,11 +630,13 @@ def generate_dxf_elements(f_output_path, fixture_settings, fixture_data, ground_
     drawing.save()
 
 
+
 def output_fixture_plot(output_dir,
                         plot_filename,
                         fixture_settings,
                         fixture_data,
                         generation_flags,
+                        module_list,
                         flags):
     """
     This function ensures the
@@ -669,9 +671,10 @@ def output_fixture_plot(output_dir,
 
                 if flags.throughput_multiplier:
                     f_output_path.write(
-                        "This fixture has throughput multiplier\n")
-                    f_output_path.write(
-                        "Ensure the ground plane is split along the modules.\n")
+                        "This fixture has throughput multiplier\n"
+                        "Ensure the ground plane is split along the modules.\n"
+                        "(Above row 13 on Bank 2, Below row 11 on Bank 1)\n")
+                        
                 else:
                     f_output_path.write(
                         "Please ensure the ground plane links all modules.\n")

@@ -768,4 +768,4 @@ def throughput_multiplier(fixture_data, ground_nodes):
     else:
         fp_logger.debug("This is not a throughput multiplier fixture.")
 
-    return throughput_multiplier_flag
+    return throughput_multiplier_flag, module_list

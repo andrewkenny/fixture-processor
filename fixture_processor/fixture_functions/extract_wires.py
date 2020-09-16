@@ -772,7 +772,7 @@ def get_fixture_info(fixture_path):
 
     fixture_data = FixtureTuple(wires, top_wires, inserts, top_inserts)
 
-    throughput_multiplier = fm.throughput_multiplier(
+    throughput_multiplier, module_list = fm.throughput_multiplier(
         fixture_data, ground_nodes)
 
     return fixture_data, throughput_multiplier
@@ -839,7 +839,7 @@ def process_fixture_info(fixture_dir, flags, generation_flags):
     if log_level in default_levels:
         fp_logger.setLevel(getattr(logging, log_level))
 
-    original_fixture_data, throughput_multiplier = get_fixture_info(
+    original_fixture_data, throughput_multiplier, module_list = get_fixture_info(
         fixture_dir)
 
     flags = flags._replace(throughput_multiplier=throughput_multiplier)
@@ -934,6 +934,7 @@ def process_fixture_info(fixture_dir, flags, generation_flags):
                 joint_settings,
                 fixture_data,
                 generation_flags,
+                module_list,
                 flags)
 
         if generation_flags.processing and target_folder in FIXTURE_TARGETS:
