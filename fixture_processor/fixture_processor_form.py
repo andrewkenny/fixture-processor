@@ -10,7 +10,7 @@ from collections import namedtuple
 
 from pathlib import Path
 
-from .options_lib import fixture_processing_options, options_functions
+from .options_lib import fixture_processing_options
 
 from .options_lib import fp_option_functions as fp_options
 
