@@ -295,7 +295,7 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
 
             for insert_match_function, mod_flags in function_dict.keys():
 
-                if mod_flags.method in ["new", "transfer"]:
+                if mod_flags.method in ["new", "transfer", "testjet"]:
                     continue
 
                 # ensure function matches insert.
@@ -344,8 +344,9 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
     # add new inserts to fixture_data
     for (insert_name, mod_flags), (line_num, raw_line) in function_dict.items():
 
-        if mod_flags.method != "transfer":
+        if mod_flags.method not in ["transfer", "testjet"]:
             continue
+            
 
         for inserts, label in zip(*loop_var):
 
