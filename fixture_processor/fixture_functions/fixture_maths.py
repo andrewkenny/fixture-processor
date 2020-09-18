@@ -171,8 +171,8 @@ class CoordTuple(typing.NamedTuple):
 
         return CoordTuple(x, -y)
 
-    @staticmethod
-    def from_mm(mm_x_coord: str, mm_y_coord: str):
+    @classmethod
+    def from_mm(cls, mm_x_coord: str, mm_y_coord: str):
         """
         creates a coord with the units in mils.
         assuming the input a string of the coord in mm.
@@ -180,16 +180,16 @@ class CoordTuple(typing.NamedTuple):
         mils_x_coord = int((float(mm_x_coord) * 100000) / 254)
         mils_y_coord = int((float(mm_y_coord) * 100000) / 254)
 
-        return CoordTuple(mils_x_coord, mils_y_coord)
+        return cls(mils_x_coord, mils_y_coord)
 
-    @staticmethod
-    def from_mils(mils_x_coord: str, mils_y_coord: str):
+    @classmethod
+    def from_mils(cls, mils_x_coord: str, mils_y_coord: str):
         """
         creates a coord with the units in mils
         assuming the input is a string of the coord in mils
         """
 
-        return CoordTuple(int(mils_x_coord), int(mils_y_coord))
+        return cls(int(mils_x_coord), int(mils_y_coord))
 
     def to_mm(self) -> tuple:
         """
@@ -265,12 +265,12 @@ class PinID(str):
     _min_column: int = 1
     _max_column: int = MAX_PIN_PER_CARD
 
-    @staticmethod
-    def from_elements(bank, row, column, half):
+    @classmethod
+    def from_elements(cls, bank, row, column, half):
 
         half_str = "1" if half else ""
 
-        return PinID(f"{bank}{row:0>2}{half_str}{column:0>2}")
+        return cls(f"{bank}{row:0>2}{half_str}{column:0>2}")
 
     @property
     def validation_checks(self):
