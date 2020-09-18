@@ -852,7 +852,7 @@ def generate_custom_transfer_comparison(argument, line_num, raw_line, err_header
     """
 
     # ensure the argument starts with p or 4 (argument is made lower case for easier parsing.
-    if not argument.startswith("custom"):
+    if not argument.startswith(("custom", "tj")):
         return None
 
     token = argument
@@ -883,7 +883,7 @@ def generate_custom_transfer_comparison(argument, line_num, raw_line, err_header
         if not isinstance(fix_id, str):
             return False
 
-        return fix_id == token
+        return fix_id.lower() == token
 
     return custom_transfer_checker
 

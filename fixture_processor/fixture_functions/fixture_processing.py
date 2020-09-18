@@ -334,7 +334,7 @@ def custom_transfer_name(mod_flags, insert_name, pin):
     """
     
     if mod_flags.method == "testjet":
-        return f"tj{insert_name}_{pin}"
+        return f"TJ{insert_name}_{pin}"
     else:
         return f"custom{insert_name}"
 
