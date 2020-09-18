@@ -260,6 +260,34 @@ def remove_ground_wires(fixture_dir, fixture_data, flags, target):
         "%d ground related wires have been removed from the fixture.", remove_count)
     return fixture_data._replace(bottom_wires=new_wires)
 
+def new_transfer(inserts, brc, new_coord, fix_id):
+    """
+    taking the location and a name, adds an insert
+    to the inserts dict.
+    """
+    
+    insert_type = "Transfer"
+    spring = ""
+    node = "OTHER"
+    device = ""
+    
+    insert = ew.InsertTuple(
+        brc, insert_type, spring, node, device, fix_id, new_coord)
+    inserts[new_coord] = insert
+
+def custom_transfer_name(mod_flags, insert_name, pin):
+    """
+    a custom insert is simply called
+        f"custom{insert_name}"
+    
+    but a testjet transfers name
+    depends on its module and pin.
+    """
+    
+    if mod_flags.method == "testjet":
+        return "tj{insert_name}_{pin}"
+    else:
+        return f"custom{insert_name}"
 
 def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
     """
@@ -366,25 +394,28 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
                 round_brackets = False
 
             new_coord = mod_flags.coord.flip_coord(flips)
-
-            if new_coord in inserts:
-                err = fmod.MOD_EXISTING_COORD.format(**locals())
-                mb.showerror("ERROR", err)
-                print(new_coord)
-                return None
-
-            brc = mod_flags.coord.to_brc_str(
-                fixture_size, round_brackets=round_brackets)
-            insert_type = "Transfer"
-            spring = ""
-            node = "OTHER"
-            device = ""
-
-            fix_id = "custom" + insert_name
-
-            insert = ew.InsertTuple(
-                brc, insert_type, spring, node, device, fix_id, new_coord)
-            inserts[new_coord] = insert
+            
+            if mod_flags.method == "testjet":
+                continue
+            else:
+                coords_list = [(new_coord, pin)]
+            
+            # add an transfer for each coord.
+            # normal transfer only adds one.
+            for new_coord, pin in coords_list:
+                if new_coord in inserts:
+                    err = fmod.MOD_EXISTING_COORD.format(**locals())
+                    mb.showerror("ERROR", err)
+                    print(new_coord)
+                    return None
+                
+                brc = mod_flags.coord.to_brc_str(
+                    fixture_size, round_brackets=round_brackets)
+                
+                
+                fix_id = custom_transfer_name(mod_flags, insert_name, pin)
+                
+                new_transfer(inserts, brc, new_coord, fix_id)
 
     return fixture_data._replace(bottom_inserts=bottom_inserts, top_inserts=top_inserts)
 
