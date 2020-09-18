@@ -214,6 +214,19 @@ GENERAL_PS_DESCRIPTION = """\
 !\
 """
 
+CUSTOM_DESCRIPTION = """\
+! A custom transfer described in "modify_inserts.csv" e.g.
+! custom1%board_detect_1
+! customGate_CLlosed1
+!
+! A testjet transfer described in "modify_inserts.csv" e.g.
+! TJ0_2
+! TJ1_4
+! TJ2_5
+! TJ3_6
+! 
+"""
+
 COMPLEX_DESCRIPTION = """\
 ! A {name} at a node. e.g. '{keyword}{{+5V}}' or '{keyword}{{1%TDI}}'
 !     or '{keyword}{{1:TDO}}'
@@ -527,6 +540,7 @@ def get_wire_addition_instructions() -> str:
 !
 {EXPLICIT_DESCRIPTION}
 {EXPLICIT_PS_DESCRIPTION}
+{CUSTOM_DESCRIPTION}
 !
 !
 ! To describe the colour, the format is:
