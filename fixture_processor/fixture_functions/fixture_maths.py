@@ -190,6 +190,21 @@ class CoordTuple(typing.NamedTuple):
         """
 
         return cls(int(mils_x_coord), int(mils_y_coord))
+        
+    @classmethod
+    def from_mils_str(cls, mils_coord_str: str):
+        """
+        creates a coord with the units in mils
+        assuming the input is a string of the coord in mils
+        in a tuple like format.
+        """
+        
+        mils_coord_str = mils_coord_str.strip("()")
+        
+
+        mils_x_coord, mils_y_coord = mils_coord_str.split(",")
+
+        return cls(int(mils_x_coord), int(mils_y_coord))
 
     def to_mm(self) -> tuple:
         """

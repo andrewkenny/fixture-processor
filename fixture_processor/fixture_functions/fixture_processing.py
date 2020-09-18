@@ -269,14 +269,44 @@ def calculate_TJ_Mux_pins(flags, pin1_coord):
     by the user.
     """
     
-    pin2_offset = eval(flags.pin2_offset)
-    pin6_offset = eval(flags.pin6_offset)
+    try:
+        pin2_offset = fm.CoordTuple.from_mils_str(flags.pin2_offset)
+    except ValueError as err:
+        msg = f"    error found in pin2 offset: \n" \
+              f"    {err}\n" \
+              f"    format should be (X, Y), where\n" \
+              f"    X and Y are integer numbers"
+        mb.showerror("ERROR", msg)
+        return None
+              
+    try:
+        pin6_offset = fm.CoordTuple.from_mils_str(flags.pin6_offset)
+    except ValueError as err:
+        msg = f"    error found in pin2 offset: \n" \
+              f"    {err}\n" \
+              f"    format should be (X, Y), where\n" \
+              f"    X and Y are integer numbers"
+        mb.showerror("ERROR", msg)
+        return None
     
-    print(pin2_offset)
-    print(pin6_offset)
-    return []
+    new_coords = []
+    
+    modified_coord = pin1_coord
+    
+    # for pins 1 to 5
+    for i in range(1, 6):
+        new_coords.append((modified_coord, i))
+        modified_coord = modified_coord + pin2_offset
+    
+    # calculate pin 6 coord
+    modified_coord = pin1_coord + pin6_offset
+    
+    # for pins 1 to 5
+    for i in range(6, 11):
+        new_coords.append((modified_coord, i))
+        modified_coord = modified_coord + pin2_offset
 
-    
+    return new_coords
 
 
 def new_transfer(inserts, brc, new_coord, fix_id):
@@ -304,7 +334,7 @@ def custom_transfer_name(mod_flags, insert_name, pin):
     """
     
     if mod_flags.method == "testjet":
-        return "tj{insert_name}_{pin}"
+        return f"tj{insert_name}_{pin}"
     else:
         return f"custom{insert_name}"
 
@@ -418,9 +448,8 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
                 coords_list = calculate_TJ_Mux_pins(flags, new_coord)
                 if coords_list is None:
                     return None
-                continue
             else:
-                coords_list = [(new_coord, pin)]
+                coords_list = [(new_coord, 1)]
             
             # add an transfer for each coord.
             # normal transfer only adds one.
