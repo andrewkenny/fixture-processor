@@ -443,6 +443,7 @@ class OptionsForm(tk.Frame):
 
         # is the entry box disabled / RFU?
         if data.disabled in [True, None]:
+            str_variable.set(data.default)
             entry_state = tk.DISABLED
         else:
             entry_state = tk.NORMAL
