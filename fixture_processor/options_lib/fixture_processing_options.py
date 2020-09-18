@@ -91,6 +91,10 @@ INSERTS_MODIFIER_OPTIONS = \
      "hidden": False,
      "modify_inserts": of.CheckbuttonData("Modify user defined inserts", False, False, dependants=["ignore_missing_inserts", "cmd_open_modify_csv"]),
      "ignore_missing_inserts": of.CheckbuttonData("Ignore missing inserts", False, disabled=None, hidden=True),
+     "pin2_offset": of.EntryTextData("TJ Mux Pin 2 Offset (mils): ",
+                                         default="(1000, 0)", disabled=True, hidden=False, width=10),
+     "pin6_offset": of.EntryTextData("TJ Mux Pin 6 Offset (mils): ",
+                                         default="(0, 1000)", disabled=True, hidden=False, width=10),
      "cmd_open_modify_csv": of.CmdbuttonData(f"Open '{inserts_modifier_filename}'\nfor editing", True, "open_modify_inserts_config")}
 OPTIONS_COLLECTION.append(INSERTS_MODIFIER_OPTIONS)
 
