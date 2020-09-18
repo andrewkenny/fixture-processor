@@ -260,6 +260,25 @@ def remove_ground_wires(fixture_dir, fixture_data, flags, target):
         "%d ground related wires have been removed from the fixture.", remove_count)
     return fixture_data._replace(bottom_wires=new_wires)
 
+def calculate_TJ_Mux_pins(flags, pin1_coord):
+    """
+    For each of the 10 pins of the mux card,
+    calculates the location of pins 2 - 10.
+    (pin 1 was provided by the user)
+    note the offsets are also provided
+    by the user.
+    """
+    
+    pin2_offset = eval(flags.pin2_offset)
+    pin6_offset = eval(flags.pin6_offset)
+    
+    print(pin2_offset)
+    print(pin6_offset)
+    return []
+
+    
+
+
 def new_transfer(inserts, brc, new_coord, fix_id):
     """
     taking the location and a name, adds an insert
@@ -396,6 +415,9 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
             new_coord = mod_flags.coord.flip_coord(flips)
             
             if mod_flags.method == "testjet":
+                coords_list = calculate_TJ_Mux_pins(flags, new_coord)
+                if coords_list is None:
+                    return None
                 continue
             else:
                 coords_list = [(new_coord, pin)]

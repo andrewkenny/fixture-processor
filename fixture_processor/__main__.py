@@ -92,7 +92,7 @@ class Window(tk.Frame):
 
         self.pack()
 
-        self.width_ratio = 1.5
+        self.width_ratio = 1.6
         logging.info("Window Width radio = %.2f" % (self.width_ratio))
 
         self.create_widgets()
