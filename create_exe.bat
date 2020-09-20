@@ -1,25 +1,36 @@
-
 @echo off
 
-set InitialPath=%PATH%
+set Processor=%1
+
+set CorrectArg=0
+
+echo %localappdata%
 
 
+del .\build\wires_processor\* /q  >nul 2>&1
 
-:: check code quality
-::pylint fixture_processor > pylint_output.txt
-::flake8 fixture_processor > flake8_output.txt
-::
-del .\build\wires_processor\* /q
+if %Processor% == 64 (
 
-pyinstaller --distpath=.\bin\fixture_processor --onefile  --noupx wires_processor.py
+    set CorrectArg=1
+    
+    
+    pyinstaller --distpath=.\bin\fixture_processor --onefile  --noupx wires_processor.py
 
-del .\build\wires_processor\* /q
+)
 
-SET PATH=C:\Users\Andrew Kenny\AppData\Local\Programs\Python\Python37-32
-SET PATH=%PATH%;C:\Users\Andrew Kenny\AppData\Local\Programs\Python\Python37-32\Scripts
-
+if %Processor% == 32 (
+    set CorrectArg=1
 
 
-"C:\Users\Andrew Kenny\AppData\Local\Programs\Python\Python37-32\Scripts\pyinstaller.exe" --distpath=.\bin\fixture_processor_x86 --onefile  --noupx wires_processor.py
+    set InitialPath=%PATH%
+    SET PATH=%localappdata%\Programs\Python\Python37-32
+    SET PATH=%PATH%;%localappdata%\Programs\Python\Python37-32\Scripts
+    
+    "%localappdata%\Programs\Python\Python37-32\Scripts\pyinstaller.exe" --distpath=.\bin\fixture_processor_x86 --onefile  --noupx wires_processor.py
+    
+    set PATH=%InitialPath%
+)
 
-set PATH=%InitialPath%
+if %CorrectArg% == 0 (
+    echo The first Argument must be '32' or '64'
+)
