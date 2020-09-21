@@ -477,10 +477,13 @@ def get_inserts_modifier_instructions() -> str:
 ! Format:
 !     offset, insert_name, units, x_offset, y_offset[, target]
 !     move, insert_name, units, x_location, y_location[, target]
+!
 !     transfer, insert_name, units, x_location, y_location[, target]
 !     top_transfer, insert_name, units, x_location, y_locatation[, target]
 !     bottom_transfer, insert_name, units, x_location, y_locatation[, target]
+!
 !     testjet, module, units, x_location, y_location[, target]
+!
 !     new, insert_name, side, units, x_location, y_location[, target][, insert_type][, node][, spring]
 !     - note that new is not implemented at the current time
 !
