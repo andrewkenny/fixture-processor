@@ -256,8 +256,10 @@ class CoordTuple(typing.NamedTuple):
         else:
             start = "["
             end = "]"
+            
+        row_str = f"{row:.2f}"
 
-        return f"{start}{bank} {row:.2f}  {column:.1f}{end}"
+        return f"{start}{bank}{row_str:>6}  {column:.1f}{end}"
 
 
 class PinID(str):

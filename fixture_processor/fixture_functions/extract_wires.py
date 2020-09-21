@@ -541,6 +541,31 @@ def get_inserts(fixture_path, pins_lookup, probe_dict):
     return inserts, top_inserts, inserts_lookup, top_inserts_lookup
 
 
+def extract_b_r_c(token_line):
+    """
+    This function extracts the bank row and column
+    accounting for negative rows.
+    (which were previously ignored)
+    """
+    
+    # account for negative row.
+    if "-" in token_line[0]:
+        bank_row, column, f_number = \
+            token_line[:3]
+            
+        bank, row = bank_row.split("-")
+        row = f"-{row}"
+        token_line = token_line[3:]
+        
+    else:
+        # then get the 'from' info
+        bank, row, column, f_number = \
+            token_line[:4]
+        token_line = token_line[4:]
+
+    return f"{bank}{row:>6} {column:>6}", token_line
+    
+
 def get_manual_line(line, inserts):
     """
     This function converts a manual line
@@ -570,13 +595,12 @@ def get_manual_line(line, inserts):
     length, gauge, colour = \
         token_line[:3]
     token_line = token_line[3:]
-
-    # then get the 'from' info
-    f_type, bank, row, column, f_number = \
-        token_line[:5]
-
-    from_brc = "{b} {r} {c:>6}".format(b=bank, r=row, c=column)
-    token_line = token_line[5:]
+    
+    f_type = token_line[0]
+    token_line = token_line[1:]
+    
+    from_brc, token_line = extract_b_r_c(token_line)
+    
 
     # finally get the 'to' info.
     to_type = token_line[0]
@@ -589,19 +613,17 @@ def get_manual_line(line, inserts):
         terminal_flag = True
 
     elif to_type in ["Pin", "Tran"]:
-        bank, row, column, to_number = \
-            token_line
-        to_brc = "{b} {r} {c:>6}".format(b=bank, r=row, c=column)
+    
+   
+        to_brc, token_line = extract_b_r_c(token_line)
 
     elif to_type == "Prob":
         if len(token_line) == 5:
             device = token_line[-1]
             token_line = token_line[:-1]
 
-        bank, row, column, to_number = \
-            token_line
-
-        to_brc = "{b} {r} {c:>6}".format(b=bank, r=row, c=column)
+   
+        to_brc, token_line = extract_b_r_c(token_line)
 
     else:
         fp_logger.info("ERROR: get_manual_line failed to parse %s", line)
