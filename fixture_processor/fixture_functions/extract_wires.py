@@ -648,9 +648,7 @@ def get_brc_terminal(token_line, inserts):
     # get the 'to brc' data, then
     # remove it from the line.
     if token_line[0].startswith(("(", "[", "*")):
-        bank, row, column = token_line[:3]
-        result = "{b} {r} {c:>6}".format(b=bank, r=row, c=column)
-        token_line = token_line[3:]
+        result, token_line = extract_b_r_c(token_line)
     else:
         terminal_flag = True
         result = token_line[0]
