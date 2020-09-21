@@ -637,12 +637,15 @@ def create_brc_loc(pin_id, offset=None):
     return brc_str
 
 
-def throughput_multiplier(fixture_data, ground_nodes):
+def throughput_multiplier(fixture_data):
     """
     This function runs a smoke test to see if the fixure
     information provided by the user is a throughput_multiplier
     fixture, In that its module grounds have to be seperated.
     """
+
+    ground_nodes = fixture_data.ground_nodes
+
 
     throughput_multiplier_flag = True
 

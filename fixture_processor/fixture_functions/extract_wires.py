@@ -162,6 +162,7 @@ class FixtureTuple(typing.NamedTuple):
     bottom_inserts: dict
     top_inserts: dict
     fixture_size: str = ""
+    ground_nodes: list = []
 
     @property
     def _wires(self):
@@ -790,10 +791,10 @@ def get_fixture_info(fixture_path):
     wires, top_wires = get_wires(
         fixture_path, (inserts_lookup, top_inserts_lookup))
 
-    fixture_data = FixtureTuple(wires, top_wires, inserts, top_inserts)
+    fixture_data = FixtureTuple(wires, top_wires, inserts, top_inserts, ground_nodes=ground_nodes)
 
     throughput_multiplier, module_list = fm.throughput_multiplier(
-        fixture_data, ground_nodes)
+        fixture_data)
 
     return fixture_data, throughput_multiplier, module_list
 
