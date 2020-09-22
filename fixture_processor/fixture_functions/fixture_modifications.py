@@ -24,26 +24,8 @@ COLUMN_ERROR = """\
     Wrong number of values ({value_count}).\
 """
 
-TARGET_FLAG_COUNT_ERR = """\
-    The target flag: '{0}' occurs more than once on line {1}
-    of "remove_wires.csv"
-    {1}:     '{2}'.
-    Only one target flag of each type is required.\
-"""
 
-DUPLICATE_FLAG_ERR = """\
-    The flag: '{0}' occurs more than once on line {1}
-    of "remove_wires.csv"
-    {1}:     '{2}'.
-    Only one target flag of each type is required.\
-"""
 
-INVALID_FLAG_ERR = """\
-    '{0}' of "remove_wires.csv"
-    is not a valid flag
-    {1}:     '{2}'.
-    Double check instructions.
-"""
 
 NO_WIRE_ERROR = """\
     The following line in 'remove_wires.csv'
@@ -52,13 +34,6 @@ NO_WIRE_ERROR = """\
     Please ensure no mistake has been made.
 """
 
-REMOVE_FLAG_ERROR = """\
-    The following line in 'remove_wires.csv'
-    has in incorrect 'remove' value.
-    {0}:     '{1}'.
-    The value after 'remove=' must be
-    'True' or 'False'
-"""
 
 REMOVE_AND_MOD_ERROR = """\
     The following line in 'remove_wires.csv'
@@ -309,7 +284,13 @@ class WireModFlags(NamedTuple):
 
     def validate_remove(self, raw_data):
         if raw_data not in ["True", "False"]:
-            mb.showerror("ERROR", REMOVE_FLAG_ERROR.format(line_num, line))
+            msg = \
+            f"    The following line in 'remove_wires.csv'\n" \
+            f"    has in incorrect 'remove' value.\n"         \
+            f"    {line_num}:     '{line}'.\n"                \
+            f"    The value after 'remove=' must be\n"        \
+            f"    'True' or 'False'\n"
+            mb.showerror("ERROR", msg)
 
         return eval(raw_data)
 
@@ -589,9 +570,13 @@ def validate_remove_flags(raw_remove_flags, line_num, line):
         flag_count = remove_flags.count(flag)
 
         if flag_count > 1:
+            msg = \
+                f"The target flag: '{flag}' occurs more than once on line {line_num}" \
+                f"of 'remove_wires.csv'" \
+                f"{line_num}:     '{line}'." \
+                f"Only one target flag of each type is required."
 
-            mb.showerror("ERROR", TARGET_FLAG_COUNT_ERR.format(
-                flag, line_num, line))
+            mb.showerror("ERROR", msg)
             return False
 
         # remove the tested flag, so string can be checked for
@@ -618,10 +603,11 @@ def generate_explicit_power_supply_comparison(argument, line_num, raw_line, err_
 
     token_match = re.fullmatch(IMP_PS_PATTERN, token, re.VERBOSE)
     if token_match is None:
-        err_message = f"    {line_num}:    '{raw_line}'.\n"
-        err_message += f"    invalid power supply description.\n"
-        err_message += f"    '{token}'\n"
-        err_message += f"    Check syntax rules and edit."
+        err_message = \
+            f"    {line_num}:    '{raw_line}'.\n" \
+            f"    invalid power supply description.\n" \
+            f"    '{token}'\n" \
+            f"    Check syntax rules and edit."
         mb.showerror("ERROR", err_header + err_message)
         return False
 
@@ -633,9 +619,10 @@ def generate_explicit_power_supply_comparison(argument, line_num, raw_line, err_
     try:
         power_supply_tuple = power_supply_dict[power_supply_lookup.upper()]
     except LookupError:
-        err_message = f"    {line_num}:    '{raw_line}'.\n"
-        err_message += f"    {power_supply_lookup} / {power_supply_lookup.upper()}\n"
-        err_message += f"    is not a valid power supply.\n"
+        err_message = \
+            f"    {line_num}:    '{raw_line}'.\n" \
+            f"    {power_supply_lookup} / {power_supply_lookup.upper()}\n" \
+            f"    is not a valid power supply.\n"
         mb.showerror("ERROR", err_header + err_message)
         return False
 
@@ -696,9 +683,10 @@ def generate_general_power_supply_comparison(argument, line_num, raw_line, err_h
     try:
         power_supply_tuple = power_supply_dict[token.upper()]
     except LookupError:
-        err_message = f"    {line_num}:    '{raw_line}'.\n"
-        err_message += f"    {power_supply_lookup} / {power_supply_lookup.upper()}\n"
-        err_message += f"    is not a valid power supply.\n"
+        err_message = \
+            f"    {line_num}:    '{raw_line}'.\n" \
+            f"    {power_supply_lookup} / {power_supply_lookup.upper()}\n" \
+            f"    is not a valid power supply.\n"
         mb.showerror("ERROR", err_header + err_message)
         return False
 
@@ -956,8 +944,14 @@ def process_flags(csv_flags, flags, filename, line_num, raw_line, target):
                 item_handled = True
                 # ensure this hasnt happened before.
                 if encounted_flags[flag_name]:
-                    err = FLAG_COUNT_ERR.format(flag_name, line_num, raw_line)
-                    mb.showerror("ERROR", err)
+                    msg = \
+                        f"    The flag: '{flag_name}' occurs more than once on line {line_num}\n" \
+                        f"    of 'remove_wires.csv'\n" \
+                        f"    {line_num}:     '{line}'.\n" \
+                        f"    Only one target flag of each type is required.\n"
+
+                    
+                    mb.showerror("ERROR", msg)
                     return None
                 else:
                     encounted_flags[flag_name] = True
@@ -986,8 +980,13 @@ def process_flags(csv_flags, flags, filename, line_num, raw_line, target):
                 break
         else:
             # if this is reached, invalid flag.
-            err = INVALID_FLAG_ERR.format(raw_item, line_num, raw_line)
-            mb.showerror("ERROR", err)
+            msg = \
+                "    '{0}' of 'remove_wires.csv'\n" \
+                "    is not a valid flag\n" \
+                "    {1}:     '{2}'.\n"
+                "    Double check instructions."
+            
+            mb.showerror("ERROR", msg)
             return None
 
         if break_flag:
