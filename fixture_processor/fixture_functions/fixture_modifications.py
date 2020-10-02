@@ -1205,7 +1205,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
         line = raw_line.strip()
         raw_line = raw_line.rstrip()
         top, bottom = True, True
-        length, direction = None, None
+        length, direction = 0, None
 
         # skip iblank lines and comments
         if not line or line.startswith("!"):
@@ -1314,7 +1314,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                 coord = ew.CoordTuple.from_mils(x_value, y_value)
 
             
-            mod_flags = InsertModFlag(method, coord, top, bottom, length, direction)
+            mod_flags = InsertModFlag(method, coord, top, bottom, int(length), direction)
             
             # for a transfer statement, a checker function is not generated.
             if method in ["transfer", "testjet"] + block_transfer_methods:

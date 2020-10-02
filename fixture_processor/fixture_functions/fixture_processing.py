@@ -260,7 +260,7 @@ def remove_ground_wires(fixture_dir, fixture_data, flags, target):
         "%d ground related wires have been removed from the fixture.", remove_count)
     return fixture_data._replace(bottom_wires=new_wires)
 
-def calculate_TJ_Mux_pins(flags, pin1_coord):
+def calculate_TJ_Mux_pins(mod_flags, flags):
     """
     For each of the 10 pins of the mux card,
     calculates the location of pins 2 - 10.
@@ -272,26 +272,26 @@ def calculate_TJ_Mux_pins(flags, pin1_coord):
     try:
         pin2_offset = fm.CoordTuple.from_mils_str(flags.pin2_offset)
     except ValueError as err:
-        msg = f"    error found in pin2 offset: \n" \
+        err = f"    error found in pin2 offset: \n" \
               f"    {err}\n" \
               f"    format should be (X, Y), where\n" \
               f"    X and Y are integer numbers"
-        mb.showerror("ERROR", msg)
+        mb.showerror("ERROR", err)
         return None
               
     try:
         pin6_offset = fm.CoordTuple.from_mils_str(flags.pin6_offset)
     except ValueError as err:
-        msg = f"    error found in pin2 offset: \n" \
+        err = f"    error found in pin2 offset: \n" \
               f"    {err}\n" \
               f"    format should be (X, Y), where\n" \
               f"    X and Y are integer numbers"
-        mb.showerror("ERROR", msg)
+        mb.showerror("ERROR", err)
         return None
     
     new_coords = []
     
-    modified_coord = pin1_coord
+    modified_coord = mod_flags.coord
     
     # for pins 1 to 5
     for i in range(1, 6):
@@ -299,7 +299,7 @@ def calculate_TJ_Mux_pins(flags, pin1_coord):
         modified_coord = modified_coord + pin2_offset
     
     # calculate pin 6 coord
-    modified_coord = pin1_coord + pin6_offset
+    modified_coord = mod_flags.coord + pin6_offset
     
     # for pins 1 to 5
     for i in range(6, 11):
@@ -308,6 +308,57 @@ def calculate_TJ_Mux_pins(flags, pin1_coord):
 
     return new_coords
 
+
+def calculate_transfer_block_pins(mod_flags, flags):
+    """
+    calculates the location of the transfer pin block
+    described in "modify_inserts.csv"
+    """
+    
+    
+    try:
+        block_pitch = int(flags.block_offset.strip())
+        if block_pitch < 1:
+            raise ValueError
+    except ValueError as err:
+        err = f"    error found in block offset: \n" \
+              f"    block offset much be a positive integer." 
+        mb.showerror("ERROR", err)
+        return None
+        
+
+    
+    if mod_flags.direction.startswith("h"):
+        row_offset = fm.CoordTuple(block_pitch, 0)
+        next_row = fm.CoordTuple(0, block_pitch)
+    else:
+        row_offset = fm.CoordTuple(0, -block_pitch)
+        next_row = fm.CoordTuple(block_pitch, 0)
+
+    # create the list containing the calculated
+    # coodinates.    
+    new_coords = []
+    pin = 1
+    modified_coord = mod_flags.coord
+    
+    # create an entry for each pin.
+    for _ in range(mod_flags.length):
+        
+        # add this new pin to the new_coords_list
+        new_coords.append((modified_coord, pin))
+        
+        #update pin variable
+        pin += 1
+        
+        # add the second row.
+        if mod_flags.method == "double_row":
+            new_coords.append((modified_coord + next_row, pin))
+            pin += 1
+            
+        modified_coord = modified_coord + row_offset
+    
+    return new_coords   
+    
 
 def new_transfer(inserts, brc, new_coord, fix_id):
     """
@@ -335,6 +386,10 @@ def custom_transfer_name(mod_flags, insert_name, pin):
     
     if mod_flags.method == "testjet":
         return f"TJ{insert_name}_{pin}"
+    elif mod_flags.method == "single_row":
+        return f"SR{insert_name}_{pin}"
+    elif mod_flags.method == "double_row":
+        return f"DR{insert_name}_{pin}"
     else:
         return f"custom{insert_name}"
 
@@ -424,11 +479,6 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
         if mod_flags.method not in ["transfer", "testjet", "single_row", "double_row"]:
             continue
         
-        # skip creating, just test parsing logic.
-        if mod_flags.method in ["single_row", "double_row"]:
-            print(insert_name, mod_flags)
-            continue
-
         for inserts, label in zip(*loop_var):
 
             # if the transfer is only for the top,
@@ -446,25 +496,32 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
             else:
                 round_brackets = False
 
-            new_coord = mod_flags.coord.flip_coord(flips)
+            
             
             if mod_flags.method == "testjet":
-                coords_list = calculate_TJ_Mux_pins(flags, new_coord)
+                coords_list = calculate_TJ_Mux_pins(mod_flags, flags)
+                if coords_list is None:
+                    return None
+            elif mod_flags.method in ["single_row", "double_row"]:
+                coords_list = calculate_transfer_block_pins(mod_flags, flags)
                 if coords_list is None:
                     return None
             else:
-                coords_list = [(new_coord, 1)]
+                coords_list = [(mod_flags.coord, 1)]
             
+            print(coords_list)
             # add an transfer for each coord.
             # normal transfer only adds one.
-            for new_coord, pin in coords_list:
+            for coord, pin in coords_list:
+                new_coord = coord.flip_coord(flips)
+                print(new_coord)
                 if new_coord in inserts:
                     err = fmod.MOD_EXISTING_COORD.format(**locals())
                     mb.showerror("ERROR", err)
-                    print(new_coord)
+                    print(inserts[new_coord])
                     return None
                 
-                brc = mod_flags.coord.to_brc_str(
+                brc = coord.to_brc_str(
                     fixture_size, round_brackets=round_brackets)
                 
                 
