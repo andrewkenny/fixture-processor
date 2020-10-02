@@ -95,6 +95,8 @@ INSERTS_MODIFIER_OPTIONS = \
                                          default="(1000, 0)", disabled=True, hidden=False, width=8),
      "pin6_offset": of.EntryTextData("TJ Mux Pin 6 Offset (⅒ mils): ",
                                          default="(0, 1000)", disabled=True, hidden=False, width=8),
+     "block_offset": of.EntryTextData("Transfer Block Offset (⅒ mils): ",
+                                         default="1000", disabled=True, hidden=False, width=5),
      "cmd_open_modify_csv": of.CmdbuttonData(f"Open '{inserts_modifier_filename}'\nfor editing", True, "open_modify_inserts_config")}
 OPTIONS_COLLECTION.append(INSERTS_MODIFIER_OPTIONS)
 
