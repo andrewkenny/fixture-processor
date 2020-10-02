@@ -325,6 +325,10 @@ class InsertModFlag(NamedTuple):
     # moving inserts
     top: bool
     bottom: bool
+    
+    # only valid when adding blocks of transfer.
+    length: int=None
+    direction: str=None
 
 
 def define_power_supplies():
@@ -1189,14 +1193,19 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
     # but due to target selection, they have been skipped.
     skip_target = False
 
+
+    acceptable_directions = ["h", "v", "horizontal", "vertical"]
+
     limited_transfer_methods = ["top_transfer", "bottom_transfer", "testjet"]
-    transfer_methods = ["transfer"] + limited_transfer_methods
+    block_transfer_methods = ["single_row", "double_row"]
+    transfer_methods = ["transfer"] + limited_transfer_methods + block_transfer_methods
 
     for line_num, (row, raw_line) in enumerate(zip(csv_line_list, line_list), 1):
 
         line = raw_line.strip()
         raw_line = raw_line.rstrip()
         top, bottom = True, True
+        length, direction = None, None
 
         # skip iblank lines and comments
         if not line or line.startswith("!"):
@@ -1213,21 +1222,56 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
 
         if method in ["offset", "move"] + transfer_methods:
             value_count = len(row)
+            
+            if method in block_transfer_methods:
+                value_range = range(7, 9)
+            else:
+                value_range = range(5, 7)
 
-            if value_count not in range(5, 7):
+            if value_count not in value_range:
                 mb.showerror("ERROR", COLUMN_ERROR.format(**locals()))
                 return None
 
-            # extract the mandatory data.
-            method, insert_name, units, x_value, y_value = [
-                value.strip() for value in row[:6]]
-            target_flags = [value.strip() for value in row[6:]]
+            if method in block_transfer_methods:
+                # extract the mandatory data.
+                method, direction, length, insert_name, units, x_value, y_value = [
+                    value.strip() for value in row[:7]]
+                target_flags = [value.strip() for value in row[7:]]
+                
+
+                if not length.isdigit():
+                    err = f"    The following line in 'modify_inserts.csv'\n" \
+                          f"    {line_num}:    '{raw_line}'.\n" \
+                          f"    specifically '{length}'\n" \
+                          f"    is not an integer." 
+                    mb.showerror("ERROR", err)
+                    return None
+                    
+                if direction not in acceptable_directions:
+                    err = f"    The following line in 'modify_inserts.csv'\n" \
+                          f"    {line_num}:    '{raw_line}'.\n" \
+                          f"    specifically '{direction}'\n" \
+                          f"    is not h[orizontal] or v[ertical]" 
+                    mb.showerror("ERROR", err)
+                    return None
+                    
+                
+                
+            else:
+                # extract the mandatory data.
+                method, insert_name, units, x_value, y_value = [
+                    value.strip() for value in row[:6]]
+                target_flags = [value.strip() for value in row[6:]]
+            
+
             
             if method == "testjet":
                 if not insert_name.isdigit() or int(insert_name) not in range(4):
                     err = MOD_INSERT_TESTJET_NAME.format(**locals())
                     mb.showerror("ERROR", err)
                     return None
+                    
+            
 
             if method in limited_transfer_methods:
                 if method == "top_transfer":
@@ -1269,10 +1313,11 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
             else:
                 coord = ew.CoordTuple.from_mils(x_value, y_value)
 
-            mod_flags = InsertModFlag(method, coord, top, bottom)
-
+            
+            mod_flags = InsertModFlag(method, coord, top, bottom, length, direction)
+            
             # for a transfer statement, a checker function is not generated.
-            if method in ["transfer", "testjet"]:
+            if method in ["transfer", "testjet"] + block_transfer_methods:
                 function_dict[(insert_name, mod_flags)] = (line_num, raw_line)
                 continue
 
@@ -1307,62 +1352,62 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
     return function_dict, skip_target
 
 
-def get_custom_insert_modification_functions(fixture_dir, target):
-    """
-    This function opens the modify_inserts.csv,
-    performes validation on the inputs, then returns
-    a function which takes an insert, and returns True
-    if it matches the users insert.
-    """
-
-    insert_editing_options = fixture_processing_options.INSERTS_MODIFIER_OPTIONS
-
-    filename = insert_editing_options["filename"]
-    edit_inserts_path = fixture_dir / filename
-
-    function = insert_editing_options["modify_inserts"].description
-
-    if not edit_inserts_path.exists():
-        err = f"    Cannot find '{filename}'\n"\
-              f"    '{filename}' is required for\n"\
-              f"    '{function}'. "
-
-        mb.showerror("ERROR", err)
-        return None
-
-    # get the contents of the csv, and store it to list of lines.
-    with edit_inserts_path.open(newline="") as edit_inserts:
-
-        # ensure every line is lower case.
-        line_list = [line.lower() for line in edit_inserts.readlines()]
-
-
-    # remove all spaces from the lines prior to csv processing.
-    csv_input = (line.replace(" ", "") for line in line_list)
-    csv_line_list = list(csv.reader(csv_input))
-
-    # Convert the csv entries and tokens into a list of functions,
-    # one function per line, then return it.
-    # look for empty function_dict
-
-    return_value = generate_insert_modification_functions(
-        csv_line_list, line_list, target, filename)
-
-    if return_value is None:
-        return None
-
-    function_dict, skip_target = return_value
-
-    # give warning if function_dict is empty
-    if function_dict == dict() and not skip_target:
-        err = f"    '{filename}' does not contain\n"\
-              f"    Any wire descriptions.\n" \
-              f"    Uncheck '{function}', or \n"\
-              f"    Add wire removal entries."
-        mb.showerror("ERROR", err)
-        return None
-
-    return function_dict
+# def get_custom_insert_modification_functions(fixture_dir, target):
+#     """
+#     This function opens the modify_inserts.csv,
+#     performes validation on the inputs, then returns
+#     a function which takes an insert, and returns True
+#     if it matches the users insert.
+#     """
+# 
+#     insert_editing_options = fixture_processing_options.INSERTS_MODIFIER_OPTIONS
+# 
+#     filename = insert_editing_options["filename"]
+#     edit_inserts_path = fixture_dir / filename
+# 
+#     function = insert_editing_options["modify_inserts"].description
+# 
+#     if not edit_inserts_path.exists():
+#         err = f"    Cannot find '{filename}'\n"\
+#               f"    '{filename}' is required for\n"\
+#               f"    '{function}'. "
+# 
+#         mb.showerror("ERROR", err)
+#         return None
+# 
+#     # get the contents of the csv, and store it to list of lines.
+#     with edit_inserts_path.open(newline="") as edit_inserts:
+# 
+#         # ensure every line is lower case.
+#         line_list = [line.lower() for line in edit_inserts.readlines()]
+# 
+# 
+#     # remove all spaces from the lines prior to csv processing.
+#     csv_input = (line.replace(" ", "") for line in line_list)
+#     csv_line_list = list(csv.reader(csv_input))
+# 
+#     # Convert the csv entries and tokens into a list of functions,
+#     # one function per line, then return it.
+#     # look for empty function_dict
+# 
+#     return_value = generate_insert_modification_functions(
+#         csv_line_list, line_list, target, filename)
+# 
+#     if return_value is None:
+#         return None
+# 
+#     function_dict, skip_target = return_value
+# 
+#     # give warning if function_dict is empty
+#     if function_dict == dict() and not skip_target:
+#         err = f"    '{filename}' does not contain\n"\
+#               f"    Any wire descriptions.\n" \
+#               f"    Uncheck '{function}', or \n"\
+#               f"    Add wire removal entries."
+#         mb.showerror("ERROR", err)
+#         return None
+# 
+#     return function_dict
 
 
 def validate_modify_inserts_functions(fixture_dir, bottom_inserts, top_inserts, target):
@@ -1399,7 +1444,7 @@ def validate_modify_inserts_functions(fixture_dir, bottom_inserts, top_inserts, 
         for (function, mod_flags), (line_num, line) in function_dict.items():
 
             # only check offset  move functions
-            if mod_flags.method in ["new", "transfer", "testjet"]:
+            if mod_flags.method in ["new", "transfer", "testjet", "single_row", "double_row"]:
                 continue
 
             for coord, insert in inserts.items():
@@ -1417,7 +1462,7 @@ def validate_modify_inserts_functions(fixture_dir, bottom_inserts, top_inserts, 
 
     # make sure all functions have found a set.
     for (function, mod_flags), (line_num, line) in function_dict.items():
-        if mod_flags.method in ["new", "transfer", "testjet"]:
+        if mod_flags.method in ["new", "transfer", "testjet", "single_row", "double_row"]:
             continue
 
         if function not in found_functions:
