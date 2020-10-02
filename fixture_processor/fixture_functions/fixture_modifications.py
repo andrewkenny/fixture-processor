@@ -983,7 +983,7 @@ def process_flags(csv_flags, flags, filename, line_num, raw_line, target):
             msg = \
                 "    '{0}' of 'remove_wires.csv'\n" \
                 "    is not a valid flag\n" \
-                "    {1}:     '{2}'.\n"
+                "    {1}:     '{2}'.\n" \
                 "    Double check instructions."
             
             mb.showerror("ERROR", msg)
