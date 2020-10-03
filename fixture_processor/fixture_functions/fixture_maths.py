@@ -260,8 +260,12 @@ class CoordTuple(typing.NamedTuple):
         row_str = f"{abs(row):05.2f}"
         if f"{row}".startswith("-"):
             row_str = "-" + row_str
+            
+        column_str = f"{abs(column):04.1f}"
+        if f"{column}".startswith("-"):
+            column_str = "-" + column_str
 
-        return f"{start}{bank}{row_str:>6}  {column:.1f}{end}"
+        return f"{start}{bank}{row_str:>6} {column_str:>5}{end}"
 
 
 class PinID(str):

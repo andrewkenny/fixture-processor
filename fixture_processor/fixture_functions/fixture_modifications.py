@@ -1303,10 +1303,13 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
             validation_x = x_value.replace(".", "", 1)
             validation_y = y_value.replace(".", "", 1)
 
-            for value, axis in zip([validation_x, validation_y], ["x, y"]):
-                if not value.isdigit():
+            for value, axis in zip([validation_x, validation_y], ["x", "y"]):
+                try:
+                    int(value)
+                except ValueError:
                     err = MOD_INSERT_INVALID_COORD.format(**locals())
                     mb.showerror("ERROR", err)
+                    return None
 
             if units == "mm":
                 coord = ew.CoordTuple.from_mm(x_value, y_value)
