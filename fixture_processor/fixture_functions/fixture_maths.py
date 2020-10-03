@@ -125,43 +125,59 @@ class CoordTuple(typing.NamedTuple):
         """
         Used when adding 2 coords.
         """
+        cls = type(self)
 
         other_x, other_y = other
 
-        return CoordTuple(self.x_coord + other_x, self.y_coord + other_y)
+        return cls(self.x_coord + other_x, self.y_coord + other_y)
 
     def __sub__(self, other):
         """
         Used when adding 2 coords.
         """
+        cls = type(self)
 
         other_x, other_y = other
 
-        return CoordTuple(self.x_coord - other_x, self.y_coord - other_y)
+        return cls(self.x_coord - other_x, self.y_coord - other_y)
 
     def __mul__(self, other):
+        """
+        either do matrix multiplication,
+        or multiply the x and y by the value other.
+        """
+        cls = type(self)
+    
         if isinstance(other, CoordTuple):
             return self.x_coord * other.x_coord + self.y_coord * other.y_coord
 
-        return CoordTuple(int(self.x_coord * other), int(self.y_coord * other))
+        return cls(round(self.x_coord * other), round(self.y_coord * other))
 
     def rotate(self, angle):
         """
         rotate self counterclockwise by angle
         """
+        cls = type(self)
 
         perp = CoordTuple(-self.y_coord, self.x_coord)
+        
+        # convert to radians
         angle = angle * math.pi / 180.0
 
         c, s = math.cos(angle), math.sin(angle)
 
-        new_x = int(self.x_coord * c + perp.x_coord * s)
-        new_y = int(self.y_coord * c + perp.y_coord * s)
+        new_x = round(self.x_coord * c + perp.x_coord * s)
+        new_y = round(self.y_coord * c + perp.y_coord * s)
 
-        return CoordTuple(new_x, new_y)
+        return cls(new_x, new_y)
 
     def flip_coord(self, flip_count: int = 1):
-
+        """
+        flip the y axis of the coord.
+        (unless the number of flips is even)
+        """
+        cls = type(self)
+        
         # when flip_count is even return
         # the original coord
         if (flip_count % 2) == 0:
@@ -169,7 +185,7 @@ class CoordTuple(typing.NamedTuple):
 
         x, y = self
 
-        return CoordTuple(x, -y)
+        return cls(x, -y)
 
     @classmethod
     def from_mm(cls, mm_x_coord: str, mm_y_coord: str):
@@ -177,8 +193,8 @@ class CoordTuple(typing.NamedTuple):
         creates a coord with the units in mils.
         assuming the input a string of the coord in mm.
         """
-        mils_x_coord = int((float(mm_x_coord) * 100000) / 254)
-        mils_y_coord = int((float(mm_y_coord) * 100000) / 254)
+        mils_x_coord = round((Decimal(mm_x_coord) * 100000) / 254)
+        mils_y_coord = round((Decimal(mm_y_coord) * 100000) / 254)
 
         return cls(mils_x_coord, mils_y_coord)
 
@@ -189,7 +205,7 @@ class CoordTuple(typing.NamedTuple):
         assuming the input is a string of the coord in mils
         """
 
-        return cls(int(mils_x_coord), int(mils_y_coord))
+        return cls(round(Decimal(mils_x_coord)), round(Decimal(mils_y_coord)))
         
     @classmethod
     def from_mils_str(cls, mils_coord_str: str):
@@ -204,16 +220,33 @@ class CoordTuple(typing.NamedTuple):
 
         mils_x_coord, mils_y_coord = mils_coord_str.split(",")
 
-        return cls(int(mils_x_coord), int(mils_y_coord))
+        return cls(round(Decimal(mils_x_coord)), round(Decimal(mils_y_coord)))
 
-    def to_mm(self) -> tuple:
+    def to_mm_dxf_point(self) -> Tuple[Decimal, Decimal]:
+        """
+        On the off chance that Decimal maths is more precise,
+        This function converts the mils to mm using the decimal
+        module.
+        """
+        coord_x, coord_y = self
+        
+        mm_x = Decimal(coord_x * 254) / 100000
+        mm_y = Decimal(coord_y * 254) / 100000
+        
+        return mm_x, mm_y
+
+
+    def to_mm(self) -> Tuple[float, float]:
         """
         returns a normal x, y tuple, containing the 
         coord, converted from mils to mm
         """
         coord_x, coord_y = self
+        
+        mm_x = (coord_x * 254) / 100000
+        mm_y = (coord_y * 254) / 100000
 
-        return (coord_x * 254) / 100000, (coord_y * 254) / 100000
+        return mm_x, mm_y
 
     def to_brc(self, fixture_size: str):
         """
