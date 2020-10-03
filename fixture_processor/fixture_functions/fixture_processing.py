@@ -629,10 +629,12 @@ def add_user_defined_wires(fixture_dir, fixture_data, flags, target):
 
             # make sure the func only matched one insert.
             for func, name in zip([from_func, to_func], ["from", "to"]):
-                matched_inserts = len(matched_inserts_lookup)
+                matched_inserts = len(matched_inserts_lookup[func])
                 if matched_inserts > 1:
-                    err = EXTRA_INSERTS_ERROR.format(
+                    err = fmod.EXTRA_INSERTS_ERROR.format(
                         name, line_num, raw_line, matched_inserts)
+                    mb.showerror("ERROR", err)
+                    return None
 
             from_coord = matched_inserts_lookup[from_func][0]
             from_insert = inserts[from_coord]
