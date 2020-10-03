@@ -28,17 +28,17 @@ PLOT_SCALE = 0.00254
 def scaled_circle(radius, center):
 
     scaled_radius = radius * PLOT_SCALE
-    scaled_centre = center.to_mm()
+    scaled_centre = center.to_mm_dxf_point()
 
     return dxf.circle(scaled_radius, scaled_centre)
 
 
 def scaled_line(point1, point2):
-    return dxf.line(point1.to_mm(), point2.to_mm())
+    return dxf.line(point1.to_mm_dxf_point(), point2.to_mm_dxf_point())
 
 
 def scaled_text(text, insert, height):
-    return dxf.text(text, insert.to_mm(), height * PLOT_SCALE)
+    return dxf.text(text, insert.to_mm_dxf_point(), height * PLOT_SCALE)
 
 
 def output_ground_pins_list(fixture_data, flags):
@@ -613,6 +613,9 @@ def generate_dxf_elements(f_output_path, fixture_settings, fixture_data, ground_
     """
 
     drawing = dxf.drawing(f_output_path.as_posix())
+    
+    # remove default layers
+    drawing.layers.clear()
 
     # add the fixture essentials ie outlines
     # tooling origin etc. Also adds pin locations and
@@ -626,6 +629,10 @@ def generate_dxf_elements(f_output_path, fixture_settings, fixture_data, ground_
     if flags.output_plot:
         add_probes(drawing, fixture_settings, fixture_data, flags)
         add_wires(drawing, fixture_settings, fixture_data, flags)
+
+
+
+    drawing.header['$CLAYER'] = "FIXTURE_OUTLINE"
 
     drawing.save()
 
