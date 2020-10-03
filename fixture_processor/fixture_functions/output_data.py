@@ -383,7 +383,7 @@ def add_probes(drawing, fixture_settings, fixture_data, flags):
                 
                 # add the brc location.
                 text = scaled_text(data.brc, coord +
-                                   (x_offset, (-height) / 2), height)
+                                   (x_offset, (-height) / 2), height * 0.8)
                 text["layer"] = transfer_label_brc
                 drawing.add(text)
 
@@ -451,7 +451,7 @@ def add_probes(drawing, fixture_settings, fixture_data, flags):
                 drawing.add(text)
                 
                 text = scaled_text(data.brc, coord +
-                                   (x_offset, (-height) / 2), height)
+                                   (x_offset, (-height) / 2), height * 0.8)
                 text["layer"] = f"{side}_PROBES_B_R_C"
                 drawing.add(text)
 
