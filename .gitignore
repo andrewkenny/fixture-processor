@@ -3,6 +3,7 @@ __pycache__/
 
 
 
+mypy_output.txt
 pylint_output.txt
 flake8_output.txt
 bin/fixture_processor/
