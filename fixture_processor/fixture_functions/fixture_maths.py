@@ -257,7 +257,9 @@ class CoordTuple(typing.NamedTuple):
             start = "["
             end = "]"
             
-        row_str = f"{row:.2f}"
+        row_str = f"{abs(row):05.2f}"
+        if f"{row}".startswith("-"):
+            row_str = "-" + row_str
 
         return f"{start}{bank}{row_str:>6}  {column:.1f}{end}"
 

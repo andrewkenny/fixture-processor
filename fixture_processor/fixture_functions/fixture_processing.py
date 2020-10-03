@@ -368,7 +368,7 @@ def new_transfer(inserts, brc, new_coord, fix_id):
     
     insert_type = "Transfer"
     spring = ""
-    node = "OTHER"
+    node = "<OTHER>"
     device = ""
     
     insert = ew.InsertTuple(
@@ -509,16 +509,16 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
             else:
                 coords_list = [(mod_flags.coord, 1)]
             
-            print(coords_list)
+            
             # add an transfer for each coord.
             # normal transfer only adds one.
             for coord, pin in coords_list:
                 new_coord = coord.flip_coord(flips)
-                print(new_coord)
+                
                 if new_coord in inserts:
                     err = fmod.MOD_EXISTING_COORD.format(**locals())
                     mb.showerror("ERROR", err)
-                    print(inserts[new_coord])
+                    
                     return None
                 
                 brc = coord.to_brc_str(
