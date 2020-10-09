@@ -1017,6 +1017,63 @@ def process_flags(csv_flags, flags, filename, line_num, raw_line, target):
 
     return flags, continue_flag
 
+def get_custom_functions(fixture_dir, target, filename, 
+                         description, generate_functions):
+    """
+    This function opens the specified csv,
+    performs validation on the inputs,
+    
+    Then returns a matching function
+    """
+    
+
+    csv_path = fixture_dir / filename
+    
+
+    if not csv_path.exists():
+        err = f"    Cannot find '{filename}'\n"\
+              f"    '{filename}' is required for\n"\
+              f"    '{description}'. "
+
+        mb.showerror("ERROR", err)
+        return None
+        
+    # get the contents of the csv, and store it to list of lines.
+    with csv_path.open(newline="") as remove_wires:
+
+        # ensure every line is lower case.
+        line_list = [line.lower() for line in remove_wires.readlines()]
+        
+    # remove all spaces from the lines prior to csv processing.
+    csv_line_list = list(csv.reader(line.replace(" ", "") for line in line_list))
+
+    # convert the csv entries into a dict of functions,
+    # and also get a flag which gets us to skip a target.
+    try:
+        return_value = generate_functions(
+            csv_line_list, line_list, target, filename)
+    except ValueError as err:
+        mb.showerror("ERROR", str(err))
+        return None
+        
+    if return_value is None:
+        return None
+    
+    function_dict, skip_target = return_value
+
+    # give warning if function_dict is empty
+    if function_dict == dict() and not skip_target:
+        msg = f"    '{filename}' does not contain\n"\
+              f"    Any wire descriptions.\n" \
+              f"    Uncheck '{description}', or \n"\
+              f"    Add valid entries."
+        mb.showerror("ERROR", msg)
+        return None
+
+    return function_dict
+
+
+
 
 def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
     """
@@ -1126,60 +1183,7 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
 
     return function_dict, skip_target
 
-def get_custom_functions(fixture_dir, target, filename, 
-                         description, generate_functions):
-    """
-    This function opens the specified csv,
-    performs validation on the inputs,
-    
-    Then returns a matching function
-    """
-    
 
-    csv_path = fixture_dir / filename
-    
-
-    if not csv_path.exists():
-        err = f"    Cannot find '{filename}'\n"\
-              f"    '{filename}' is required for\n"\
-              f"    '{description}'. "
-
-        mb.showerror("ERROR", err)
-        return None
-        
-    # get the contents of the csv, and store it to list of lines.
-    with csv_path.open(newline="") as remove_wires:
-
-        # ensure every line is lower case.
-        line_list = [line.lower() for line in remove_wires.readlines()]
-        
-    # remove all spaces from the lines prior to csv processing.
-    csv_line_list = list(csv.reader(line.replace(" ", "") for line in line_list))
-
-    # convert the csv entries into a dict of functions,
-    # and also get a flag which gets us to skip a target.
-    try:
-        return_value = generate_functions(
-            csv_line_list, line_list, target, filename)
-    except ValueError as err:
-        mb.showerror("ERROR", str(err))
-        return None
-        
-    if return_value is None:
-        return None
-    
-    function_dict, skip_target = return_value
-
-    # give warning if function_dict is empty
-    if function_dict == dict() and not skip_target:
-        msg = f"    '{filename}' does not contain\n"\
-              f"    Any wire descriptions.\n" \
-              f"    Uncheck '{description}', or \n"\
-              f"    Add valid entries."
-        mb.showerror("ERROR", msg)
-        return None
-
-    return function_dict
 
 
 def generate_insert_modification_functions(csv_line_list, line_list, target, filename):
@@ -1289,7 +1293,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                 if not insert_name.isdigit() or int(insert_name) not in range(4):
                     err_msg = error_header + \
                         f"    The insert name: '{insert_name}'\n" \
-                        f"    is not an integer describing a 3070 module.\n"
+                        f"    is not an integer describing a 3070 module.\n"\
                         f"    (0, 1, 2, 3)"
                     raise ValueError(err_msg)
                     
