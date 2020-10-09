@@ -117,6 +117,9 @@ def get_wire_length(insert_1, insert_2):
     return f"{half_rounded:.1f}"
 
 
+class FutureCoord:
+    pass
+
 class CoordTuple(typing.NamedTuple):
     x_coord: int
     y_coord: int
@@ -187,26 +190,58 @@ class CoordTuple(typing.NamedTuple):
 
         return cls(x, -y)
 
+    # @classmethod
+    # def from_mm(cls, mm_x_coord: str, mm_y_coord: str):
+    #     """
+    #     creates a coord with the units in mils.
+    #     assuming the input a string of the coord in mm.
+    #     """
+    #     mils_x_coord = round((Decimal(mm_x_coord) * 100000) / 254)
+    #     mils_y_coord = round((Decimal(mm_y_coord) * 100000) / 254)
+    # 
+    #     return cls(mils_x_coord, mils_y_coord)
+    
+    
     @classmethod
-    def from_mm(cls, mm_x_coord: str, mm_y_coord: str):
+    def from_str(cls, str_x_coord, str_y_coord, units="mils"):
         """
-        creates a coord with the units in mils.
-        assuming the input a string of the coord in mm.
-        """
-        mils_x_coord = round((Decimal(mm_x_coord) * 100000) / 254)
-        mils_y_coord = round((Decimal(mm_y_coord) * 100000) / 254)
-
-        return cls(mils_x_coord, mils_y_coord)
-
-    @classmethod
-    def from_mils(cls, mils_x_coord: str, mils_y_coord: str):
-        """
-        creates a coord with the units in mils
-        assuming the input is a string of the coord in mils
-        """
-
-        return cls(round(Decimal(mils_x_coord)), round(Decimal(mils_y_coord)))
+        When the x and y coord are described in a text file, they could
+        have the following formats:
+        mils (10,000s of an inch)
+        mm (milimetres)
+        inches (for board_xy files)
         
+        This function will do the maths to convert the unit to
+        mils. (The unit of the fixture files & inserts etc.)
+        """
+        
+            
+        
+        # first validate that they are valid numbers.
+        for coord, axis in zip([str_x_coord, str_y_coord], ["x", "y"]):
+            try:
+                # ensure the value can be made into a float
+                float(coord)
+            except ValueError:
+                raise ValueError(f"    The {axis} location / {axis} offset: '{coord}'\n"\
+                                 f"    must contain a decimal number.")
+        
+        # convert the now validated string coords into the Decimal type
+        # (for precision)        
+        decimal_x, decimal_y = Decimal(str_x_coord), Decimal(str_y_coord)
+        
+        if units == "mils":
+            return cls(round(decimal_x), round(decimal_y))
+        elif units == "mm":
+            mils_x_coord = round((decimal_x * 100000) / 254)
+            mils_y_coord = round((decimal_y * 100000) / 254)
+            return cls(mils_x_coord, mils_y_coord)
+        else:
+            raise ValueError(f"    Invalid unit: {units}\n"\
+                             f"    Allowed units are:"
+                             f"    mm, mils")
+    
+ 
     @classmethod
     def from_mils_str(cls, mils_coord_str: str):
         """
