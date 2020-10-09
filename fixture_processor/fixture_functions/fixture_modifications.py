@@ -82,13 +82,7 @@ TOP_AND_BOTTOM_ERROR = """\
     Please check 'fixture.o" for errors.
 """
 
-TWO_WILDCARD_ERR = """\
-    The Wildcard token '*' appears twice, 
-    in both 'From' and 'To' on line {0}
-    {0}:    '{1}'.
-    Wildcard can only appear once per line. \n\
-    (A Wildcard for both 'From' and 'To' would match all wires!)\
-"""
+
 
 NO_MATCH_ERR = """\
     Error in the {2} token
@@ -1041,13 +1035,16 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
 
     to_list = from_list.copy()
 
-    err_header = f"    Error found in '{filename}'\n"
+    err_header_old = f"    Error found in '{filename}'\n"
+    error_header_func = error_message_header(filename)
 
     # this flag goes True if there are entries,
     # but due to target selection, they have been skipped.
     skip_target = False
 
     for line_num, (row, raw_line) in enumerate(zip(csv_line_list, line_list), 1):
+        error_header = error_header_func(line_num, raw_line)
+
 
         line = raw_line.strip()
         raw_line = raw_line.rstrip()
@@ -1062,8 +1059,8 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
 
         # skip lines with too many or too fiew values
         if value_count not in value_range:
-            mb.showerror("ERROR", COLUMN_ERROR.format(**locals()))
-            return None
+            err_msg = error_header + f"Wrong number of values ({value_count})."
+            raise ValueError(err_msg)
 
         # extract the from and to token, stripping them of l and r
         # whitespace.
@@ -1074,6 +1071,7 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
             csv_flags, flags, filename, line_num, raw_line, target)
         if processed_flags_return is None:
             return None
+            
         flags, continue_flag = processed_flags_return
 
         if continue_flag:
@@ -1082,8 +1080,10 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
 
         # is the to and from token wilcard *,
         if (from_token.rstrip("T"), to_token.rstrip("T")) == ("*", "*"):
-            mb.showerror("ERROR", TWO_WILDCARD_ERR.format(line_num, line))
-            return None
+            err_msg = error_header + \
+                f"    Wildcard can only appear once per line. \n"\
+                f"    (A Wildcard for both 'From' and 'To' would match all wires!)"
+            raise ValueError(err_msg)
 
         loop_vars = (["from", "to"],
                      [from_token, to_token],
@@ -1092,15 +1092,16 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
         token_functions = []
         for name, token, func_list in zip(*loop_vars):
 
-            checker_list = (func(token, line_num, raw_line, err_header)
+            checker_list = (func(token, line_num, raw_line, err_header_old)
                             for func in func_list)
             checker_list = [item for item in checker_list if item is not None]
 
             # a blank checker_list means a problem with the token.
             if not checker_list:
-                err = NO_MATCH_ERR.format(line_num, line, name, filename)
-                mb.showerror("ERROR", err)
-                return None
+                err_msg = error_header + \
+                    f"    The {name} token did not generate any matching functions\n"\
+                    f"        Check syntax rules and edit."
+                raise ValueError(err_msg)
 
             # a False in the checker_list means an error
             if False in checker_list:
@@ -1110,9 +1111,10 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
             # if token in the remove wire file matches more than one
             # checker (unlikely, but must be accounted for)
             if len(checker_list) > 1:
-                err = NO_MATCH_ERR.format(line_num, line, name, filename)
-                mb.showerror("ERROR", err)
-                return None
+                err_msg = error_header + \
+                    f"    The {name} token matched more than one matching function!\n"\
+                    f"        Check syntax rules and edit."
+                raise ValueError(err_msg)
 
             # There should be only one function now,
             # stored in a list for future processing.
@@ -1156,8 +1158,12 @@ def get_custom_functions(fixture_dir, target, filename,
 
     # convert the csv entries into a dict of functions,
     # and also get a flag which gets us to skip a target.
-    return_value = generate_functions(
-        csv_line_list, line_list, target, filename)
+    try:
+        return_value = generate_functions(
+            csv_line_list, line_list, target, filename)
+    except ValueError as err:
+        mb.showerror("ERROR", str(err))
+        return None
         
     if return_value is None:
         return None
@@ -1236,8 +1242,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
             for i in range(0, len(allowed_methods), line_len):
                 err_msg += f"    ({', '.join(allowed_methods[i:i + line_len])})\n"
 
-            mb.showerror("ERROR", err_msg)
-            return None
+            raise ValueError(err_msg)
 
         if method in ["offset", "move"] + transfer_methods:
             value_count = len(row)
@@ -1249,8 +1254,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
 
             if value_count not in value_range:
                 err_msg = error_header + f"Wrong number of values ({value_count})."
-                mb.showerror("ERROR", err_msg)
-                return None
+                raise ValueError(err_msg)
 
             if method in block_transfer_methods:
                 # extract the mandatory data.
@@ -1263,15 +1267,13 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                     err_msg = error_header + \
                               f"    The length:  '{length}'\n" \
                               f"    is not an integer." 
-                    mb.showerror("ERROR", err_msg)
-                    return None
+                    raise ValueError(err_msg)
                     
                 if direction not in acceptable_directions:
                     err_msg = error_header + \
                               f"    The direction: '{direction}'\n" \
                               f"    is not h[orizontal] or v[ertical]" 
-                    mb.showerror("ERROR", err_msg)
-                    return None
+                    raise ValueError(err_msg)
                     
                 
                 
@@ -1289,8 +1291,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                         f"    The insert name: '{insert_name}'\n" \
                         f"    is not an integer describing a 3070 module.\n"
                         f"    (0, 1, 2, 3)"
-                    mb.showerror("ERROR", err_msg)
-                    return None
+                    raise ValueError(err_msg)
                     
             
 
@@ -1317,8 +1318,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                 coord = ew.CoordTuple.from_str(x_value, y_value, units)
             except ValueError as err:
                 err_msg = error_header + str(err)
-                mb.showerror("ERROR", err_msg)
-                return None       
+                raise ValueError(err_msg)      
 
 
             
@@ -1336,9 +1336,10 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
 
             # a blank checker_list means a problem with the token.
             if not checker_list:
-                err = NO_MATCH_ERR.format(line_num, raw_line, method, filename)
-                mb.showerror("ERROR", err)
-                return None
+                err_msg = error_header + \
+                    f"    The {method} token did not generate any matching functions\n"\
+                    f"        Check syntax rules and edit."
+                raise ValueError(err_msg)
 
             # a False in the checker_list means an error
             if False in checker_list:
@@ -1349,9 +1350,10 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
             # (unlikely, but must be accounted for)
             # checker (unlikely, but must be accounted for)
             if len(checker_list) > 1:
-                err = NO_MATCH_ERR.format(line_num, raw_line, name, filename)
-                mb.showerror("ERROR", err)
-                return None
+                err_msg = error_header + \
+                    f"    The {name} token matched more than one matching function!\n"\
+                    f"        Check syntax rules and edit."
+                raise ValueError(err_msg)
 
             # there should only be one function now.
             function_dict[(checker_list[0], mod_flags)] = (line_num, raw_line)
@@ -1360,62 +1362,6 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
     return function_dict, skip_target
 
 
-# def get_custom_insert_modification_functions(fixture_dir, target):
-#     """
-#     This function opens the modify_inserts.csv,
-#     performes validation on the inputs, then returns
-#     a function which takes an insert, and returns True
-#     if it matches the users insert.
-#     """
-# 
-#     insert_editing_options = fixture_processing_options.INSERTS_MODIFIER_OPTIONS
-# 
-#     filename = insert_editing_options["filename"]
-#     edit_inserts_path = fixture_dir / filename
-# 
-#     function = insert_editing_options["modify_inserts"].description
-# 
-#     if not edit_inserts_path.exists():
-#         err = f"    Cannot find '{filename}'\n"\
-#               f"    '{filename}' is required for\n"\
-#               f"    '{function}'. "
-# 
-#         mb.showerror("ERROR", err)
-#         return None
-# 
-#     # get the contents of the csv, and store it to list of lines.
-#     with edit_inserts_path.open(newline="") as edit_inserts:
-# 
-#         # ensure every line is lower case.
-#         line_list = [line.lower() for line in edit_inserts.readlines()]
-# 
-# 
-#     # remove all spaces from the lines prior to csv processing.
-#     csv_input = (line.replace(" ", "") for line in line_list)
-#     csv_line_list = list(csv.reader(csv_input))
-# 
-#     # Convert the csv entries and tokens into a list of functions,
-#     # one function per line, then return it.
-#     # look for empty function_dict
-# 
-#     return_value = generate_insert_modification_functions(
-#         csv_line_list, line_list, target, filename)
-# 
-#     if return_value is None:
-#         return None
-# 
-#     function_dict, skip_target = return_value
-# 
-#     # give warning if function_dict is empty
-#     if function_dict == dict() and not skip_target:
-#         err = f"    '{filename}' does not contain\n"\
-#               f"    Any wire descriptions.\n" \
-#               f"    Uncheck '{function}', or \n"\
-#               f"    Add wire removal entries."
-#         mb.showerror("ERROR", err)
-#         return None
-# 
-#     return function_dict
 
 
 def validate_modify_inserts_functions(fixture_dir, bottom_inserts, top_inserts, target):
@@ -1498,12 +1444,16 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
 
     to_list = from_list.copy()
 
-    err_header = "    Error found in 'add_wires.csv'\n"
+    err_header_old = "    Error found in 'add_wires.csv'\n"
+    error_header_func = error_message_header(filename)
+    
     # this flag goes True if there are entries,
     # but due to target selection, they have been skipped.
     skip_target = False
 
     for line_num, (row, raw_line) in enumerate(zip(csv_line_list, line_list), 1):
+        error_header = error_header_func(line_num, raw_line)
+        
         line = raw_line.strip()
 
         # skip blank lines, and comments
@@ -1514,7 +1464,8 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
         value_count = len(row)
 
         if value_count not in range(3, 5 + len(flags)):
-            mb.showerror("ERROR", COLUMN_ERROR.format(**locals()))
+            err_msg = error_header + f"Wrong number of values ({value_count})."
+            mb.showerror("ERROR", err_msg)
             return None
 
         # extract the from and to token, stripping them of l and r
@@ -1540,14 +1491,16 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
 
         for name, token, func_list in zip(*loop_vars):
 
-            checker_list = (func(token, line_num, raw_line, err_header)
+            checker_list = (func(token, line_num, raw_line, err_header_old)
                             for func in func_list)
             checker_list = [item for item in checker_list if item is not None]
 
             # a blank checker_list means a problem with the token.
             if not checker_list:
-                err = NO_MATCH_ERR.format(line_num, line, name, filename)
-                mb.showerror("ERROR", err)
+                err_msg = error_header + \
+                    f"    The {name} token did not generate any matching functions\n"\
+                    f"        Check syntax rules and edit."
+                mb.showerror("ERROR", err_msg)
                 return None
 
             # a False in the checker_list means an error
@@ -1558,8 +1511,10 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
             # if token in the remove wire file matches more than one
             # checker (unlikely, but must be accounted for)
             if len(checker_list) > 1:
-                err = NO_MATCH_ERR.format(line_num, line, name, filename)
-                mb.showerror("ERROR", err)
+                err_msg = error_header + \
+                    f"    The {name} token matched more than one matching function!\n"\
+                    f"        Check syntax rules and edit."
+                mb.showerror("ERROR", err_msg)
                 return None
 
             # There should be only one function now,
