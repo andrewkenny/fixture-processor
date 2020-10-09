@@ -10,6 +10,8 @@ import logging
 import re
 
 from ..options_lib import fixture_processing_options
+from ..helper_functions import error_message_header
+
 from . import fixture_maths as fm
 from . import extract_wires as ew
 
@@ -1187,7 +1189,8 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
 
     insert_match_list = [generate_brc_comparison, generate_probe_comparison]
 
-    err_header = f"    Error found in '{filename}'\n"
+    err_header_old = f"    Error found in '{filename}'\n"
+    error_header_func = error_message_header(filename)
 
     # This flag goes True if there are entries,
     # but due to target selection, they have been skipped.
@@ -1201,11 +1204,17 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
     transfer_methods = ["transfer"] + limited_transfer_methods + block_transfer_methods
 
     for line_num, (row, raw_line) in enumerate(zip(csv_line_list, line_list), 1):
+        error_header = error_header_func(line_num, raw_line)
+
 
         line = raw_line.strip()
         raw_line = raw_line.rstrip()
         top, bottom = True, True
         length, direction = 0, None
+        
+        # if True, the location will be provided later.
+        future_location = False
+        
 
         # skip iblank lines and comments
         if not line or line.startswith("!"):
@@ -1215,10 +1224,20 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
         method = row[0]
         allowed_methods = ["offset", "move", "new"] + transfer_methods
 
+        # if method not in allowed_methods:
+        #     allowed_methods_str = "(" + ",".join(allowed_methods) + ")"
+        #     err = MOD_INSERT_METHOD_ERROR.format(**locals())
+        #     mb.showerror("ERROR", err)
         if method not in allowed_methods:
-            allowed_methods_str = "(" + ",".join(allowed_methods) + ")"
-            err = MOD_INSERT_METHOD_ERROR.format(**locals())
-            mb.showerror("ERROR", err)
+            err_msg = error_header + \
+                f"    '{method}' does not describe a valid insert mod\n"\
+                f"    Allowed mods: \n"
+            line_len = 5    
+            for i in range(0, len(allowed_methods), line_len):
+                err_msg += f"    ({', '.join(allowed_methods[i:i + line_len])})\n"
+
+            mb.showerror("ERROR", err_msg)
+            return None
 
         if method in ["offset", "move"] + transfer_methods:
             value_count = len(row)
@@ -1229,7 +1248,8 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                 value_range = range(5, 7)
 
             if value_count not in value_range:
-                mb.showerror("ERROR", COLUMN_ERROR.format(**locals()))
+                err_msg = error_header + f"Wrong number of values ({value_count})."
+                mb.showerror("ERROR", err_msg)
                 return None
 
             if method in block_transfer_methods:
@@ -1240,19 +1260,17 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                 
 
                 if not length.isdigit():
-                    err = f"    The following line in 'modify_inserts.csv'\n" \
-                          f"    {line_num}:    '{raw_line}'.\n" \
-                          f"    specifically '{length}'\n" \
-                          f"    is not an integer." 
-                    mb.showerror("ERROR", err)
+                    err_msg = error_header + \
+                              f"    The length:  '{length}'\n" \
+                              f"    is not an integer." 
+                    mb.showerror("ERROR", err_msg)
                     return None
                     
                 if direction not in acceptable_directions:
-                    err = f"    The following line in 'modify_inserts.csv'\n" \
-                          f"    {line_num}:    '{raw_line}'.\n" \
-                          f"    specifically '{direction}'\n" \
-                          f"    is not h[orizontal] or v[ertical]" 
-                    mb.showerror("ERROR", err)
+                    err_msg = error_header + \
+                              f"    The direction: '{direction}'\n" \
+                              f"    is not h[orizontal] or v[ertical]" 
+                    mb.showerror("ERROR", err_msg)
                     return None
                     
                 
@@ -1267,8 +1285,11 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
             
             if method == "testjet":
                 if not insert_name.isdigit() or int(insert_name) not in range(4):
-                    err = MOD_INSERT_TESTJET_NAME.format(**locals())
-                    mb.showerror("ERROR", err)
+                    err_msg = error_header + \
+                        f"    The insert name: '{insert_name}'\n" \
+                        f"    is not an integer describing a 3070 module.\n"
+                        f"    (0, 1, 2, 3)"
+                    mb.showerror("ERROR", err_msg)
                     return None
                     
             
@@ -1292,29 +1313,13 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                     skip_target = True
                     continue
 
-            # Ensure the units are valid.
-            allowed_units = ["mils", "mm"]
-            if units not in allowed_units:
-                allowed_units_str = "(" + ",".join(allowed_units) + ")"
-                err = MOD_INSERT_WRONG_UNITS.format(**locals())
-                mb.showerror("ERROR", err)
+            try:
+                coord = ew.CoordTuple.from_str(x_value, y_value, units)
+            except ValueError as err:
+                err_msg = error_header + str(err)
+                mb.showerror("ERROR", err_msg)
+                return None       
 
-            # validate the x and y values.
-            validation_x = x_value.replace(".", "", 1)
-            validation_y = y_value.replace(".", "", 1)
-
-            for value, axis in zip([validation_x, validation_y], ["x", "y"]):
-                try:
-                    int(value)
-                except ValueError:
-                    err = MOD_INSERT_INVALID_COORD.format(**locals())
-                    mb.showerror("ERROR", err)
-                    return None
-
-            if units == "mm":
-                coord = ew.CoordTuple.from_mm(x_value, y_value)
-            else:
-                coord = ew.CoordTuple.from_mils(x_value, y_value)
 
             
             mod_flags = InsertModFlag(method, coord, top, bottom, int(length), direction)
@@ -1326,7 +1331,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
 
             # now generate function matcher.
             checker_list = (
-                func(insert_name, line_num, raw_line, err_header) for func in insert_match_list)
+                func(insert_name, line_num, raw_line, err_header_old) for func in insert_match_list)
             checker_list = [item for item in checker_list if item is not None]
 
             # a blank checker_list means a problem with the token.
