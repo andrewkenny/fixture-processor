@@ -862,7 +862,7 @@ def generate_custom_transfer_comparison(argument, line_num, raw_line, err_header
     """
 
     # ensure the argument starts with p or 4 (argument is made lower case for easier parsing.
-    if not argument.startswith(("custom", "tj", "sr", "dr")):
+    if not argument.startswith(("$", "tj", "#")):
         return None
 
     token = argument

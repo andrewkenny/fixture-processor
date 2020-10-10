@@ -387,11 +387,11 @@ def custom_transfer_name(mod_flags, insert_name, pin):
     if mod_flags.method == "testjet":
         return f"TJ{insert_name}_{pin}"
     elif mod_flags.method == "single_row":
-        return f"SR{insert_name}_{pin}"
+        return f"#{insert_name}_{pin}"
     elif mod_flags.method == "double_row":
-        return f"DR{insert_name}_{pin}"
+        return f"#{insert_name}_{pin}"
     else:
-        return f"custom{insert_name}"
+        return f"${insert_name}"
 
 def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
     """
