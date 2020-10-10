@@ -187,8 +187,8 @@ GENERAL_PS_DESCRIPTION = """\
 
 CUSTOM_DESCRIPTION = """\
 ! A custom transfer described in "modify_inserts.csv" e.g.
-! custom1%board_detect_1
-! customGate_CLlosed1
+! #%board_detect_1
+! #gate_closed1
 !
 ! A testjet transfer described in "modify_inserts.csv" e.g.
 ! TJ0_2
