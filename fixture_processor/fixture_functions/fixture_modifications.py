@@ -37,20 +37,7 @@ NO_WIRE_ERROR = """\
 """
 
 
-REMOVE_AND_MOD_ERROR = """\
-    The following line in 'remove_wires.csv'
-    {0}:    '{1}'.
-    Attempted to remove a wire, and modify it.
-    If attempting to modify wire, ensure statement
-    contains 'remove=False'
-"""
 
-NEITHER_REMOVE_AND_MOD_ERROR = """\
-    The following line in 'remove_wires.csv'
-    {0}:    '{1}'.
-    Has not been flagged for removal or
-    modification. Double check.
-"""
 
 NO_INSERT_ERROR = """\
     token {0} on line {1}
@@ -949,15 +936,10 @@ def process_flags(csv_flags, flags, filename, line_num, raw_line, target):
                 item_handled = True
                 # ensure this hasnt happened before.
                 if encounted_flags[flag_name]:
-                    msg = \
-                        f"    The flag: '{flag_name}' occurs more than once on line {line_num}\n" \
-                        f"    of 'remove_wires.csv'\n" \
-                        f"    {line_num}:     '{line}'.\n" \
+                    err_msg = \
+                        f"    The flag: '{flag_name}' occurs more than once\n" \
                         f"    Only one target flag of each type is required.\n"
-
-                    
-                    mb.showerror("ERROR", msg)
-                    return None
+                    raise ValueError(err_msg)
                 else:
                     encounted_flags[flag_name] = True
 
@@ -985,14 +967,10 @@ def process_flags(csv_flags, flags, filename, line_num, raw_line, target):
                 break
         else:
             # if this is reached, invalid flag.
-            msg = \
-                "    '{0}' of 'remove_wires.csv'\n" \
-                "    is not a valid flag\n" \
-                "    {1}:     '{2}'.\n" \
-                "    Double check instructions."
-            
-            mb.showerror("ERROR", msg)
-            return None
+            err_msg = \
+                f"    '{flag_name}' of is not a valid flag\n" \
+                f"    Double check instructions."
+            raise ValueError(err_msg)
 
         if break_flag:
             break
@@ -1005,15 +983,16 @@ def process_flags(csv_flags, flags, filename, line_num, raw_line, target):
         # if replace is true, no other flags can be set. (except target)
         # if replace is false, one of othe other flags must be set. (except target)
         if flags.remove and any(modification_flags):
-            err = REMOVE_AND_MOD_ERROR.format(line_num, raw_line)
-            mb.showerror("ERROR", err)
-            return None
+            err_msg = "    Attempted to remove a wire, and modify it.\n" \
+                      "    If attempting to modify wire, ensure statement\n"
+                      "    contains 'remove=False'"
+            raise ValueError(err_msg)
 
         # if replace is false, one of othe other flags must be set. (except target)
         if not flags.remove and not any(modification_flags):
-            err = NEITHER_REMOVE_AND_MOD_ERROR.format(line_num, raw_line)
-            mb.showerror("ERROR", err)
-            return None
+            err_msg = "    Has not been flagged for removal or\n"
+                      "    modification. Double check.\n"
+            raise ValueError(err_msg)
 
     return flags, continue_flag
 
@@ -1123,11 +1102,12 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
         # whitespace.
         from_token, to_token = [value.strip() for value in row[:2]]
         csv_flags = [value.strip() for value in row[2:]]
-
-        processed_flags_return = process_flags(
-            csv_flags, flags, filename, line_num, raw_line, target)
-        if processed_flags_return is None:
-            return None
+        
+        try:
+            processed_flags_return = process_flags(
+                csv_flags, flags, filename, line_num, raw_line, target)
+        except ValueError as err:
+            raise ValueError(error_header + str(err))
             
         flags, continue_flag = processed_flags_return
 
@@ -1476,11 +1456,14 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
         # whitespace.
         from_token, to_token = [value.strip() for value in row[:2]]
         csv_flags = row[2:]
+        
+        try:
+            processed_flags_return = process_flags(
+                csv_flags, flags, filename, line_num, raw_line, target)
+        except ValueError as err:
+            raise ValueError(error_header + str(err))
+            
 
-        processed_flags_return = process_flags(
-            csv_flags, flags, filename, line_num, raw_line, target)
-        if processed_flags_return is None:
-            return None
         flags, continue_flag = processed_flags_return
 
         if continue_flag:
