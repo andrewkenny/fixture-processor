@@ -578,7 +578,7 @@ def validate_remove_flags(raw_remove_flags, line_num, line):
     return True
 
 
-def generate_explicit_power_supply_comparison(argument, line_num, raw_line, err_header=""):
+def generate_explicit_power_supply_comparison(argument):
     """
     an explicit power supply has to refer
     to the power supply pin by fuction, eg
@@ -595,13 +595,12 @@ def generate_explicit_power_supply_comparison(argument, line_num, raw_line, err_
 
     token_match = re.fullmatch(IMP_PS_PATTERN, token, re.VERBOSE)
     if token_match is None:
-        err_message = \
-            f"    {line_num}:    '{raw_line}'.\n" \
+        err_msg = \
             f"    invalid power supply description.\n" \
             f"    '{token}'\n" \
             f"    Check syntax rules and edit."
-        mb.showerror("ERROR", err_header + err_message)
-        return False
+        raise ValueError(err_msg)
+
 
     power_supply_lookup = token_match.group("power_supply")
     pin_lookup = token_match.group("pin")
@@ -611,12 +610,10 @@ def generate_explicit_power_supply_comparison(argument, line_num, raw_line, err_
     try:
         power_supply_tuple = power_supply_dict[power_supply_lookup.upper()]
     except LookupError:
-        err_message = \
-            f"    {line_num}:    '{raw_line}'.\n" \
+        err_msg = \
             f"    {power_supply_lookup} / {power_supply_lookup.upper()}\n" \
             f"    is not a valid power supply.\n"
-        mb.showerror("ERROR", err_header + err_message)
-        return False
+        raise ValueError(err_msg)
 
     # get the brc of the power supply.
     power_supply_pin = getattr(power_supply_tuple, pin_lookup)
@@ -652,7 +649,7 @@ def generate_explicit_power_supply_comparison(argument, line_num, raw_line, err_
     return brc_checker
 
 
-def generate_general_power_supply_comparison(argument, line_num, raw_line, err_header=""):
+def generate_general_power_supply_comparison(argument):
     """
     Only for use when removing wires, from the fixture,
     this function allows the whole power supply wires
@@ -669,18 +666,16 @@ def generate_general_power_supply_comparison(argument, line_num, raw_line, err_h
     # if engineer describes explicit location, use
     # explicit function.
     if re.fullmatch(IMP_PS_PATTERN, token, re.VERBOSE):
-        return generate_explicit_power_supply_comparison(argument, line_num, raw_line, err_header)
+        return generate_explicit_power_supply_comparison(argument)
 
     power_supply_dict = define_power_supplies()
     try:
         power_supply_tuple = power_supply_dict[token.upper()]
     except LookupError:
-        err_message = \
-            f"    {line_num}:    '{raw_line}'.\n" \
+        err_msg = \
             f"    {power_supply_lookup} / {power_supply_lookup.upper()}\n" \
             f"    is not a valid power supply.\n"
-        mb.showerror("ERROR", err_header + err_message)
-        return False
+        raise ValueError(err_msg)
 
     def brc_checker(insert):
         """
@@ -711,7 +706,7 @@ def generate_general_power_supply_comparison(argument, line_num, raw_line, err_h
     return brc_checker
 
 
-def generate_wildcard_comparison(argument, line_num, raw_line, err_header=""):
+def generate_wildcard_comparison(argument):
     # A wildcard entry means that the checker matches
     # all insert entries, except for terminals.
 
@@ -730,7 +725,7 @@ def generate_wildcard_comparison(argument, line_num, raw_line, err_header=""):
         return lambda insert: insert is not None
 
 
-def generate_brc_comparison(argument, line_num, raw_line, err_header=""):
+def generate_brc_comparison(argument):
     """
     if the argument is a brc pin,
     that is:
@@ -747,20 +742,16 @@ def generate_brc_comparison(argument, line_num, raw_line, err_header=""):
     # if it does, remove the brc text leaving the rest of the data
     token = fm.PinID(argument.replace("brc", "", 1))
 
-    # create an error message header - to be displayed before
-    # all errors, it will display the line number, and the line.
-    err_header += f"    Line {line_num}:    '{raw_line.rstrip()}'\n\n"
 
     # ensure the user inputted brc token is correct, with no errors.
-    for method_name, err_message in token.validation_checks:
+    for method_name, err_msg in token.validation_checks:
 
         # the method name is the method used to validate
         # part of the token. The err_message should be
         # displayed if the method returns False.
         if not getattr(token, method_name):
 
-            mb.showerror("ERROR", err_header + err_message)
-            return False
+            raise(err_msg)
 
     def brc_checker(insert):
         """
@@ -793,7 +784,7 @@ def generate_brc_comparison(argument, line_num, raw_line, err_header=""):
     return brc_checker
 
 
-def generate_probe_comparison(argument, line_num, raw_line, err_header=""):
+def generate_probe_comparison(argument):
     """
     If the argument is a probe name,
     That is T123 or P123,
@@ -811,9 +802,6 @@ def generate_probe_comparison(argument, line_num, raw_line, err_header=""):
 
     token = argument.upper()
 
-    # create an error message header - to be displayed before
-    # all errors, it will display the line number, and the line.
-    err_header += f"    Line {line_num}:    '{raw_line.rstrip()}'\n\n"
 
     def probe_checker(insert):
         """
@@ -842,7 +830,7 @@ def generate_probe_comparison(argument, line_num, raw_line, err_header=""):
     return probe_checker
 
 
-def generate_custom_transfer_comparison(argument, line_num, raw_line, err_header=""):
+def generate_custom_transfer_comparison(argument):
     """
     If the argument is a custom transfer,
     eg custom1%gnd
@@ -854,9 +842,7 @@ def generate_custom_transfer_comparison(argument, line_num, raw_line, err_header
 
     token = argument
 
-    # create an error message header - to be displayed before
-    # all errors, it will display the line number, and the line.
-    err_header += f"    Line {line_num}:    '{raw_line.rstrip()}'\n\n"
+
 
     def custom_transfer_checker(insert):
         """
@@ -984,13 +970,13 @@ def process_flags(csv_flags, flags, filename, line_num, raw_line, target):
         # if replace is false, one of othe other flags must be set. (except target)
         if flags.remove and any(modification_flags):
             err_msg = "    Attempted to remove a wire, and modify it.\n" \
-                      "    If attempting to modify wire, ensure statement\n"
+                      "    If attempting to modify wire, ensure statement\n" \
                       "    contains 'remove=False'"
             raise ValueError(err_msg)
 
         # if replace is false, one of othe other flags must be set. (except target)
         if not flags.remove and not any(modification_flags):
-            err_msg = "    Has not been flagged for removal or\n"
+            err_msg = "    Has not been flagged for removal or\n" \
                       "    modification. Double check.\n"
             raise ValueError(err_msg)
 
@@ -1071,7 +1057,7 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
 
     to_list = from_list.copy()
 
-    err_header_old = f"    Error found in '{filename}'\n"
+
     error_header_func = error_message_header(filename)
 
     # this flag goes True if there are entries,
@@ -1129,9 +1115,26 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
         token_functions = []
         for name, token, func_list in zip(*loop_vars):
 
-            checker_list = (func(token, line_num, raw_line, err_header_old)
-                            for func in func_list)
-            checker_list = [item for item in checker_list if item is not None]
+            # now generate function matcher.
+            checker_list = []
+            for func in func_list:
+                try:
+                    result = func(token)
+                except ValueError as err:
+                    err_msg = error_header + str(err)
+                    raise ValueError(err_msg)
+                else:
+                    if result is None:
+                        continue
+                
+                    if checker_list:
+                        err_msg = \
+                            f"    The {name} token matched more than one matching function!\n"\
+                            f"    Check syntax rules and edit."
+                        raise ValueError(error_header + err_msg)
+                
+                    checker_list.append(result)
+
 
             # a blank checker_list means a problem with the token.
             if not checker_list:
@@ -1140,18 +1143,7 @@ def generate_remove_wire_functions(csv_line_list, line_list, target, filename):
                     f"        Check syntax rules and edit."
                 raise ValueError(err_msg)
 
-            # a False in the checker_list means an error
-            if False in checker_list:
-                print("Found Error")
-                return None
 
-            # if token in the remove wire file matches more than one
-            # checker (unlikely, but must be accounted for)
-            if len(checker_list) > 1:
-                err_msg = error_header + \
-                    f"    The {name} token matched more than one matching function!\n"\
-                    f"        Check syntax rules and edit."
-                raise ValueError(err_msg)
 
             # There should be only one function now,
             # stored in a list for future processing.
@@ -1179,7 +1171,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
 
     insert_match_list = [generate_brc_comparison, generate_probe_comparison]
 
-    err_header_old = f"    Error found in '{filename}'\n"
+
     error_header_func = error_message_header(filename)
 
     # This flag goes True if there are entries,
@@ -1214,10 +1206,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
         method = row[0]
         allowed_methods = ["offset", "move", "new"] + transfer_methods
 
-        # if method not in allowed_methods:
-        #     allowed_methods_str = "(" + ",".join(allowed_methods) + ")"
-        #     err = MOD_INSERT_METHOD_ERROR.format(**locals())
-        #     mb.showerror("ERROR", err)
+
         if method not in allowed_methods:
             err_msg = error_header + \
                 f"    '{method}' does not describe a valid insert mod\n"\
@@ -1314,30 +1303,35 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                 continue
 
             # now generate function matcher.
-            checker_list = (
-                func(insert_name, line_num, raw_line, err_header_old) for func in insert_match_list)
-            checker_list = [item for item in checker_list if item is not None]
+            checker_list = []
+            for func in insert_match_list:
+                try:
+                    result = func(insert_name)
+                except ValueError as err:
+                    err_msg = error_header + str(err)
+                    raise ValueError(err_msg)
+                else:
+                    if result is None:
+                        continue
+                
+                    if checker_list:
+                        err_msg = \
+                            f"    The {name} token matched more than one matching function!\n"\
+                            f"    Check syntax rules and edit."
+                        raise ValueError(error_header + err_msg)
+                
+                    checker_list.append(result)
+            
+            
 
             # a blank checker_list means a problem with the token.
             if not checker_list:
-                err_msg = error_header + \
+                err_msg = \
                     f"    The {method} token did not generate any matching functions\n"\
                     f"        Check syntax rules and edit."
-                raise ValueError(err_msg)
+                raise ValueError(error_header + err_msg)
 
-            # a False in the checker_list means an error
-            if False in checker_list:
-                print("Found Error")
-                return None
 
-            # if the insert name item matches more than one checker function
-            # (unlikely, but must be accounted for)
-            # checker (unlikely, but must be accounted for)
-            if len(checker_list) > 1:
-                err_msg = error_header + \
-                    f"    The {name} token matched more than one matching function!\n"\
-                    f"        Check syntax rules and edit."
-                raise ValueError(err_msg)
 
             # there should only be one function now.
             function_dict[(checker_list[0], mod_flags)] = (line_num, raw_line)
@@ -1428,7 +1422,6 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
 
     to_list = from_list.copy()
 
-    err_header_old = "    Error found in 'add_wires.csv'\n"
     error_header_func = error_message_header(filename)
     
     # this flag goes True if there are entries,
@@ -1478,31 +1471,34 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
 
         for name, token, func_list in zip(*loop_vars):
 
-            checker_list = (func(token, line_num, raw_line, err_header_old)
-                            for func in func_list)
-            checker_list = [item for item in checker_list if item is not None]
+            checker_list = []
+            for func in func_list:
+                try:
+                    result = func(token)
+                except ValueError as err:
+                    err_msg = error_header + str(err)
+                    raise ValueError(err_msg)
+                else:
+                    if result is None:
+                        continue
+                
+                    if checker_list:
+                        err_msg = \
+                            f"    The {name} token matched more than one matching function!\n"\
+                            f"    Check syntax rules and edit."
+                        raise ValueError(error_header + err_msg)
+                
+                    checker_list.append(result)
+                        
 
             # a blank checker_list means a problem with the token.
             if not checker_list:
-                err_msg = error_header + \
+                err_msg = \
                     f"    The {name} token did not generate any matching functions\n"\
                     f"        Check syntax rules and edit."
-                mb.showerror("ERROR", err_msg)
+                mb.showerror("ERROR", error_header + err_msg)
                 return None
 
-            # a False in the checker_list means an error
-            if False in checker_list:
-                print("Found Error")
-                return None
-
-            # if token in the remove wire file matches more than one
-            # checker (unlikely, but must be accounted for)
-            if len(checker_list) > 1:
-                err_msg = error_header + \
-                    f"    The {name} token matched more than one matching function!\n"\
-                    f"        Check syntax rules and edit."
-                mb.showerror("ERROR", err_msg)
-                return None
 
             # There should be only one function now,
             # stored in a list for future processing.
