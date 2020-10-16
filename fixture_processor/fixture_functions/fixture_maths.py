@@ -168,11 +168,14 @@ class CoordTuple(typing.NamedTuple):
         angle = angle * math.pi / 180.0
 
         c, s = math.cos(angle), math.sin(angle)
-
+        
+        
         new_x = round(self.x_coord * c + perp.x_coord * s)
         new_y = round(self.y_coord * c + perp.y_coord * s)
 
         return cls(new_x, new_y)
+    
+
 
     def flip_coord(self, flip_count: int = 1):
         """
@@ -189,18 +192,27 @@ class CoordTuple(typing.NamedTuple):
         x, y = self
 
         return cls(x, -y)
+        
+    @staticmethod
+    def str_to_mils(mm_str: str, units):
+        try:
+            # ensure the value can be made into a float
+            float(mm_str)
+        except ValueError:
+            raise f"    {mm_str} must contain a decimal number"
+        
+        decimal_value = Decimal(mm_str)
+        
+        if units == "mils":
+            return round(decimal_value)
+        elif units == "mm":
+            return round((decimal_value * 100000) / 254) 
+        else:
+            raise ValueError(f"    Invalid unit: {units}\n"\
+                             f"    Allowed units are:"
+                             f"    mm, mils")
+        
 
-    # @classmethod
-    # def from_mm(cls, mm_x_coord: str, mm_y_coord: str):
-    #     """
-    #     creates a coord with the units in mils.
-    #     assuming the input a string of the coord in mm.
-    #     """
-    #     mils_x_coord = round((Decimal(mm_x_coord) * 100000) / 254)
-    #     mils_y_coord = round((Decimal(mm_y_coord) * 100000) / 254)
-    # 
-    #     return cls(mils_x_coord, mils_y_coord)
-    
     
     @classmethod
     def from_str(cls, str_x_coord, str_y_coord, units="mils"):
@@ -216,7 +228,7 @@ class CoordTuple(typing.NamedTuple):
         """
         
             
-        
+
         # first validate that they are valid numbers.
         for coord, axis in zip([str_x_coord, str_y_coord], ["x", "y"]):
             try:

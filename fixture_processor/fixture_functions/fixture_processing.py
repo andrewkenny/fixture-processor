@@ -322,7 +322,7 @@ def calculate_transfer_block_pins(mod_flags, flags):
         block_pitch = int(flags.block_offset.strip())
         if block_pitch < 1:
             raise ValueError
-    except ValueError as err:
+    except ValueError:
         err = f"    error found in block offset: \n" \
               f"    block offset much be a positive integer." 
         mb.showerror("ERROR", err)
@@ -344,7 +344,7 @@ def calculate_transfer_block_pins(mod_flags, flags):
     modified_coord = mod_flags.coord
     
     # create an entry for each pin.
-    for _ in range(mod_flags.length):
+    for _ in range(int(mod_flags.length)):
         
         # add this new pin to the new_coords_list
         new_coords.append((modified_coord, pin))
@@ -361,6 +361,42 @@ def calculate_transfer_block_pins(mod_flags, flags):
     
     return new_coords   
     
+def calculate_transfer_pair_pins(mod_flags, flags):
+    """
+    calculates the locations of a pair of pins in 
+    "modify_inserts.csv"
+    """
+    
+    
+
+        
+    radius = mod_flags.length
+    theta = mod_flags.direction
+    
+    # create the list containing the calculated
+    # coodinates.    
+    new_coords = []
+    
+    base_coord = mod_flags.coord
+    
+    new_coords.append((base_coord, 1))
+    
+    # create a point from 0, 0 pointing up
+    vertical_coord = fm.CoordTuple(0, mod_flags.length)
+    
+    # rotate that coord to the required angle
+    rotated_coord = vertical_coord.rotate(-mod_flags.direction)
+    
+
+    
+    # add that angle to the base coord to get the second coord.
+    offset_coord = base_coord + rotated_coord
+    
+    new_coords.append((rotated_coord, 2))
+    
+    
+    return new_coords  
+
 
 def new_transfer(inserts, brc, new_coord, fix_id):
     """
@@ -392,6 +428,8 @@ def custom_transfer_name(mod_flags, insert_name, pin):
         return f"#{insert_name}_{pin}"
     elif mod_flags.method == "double_row":
         return f"#{insert_name}_{pin}"
+    elif mod_flags.method == "pair":
+        return f":{insert_name}_{pin}"
     else:
         return f"${insert_name}"
 
@@ -429,7 +467,7 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
 
             for insert_match_function, mod_flags in function_dict.keys():
 
-                if mod_flags.method in ["new", "transfer", "testjet", "single_row", "double_row"]:
+                if mod_flags.method in ["new", "transfer", "testjet", "single_row", "double_row", "pair"]:
                     continue
 
                 # ensure function matches insert.
@@ -478,7 +516,7 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
     # add new inserts to fixture_data
     for (insert_name, mod_flags), (line_num, raw_line) in function_dict.items():
 
-        if mod_flags.method not in ["transfer", "testjet", "single_row", "double_row"]:
+        if mod_flags.method not in ["transfer", "testjet", "single_row", "double_row", "pair"]:
             continue
         
         for inserts, label in zip(*loop_var):
@@ -506,6 +544,11 @@ def modify_user_defined_inserts(fixture_dir, fixture_data, flags, target):
                     return None
             elif mod_flags.method in ["single_row", "double_row"]:
                 coords_list = calculate_transfer_block_pins(mod_flags, flags)
+                if coords_list is None:
+                    return None
+                    
+            elif mod_flags.method == "pair":
+                coords_list = calculate_transfer_pair_pins(mod_flags, flags)
                 if coords_list is None:
                     return None
             else:

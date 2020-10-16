@@ -16,6 +16,7 @@ from . import fixture_maths as fm
 from . import extract_wires as ew
 
 from typing import NamedTuple, Optional
+from decimal import Decimal
 
 
 fp_logger = logging.getLogger('fixture_processing.fixture_modifications')
@@ -452,8 +453,9 @@ def get_inserts_modifier_instructions() -> str:
 !
 !     testjet, module, units, x_location, y_location[, target]
 !
-!     single_row, direction, length, insert_name, units, x_location, y_locatation[, target]
-!     double_row, direction, length, insert_name, units, x_location, y_locatation[, target]
+!     single_row, length, direction, insert_name, units, x_location, y_locatation[, target]
+!     double_row, length, direction, insert_name, units, x_location, y_locatation[, target]
+!     double_row, radius,     theta, insert_name, units, x_location, y_locatation[, target]
 !
 ! offset tells the program that you wish to offset an insert (by x_offset, y_offset)
 ! move tells the program that you wish to move an insert to a new location. (x_location, y_location)
@@ -472,6 +474,11 @@ def get_inserts_modifier_instructions() -> str:
 !     The direction can be h[orizontal] or v[ertical],
 !     The length must be an integer number
 !     And Insert name will precede the pin number, eg r_feasa_1
+!
+! pair is for a pair of inserts. 
+!     Radius is the distance between the 2 points.
+!     theta is the angle between the vertical of the first point
+!     and the second point.
 !
 !
 ! units will be either mils (10 thousands of an inch) or mm (milimetres)
@@ -1179,7 +1186,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
     acceptable_directions = ["h", "v", "horizontal", "vertical"]
 
     limited_transfer_methods = ["top_transfer", "bottom_transfer", "testjet"]
-    block_transfer_methods = ["single_row", "double_row"]
+    block_transfer_methods = ["single_row", "double_row", "pair"]
     transfer_methods = ["transfer"] + limited_transfer_methods + block_transfer_methods
 
     for line_num, (row, raw_line) in enumerate(zip(csv_line_list, line_list), 1):
@@ -1228,22 +1235,44 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
 
             if method in block_transfer_methods:
                 # extract the mandatory data.
-                method, direction, length, insert_name, units, x_value, y_value = [
+                method, length, direction, insert_name, units, x_value, y_value = [
                     value.strip() for value in row[:7]]
                 target_flags = [value.strip() for value in row[7:]]
                 
+                
+                if method != "pair":
+                    if not length.isdigit():
+                        err_msg = error_header + \
+                                  f"    The length:  '{length}'\n" \
+                                  f"    is not an integer." 
+                        raise ValueError(err_msg)
+                        
+                    if direction not in acceptable_directions:
+                        err_msg = error_header + \
+                                  f"    The direction: '{direction}'\n" \
+                                  f"    is not h[orizontal] or v[ertical]" 
+                        raise ValueError(err_msg)
+                        
+                else:
+                    try:
+                        length = ew.CoordTuple.str_to_mils(length, units)
 
-                if not length.isdigit():
-                    err_msg = error_header + \
-                              f"    The length:  '{length}'\n" \
-                              f"    is not an integer." 
-                    raise ValueError(err_msg)
+                    except ValueError as err:
+                        err_msg = error_header + \
+                            f"    Program with 'length' entry.\n"
+                        raise ValueError(err_msg + str(err))
                     
-                if direction not in acceptable_directions:
-                    err_msg = error_header + \
-                              f"    The direction: '{direction}'\n" \
-                              f"    is not h[orizontal] or v[ertical]" 
-                    raise ValueError(err_msg)
+                    try:
+                        direction = float(direction)
+                    except ValueError:
+                        err_msg = error_header + \
+                                  f"    The angle theta:  '{direction}'\n" \
+                                  f"    must be a real number, representing" \
+                                  f"    An angle in degrees." 
+                        raise ValueError(err_msg)
+                        
+
+                    
                     
                 
                 
@@ -1292,7 +1321,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
 
 
             
-            mod_flags = InsertModFlag(method, coord, top, bottom, int(length), direction)
+            mod_flags = InsertModFlag(method, coord, top, bottom, length, direction)
             
             # for a transfer statement, a checker function is not generated.
             if method in ["transfer", "testjet"] + block_transfer_methods:
@@ -1318,8 +1347,7 @@ def generate_insert_modification_functions(csv_line_list, line_list, target, fil
                         raise ValueError(error_header + err_msg)
                 
                     checker_list.append(result)
-            
-            
+
 
             # a blank checker_list means a problem with the token.
             if not checker_list:
@@ -1376,7 +1404,7 @@ def validate_modify_inserts_functions(fixture_dir, bottom_inserts, top_inserts, 
         for (function, mod_flags), (line_num, line) in function_dict.items():
 
             # only check offset  move functions
-            if mod_flags.method in ["new", "transfer", "testjet", "single_row", "double_row"]:
+            if mod_flags.method in ["new", "transfer", "testjet", "single_row", "double_row", "pair"]:
                 continue
 
             for coord, insert in inserts.items():
@@ -1394,7 +1422,7 @@ def validate_modify_inserts_functions(fixture_dir, bottom_inserts, top_inserts, 
 
     # make sure all functions have found a set.
     for (function, mod_flags), (line_num, line) in function_dict.items():
-        if mod_flags.method in ["new", "transfer", "testjet", "single_row", "double_row"]:
+        if mod_flags.method in ["new", "transfer", "testjet", "single_row", "double_row", "pair"]:
             continue
 
         if function not in found_functions:
