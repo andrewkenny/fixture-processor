@@ -477,7 +477,7 @@ def get_inserts_modifier_instructions() -> str:
 !
 ! pair is for a pair of inserts. 
 !     Radius is the distance between the 2 points.
-!     theta is the angle between the vertical of the first point
+!     theta is the angle between the right horizontal of the first point
 !     and the second point.
 !
 !
@@ -844,7 +844,7 @@ def generate_custom_transfer_comparison(argument):
     """
 
     # ensure the argument starts with p or 4 (argument is made lower case for easier parsing.
-    if not argument.startswith(("$", "tj", "#")):
+    if not argument.startswith(("$", "tj", "#", ":")):
         return None
 
     token = argument

@@ -382,10 +382,10 @@ def calculate_transfer_pair_pins(mod_flags, flags):
     new_coords.append((base_coord, 1))
     
     # create a point from 0, 0 pointing up
-    vertical_coord = fm.CoordTuple(0, mod_flags.length)
+    vertical_coord = fm.CoordTuple(mod_flags.length, 0)
     
     # rotate that coord to the required angle
-    rotated_coord = vertical_coord.rotate(-mod_flags.direction)
+    rotated_coord = vertical_coord.rotate(mod_flags.direction)
     
 
     
