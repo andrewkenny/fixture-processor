@@ -396,41 +396,41 @@ def define_muxcard_wiring():
     muxcard_dict = {}
     
     
-    muxcard_dict["MOD0_2"]  =  fm.PinID("11147")
-    muxcard_dict["MOD0_3"]  =  fm.PinID("10660")
-    muxcard_dict["MOD0_4"]  =  fm.PinID("10658")
-    muxcard_dict["MOD0_5"]  =  fm.PinID("10656")
-    muxcard_dict["MOD0_6"]  =  fm.PinID("11107")
-    muxcard_dict["MOD0_7"]  =  fm.PinID("11103")
-    muxcard_dict["MOD0_8"]  =  fm.PinID("11104")
-    muxcard_dict["MOD0_9"]  =  fm.PinID("10661")
+    muxcard_dict["MUX0_2"]  =  fm.PinID("11147")
+    muxcard_dict["MUX0_3"]  =  fm.PinID("10660")
+    muxcard_dict["MUX0_4"]  =  fm.PinID("10658")
+    muxcard_dict["MUX0_5"]  =  fm.PinID("10656")
+    muxcard_dict["MUX0_6"]  =  fm.PinID("11107")
+    muxcard_dict["MUX0_7"]  =  fm.PinID("11103")
+    muxcard_dict["MUX0_8"]  =  fm.PinID("11104")
+    muxcard_dict["MUX0_9"]  =  fm.PinID("10661")
     
-    muxcard_dict["MOD1_2"]  =  fm.PinID("12347")
-    muxcard_dict["MOD1_3"]  =  fm.PinID("11860")
-    muxcard_dict["MOD1_4"]  =  fm.PinID("11858")
-    muxcard_dict["MOD1_5"]  =  fm.PinID("11856")
-    muxcard_dict["MOD1_6"]  =  fm.PinID("12307")
-    muxcard_dict["MOD1_7"]  =  fm.PinID("12303")
-    muxcard_dict["MOD1_8"]  =  fm.PinID("12304")
-    muxcard_dict["MOD1_9"]  =  fm.PinID("11861")
+    muxcard_dict["MUX1_2"]  =  fm.PinID("12347")
+    muxcard_dict["MUX1_3"]  =  fm.PinID("11860")
+    muxcard_dict["MUX1_4"]  =  fm.PinID("11858")
+    muxcard_dict["MUX1_5"]  =  fm.PinID("11856")
+    muxcard_dict["MUX1_6"]  =  fm.PinID("12307")
+    muxcard_dict["MUX1_7"]  =  fm.PinID("12303")
+    muxcard_dict["MUX1_8"]  =  fm.PinID("12304")
+    muxcard_dict["MUX1_9"]  =  fm.PinID("11861")
     
-    muxcard_dict["MOD2_2"]  =  fm.PinID("20132")
-    muxcard_dict["MOD2_3"]  =  fm.PinID("20619")
-    muxcard_dict["MOD2_4"]  =  fm.PinID("20621")
-    muxcard_dict["MOD2_5"]  =  fm.PinID("20623")
-    muxcard_dict["MOD2_6"]  =  fm.PinID("20172")
-    muxcard_dict["MOD2_7"]  =  fm.PinID("20176")
-    muxcard_dict["MOD2_8"]  =  fm.PinID("20175")
-    muxcard_dict["MOD2_9"]  =  fm.PinID("20618")
+    muxcard_dict["MUX2_2"]  =  fm.PinID("20132")
+    muxcard_dict["MUX2_3"]  =  fm.PinID("20619")
+    muxcard_dict["MUX2_4"]  =  fm.PinID("20621")
+    muxcard_dict["MUX2_5"]  =  fm.PinID("20623")
+    muxcard_dict["MUX2_6"]  =  fm.PinID("20172")
+    muxcard_dict["MUX2_7"]  =  fm.PinID("20176")
+    muxcard_dict["MUX2_8"]  =  fm.PinID("20175")
+    muxcard_dict["MUX2_9"]  =  fm.PinID("20618")
     
-    muxcard_dict["MOD3_2"]  =  fm.PinID("21332")
-    muxcard_dict["MOD3_3"]  =  fm.PinID("21819")
-    muxcard_dict["MOD3_4"]  =  fm.PinID("21821")
-    muxcard_dict["MOD3_5"]  =  fm.PinID("21823")
-    muxcard_dict["MOD3_6"]  =  fm.PinID("21372")
-    muxcard_dict["MOD3_7"]  =  fm.PinID("21376")
-    muxcard_dict["MOD3_8"]  =  fm.PinID("21375")
-    muxcard_dict["MOD3_9"]  =  fm.PinID("21818")
+    muxcard_dict["MUX3_2"]  =  fm.PinID("21332")
+    muxcard_dict["MUX3_3"]  =  fm.PinID("21819")
+    muxcard_dict["MUX3_4"]  =  fm.PinID("21821")
+    muxcard_dict["MUX3_5"]  =  fm.PinID("21823")
+    muxcard_dict["MUX3_6"]  =  fm.PinID("21372")
+    muxcard_dict["MUX3_7"]  =  fm.PinID("21376")
+    muxcard_dict["MUX3_8"]  =  fm.PinID("21375")
+    muxcard_dict["MUX3_9"]  =  fm.PinID("21818")
     
     return muxcard_dict
 
@@ -629,6 +629,63 @@ def validate_remove_flags(raw_remove_flags, line_num, line):
         remove_flags.replace(flag, "")
 
     return True
+
+
+def generate_testjet_muxcard_comparison(argument):
+    """
+    When A person wants to connect a wire to a testjet BRC,
+    they can describe it as MUX0_2, which refers to 
+    module 0 mux card, pin 2.
+    """
+    
+    token = argument.strip()
+
+    # ensure the token is indeed
+    # describing a power supply
+    if not token.startswith("mux"):
+        return None
+        
+    if re.fullmatch(r"mux[0-3]_[2-9]", token) is None:
+        err_msg = \
+            f"    invalid mux card description: \n" \
+            f"    '{token}'\n" \
+            f"    Check syntax rules and edit."
+        raise ValueError(err_msg)
+        
+    mux_card_dict = define_muxcard_wiring()
+    
+    mux_card_lookup = mux_card_dict[token.upper()]
+    
+    def brc_checker(insert):
+        """
+        returns True if the given brc given by the user config
+        matches the brc given in the inserts data structure.
+
+        outer arguments:
+            token
+
+        """
+
+        # insert is None for terminal inserts.
+        if insert is None:
+            return False
+
+        # return false if insert is not a pin / insert
+        if insert.insert_type not in ["Pin", "Offset"]:
+            return False
+
+        # The brc name (as described in the fixture file (and wirelist)
+        # is stored in fix_id.
+        fix_id = insert.fix_id
+
+        # a fix_id that is a string means there was a lookup error.
+        if isinstance(fix_id, str):
+            return False
+
+        return fix_id.brc == mux_card_lookup
+
+    return brc_checker
+
 
 
 def generate_explicit_power_supply_comparison(argument):
@@ -1492,7 +1549,8 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
 
     from_list = [generate_brc_comparison, generate_probe_comparison,
                  generate_custom_transfer_comparison,
-                 generate_explicit_power_supply_comparison]
+                 generate_explicit_power_supply_comparison,
+                 generate_testjet_muxcard_comparison]
 
     to_list = from_list.copy()
 
