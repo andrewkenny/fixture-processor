@@ -996,12 +996,11 @@ def get_custom_functions(fixture_dir, target, filename,
     
 
     if not csv_path.exists():
-        err = f"    Cannot find '{filename}'\n"\
-              f"    '{filename}' is required for\n"\
-              f"    '{description}'. "
+        err_msg = f"    Cannot find '{filename}'\n"\
+                  f"    '{filename}' is required for\n"\
+                  f"    '{description}'. "
 
-        mb.showerror("ERROR", err)
-        return None
+        raise ValueError(err_message)
         
     # get the contents of the csv, and store it to list of lines.
     with csv_path.open(newline="") as remove_wires:
@@ -1018,8 +1017,7 @@ def get_custom_functions(fixture_dir, target, filename,
         return_value = generate_functions(
             csv_line_list, line_list, target, filename)
     except ValueError as err:
-        mb.showerror("ERROR", str(err))
-        return None
+        raise ValueError(str(err))
         
     if return_value is None:
         return None
@@ -1028,12 +1026,11 @@ def get_custom_functions(fixture_dir, target, filename,
 
     # give warning if function_dict is empty
     if function_dict == dict() and not skip_target:
-        msg = f"    '{filename}' does not contain\n"\
-              f"    Any wire descriptions.\n" \
-              f"    Uncheck '{description}', or \n"\
-              f"    Add valid entries."
-        mb.showerror("ERROR", msg)
-        return None
+        err_msg = f"    '{filename}' does not contain\n"\
+                  f"    Any wire descriptions.\n" \
+                  f"    Uncheck '{description}', or \n"\
+                  f"    Add valid entries."
+        raise ValueError(err_message)
 
     return function_dict
 
@@ -1355,14 +1352,17 @@ def validate_modify_inserts_functions(fixture_dir, bottom_inserts, top_inserts, 
     filename = insert_editing_options["filename"]
     description = insert_editing_options["modify_inserts"].description
     
-    function_dict = get_custom_functions(
-        fixture_dir, 
-        target,
-        filename, description,
-        generate_insert_modification_functions)
-
-    if function_dict is None:
+    try:
+        function_dict = get_custom_functions(
+            fixture_dir, 
+            target,
+            filename, description,
+            generate_insert_modification_functions)
+    except ValueError as err:
+        mb.showerror("ERROR", str(err))
         return None
+
+
 
     # all functions which match an insert are stored here.
     found_functions = set()
@@ -1559,12 +1559,15 @@ def validate_add_wires_functions(fixture_dir, bottom_inserts, top_inserts, targe
     filename = wire_addition_options["filename"]
     description = wire_addition_options["add_custom_wires"].description
     
-    function_dict = get_custom_functions(fixture_dir, 
-                                         target, 
-                                         filename, description,
-                                         generate_addition_wire_functions )
-    if function_dict is None:
+    try:
+        function_dict = get_custom_functions(fixture_dir, 
+                                             target, 
+                                             filename, description,
+                                             generate_addition_wire_functions)
+    except ValueError as err:
+        mb.showerror("ERROR", str(err))
         return None
+
 
     bottom_functions, top_functions = {}, {}
 

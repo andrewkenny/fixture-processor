@@ -59,16 +59,18 @@ def remove_user_defined_wires(fixture_dir, fixture_data, flags, target):
     file_name = wire_removal_options["filename"]
     description = wire_removal_options["remove_custom_wires"].description
     
-    function_dict = fmod.get_custom_functions(fixture_dir, target,
-        file_name, description, fmod.generate_remove_wire_functions)
+    try:
+        function_dict = fmod.get_custom_functions(fixture_dir, target,
+            file_name, description, fmod.generate_remove_wire_functions)
+    except ValueError as err:
+        mb.showerror("ERROR", str(err))
+        return None
 
     # we must keep track of the functions which are used.
     # a function which applies to no wires often means
     # the writer of remove_wires.csv has made a mistake.
     used_functions = set()
 
-    if function_dict is None:
-        return None
 
     loop_vars = ([bottom_wires, top_wires],
                  [new_bottom_wires, new_top_wires],
