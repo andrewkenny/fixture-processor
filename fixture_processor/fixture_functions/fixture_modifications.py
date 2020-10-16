@@ -388,6 +388,52 @@ def define_power_supplies():
     power_supply_dict["PS24+"] = power_supply("11124", "11123", "11158")
     return power_supply_dict
 
+def define_muxcard_wiring():
+    """
+    This function returns a dict containing all standard testjet / VTEP wires.
+    """
+    
+    muxcard_dict = {}
+    
+    
+    muxcard_dict["MOD0_2"]  =  fm.PinID("11147")
+    muxcard_dict["MOD0_3"]  =  fm.PinID("10660")
+    muxcard_dict["MOD0_4"]  =  fm.PinID("10658")
+    muxcard_dict["MOD0_5"]  =  fm.PinID("10656")
+    muxcard_dict["MOD0_6"]  =  fm.PinID("11107")
+    muxcard_dict["MOD0_7"]  =  fm.PinID("11103")
+    muxcard_dict["MOD0_8"]  =  fm.PinID("11104")
+    muxcard_dict["MOD0_9"]  =  fm.PinID("10661")
+    
+    muxcard_dict["MOD1_2"]  =  fm.PinID("12347")
+    muxcard_dict["MOD1_3"]  =  fm.PinID("11860")
+    muxcard_dict["MOD1_4"]  =  fm.PinID("11858")
+    muxcard_dict["MOD1_5"]  =  fm.PinID("11856")
+    muxcard_dict["MOD1_6"]  =  fm.PinID("12307")
+    muxcard_dict["MOD1_7"]  =  fm.PinID("12303")
+    muxcard_dict["MOD1_8"]  =  fm.PinID("12304")
+    muxcard_dict["MOD1_9"]  =  fm.PinID("11861")
+    
+    muxcard_dict["MOD2_2"]  =  fm.PinID("20132")
+    muxcard_dict["MOD2_3"]  =  fm.PinID("20619")
+    muxcard_dict["MOD2_4"]  =  fm.PinID("20621")
+    muxcard_dict["MOD2_5"]  =  fm.PinID("20623")
+    muxcard_dict["MOD2_6"]  =  fm.PinID("20172")
+    muxcard_dict["MOD2_7"]  =  fm.PinID("20176")
+    muxcard_dict["MOD2_8"]  =  fm.PinID("20175")
+    muxcard_dict["MOD2_9"]  =  fm.PinID("20618")
+    
+    muxcard_dict["MOD3_2"]  =  fm.PinID("21332")
+    muxcard_dict["MOD3_3"]  =  fm.PinID("21819")
+    muxcard_dict["MOD3_4"]  =  fm.PinID("21821")
+    muxcard_dict["MOD3_5"]  =  fm.PinID("21823")
+    muxcard_dict["MOD3_6"]  =  fm.PinID("21372")
+    muxcard_dict["MOD3_7"]  =  fm.PinID("21376")
+    muxcard_dict["MOD3_8"]  =  fm.PinID("21375")
+    muxcard_dict["MOD3_9"]  =  fm.PinID("21818")
+    
+    return muxcard_dict
+
 
 def get_wire_removal_instructions() -> str:
 
