@@ -1584,8 +1584,7 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
 
         if value_count not in range(3, 5 + len(flags)):
             err_msg = error_header + f"Wrong number of values ({value_count})."
-            mb.showerror("ERROR", err_msg)
-            return None
+            raise ValueError(err_message)
 
         # extract the from and to token, stripping them of l and r
         # whitespace.
