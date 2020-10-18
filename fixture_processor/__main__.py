@@ -97,6 +97,7 @@ class Window(tk.Frame):
 
         self.create_widgets()
         self.load_fixture(fixture_path)
+        self.add_job_widgets()
 
     def get_program_options(self):
         """
@@ -169,10 +170,19 @@ class Window(tk.Frame):
 
         self.ntbk_tabs.add(self.fixture_canvas, text="Fixture Layout Plot.")
 
+    def add_job_widgets(self):
+        """
+        These contain the widgets to be added after the job has been loaded,
+        To see what stage the job is at (design / debug / fixture only)
+        """
+
         # add the fixture processing option widgets form.
         self.fp_form = FixtureProcessingForm(
             self.engineering_flag, self, self.ntbk_tabs)
         self.ntbk_tabs.add(self.fp_form, text="Fixture Processor Options.")
+        
+        # get user options, and fill the checkboxes
+        self.fp_form.get_user_options()
 
     def choose_directory(self):
 
@@ -284,8 +294,7 @@ class Window(tk.Frame):
         # draw the outline of the fixture to the fixture canvas.
         self.fixture_canvas.load_fixture_and_draw()
 
-        # get user options, and fill the checkboxes
-        self.fp_form.get_user_options()
+
 
 
 def main():
