@@ -542,7 +542,7 @@ def get_inserts(fixture_path, pins_lookup, probe_dict):
     return inserts, top_inserts, inserts_lookup, top_inserts_lookup
 
 
-def extract_b_r_c(token_line):
+def extract_b_r_c(token_line, automatic=False):
     """
     This function extracts the bank row and column
     accounting for negative rows.
@@ -551,18 +551,27 @@ def extract_b_r_c(token_line):
     
     # account for negative row.
     if "-" in token_line[0]:
-        bank_row, column, f_number = \
+        bank_row, column, _ = \
             token_line[:3]
             
         bank, row = bank_row.split("-")
         row = f"-{row}"
-        token_line = token_line[3:]
+        
+        # automatic doesn't have a wrap number
+        if automatic:
+            token_line = token_line[2:]
+        else:
+            token_line = token_line[3:]
         
     else:
         # then get the 'from' info
-        bank, row, column, f_number = \
+        bank, row, column, _ = \
             token_line[:4]
-        token_line = token_line[4:]
+        
+        if automatic:        
+            token_line = token_line[3:]
+        else:
+            token_line = token_line[4:]
 
     return f"{bank}{row:>6} {column:>6}", token_line
     
@@ -649,10 +658,12 @@ def get_brc_terminal(token_line, inserts):
     # get the 'to brc' data, then
     # remove it from the line.
     if token_line[0].startswith(("(", "[", "*")):
-        result, token_line = extract_b_r_c(token_line)
+        result, token_line = extract_b_r_c(token_line, automatic=True)
     else:
+        
         terminal_flag = True
         result = token_line[0]
+
         token_line = token_line[1:]
 
     if terminal_flag:
@@ -686,6 +697,7 @@ def get_automatic_line(line, inserts):
     # get the from_brc and update the token line
     # the from_brc could be a pin or a terminal
     token_line, from_brc, from_xy = get_brc_terminal(token_line, inserts)
+    print(token_line)
 
     # get the to_brc and update the token line
     # the to_brc could be a pin or a terminal

@@ -156,6 +156,7 @@ def remove_terminal_wires(fixture_dir, fixture_data, flags, target):
         if not wire._is_terminal_wire:
             new_bottom_wires.append(wire)
         else:
+            # print(wire.to_brc,"---",wire.to_xy,"---", wire.from_brc)
             remove_count += 1
 
     fp_logger.info(
