@@ -232,15 +232,16 @@ def output_wires_inserts(new_dir, source_dir, settings_dict, fixture_data, name)
             if name == "wires":
                 replace_dict = {}
                 from_xy, to_xy = data._get_xy_coords
+                from_brc, to_brc = data._get_brc_data
 
-                for xy, label in zip([from_xy, to_xy], ["from", "to"]):
+                for xy, brc, label in data.iter_wire():
                     terminal_check = f"_{label}_is_terminal"
                     # skip if the from / to entry is a terminal.
                     if getattr(data, terminal_check):
                         continue
 
                     insert = inserts[xy]
-                    if insert.coord == xy:
+                    if insert.coord == xy and not brc.startswith("*"):
                         continue
 
                     replace_dict[f"{label}_xy"] = insert.coord

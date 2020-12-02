@@ -104,6 +104,25 @@ class WireTuple(typing.NamedTuple):
         """
 
         return self.from_xy, self.to_xy
+        
+    @property
+    def _get_brc_data(self):
+        """
+        Often, only the from_xy and to_xy is required
+        from the WireTuple. This returns only that.
+        """
+
+        return self.from_brc, self.to_brc
+        
+    
+    def iter_wire(self):
+        """
+        acts as a generator to return the
+        'from' data, then the 'to' data
+        """
+
+        yield (self.from_xy, self.from_brc, "from")
+        yield (self.to_xy, self.to_brc, "to")       
 
 
 class InsertTuple(typing.NamedTuple):

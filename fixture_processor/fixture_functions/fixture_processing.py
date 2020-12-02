@@ -600,7 +600,17 @@ def correct_offset_pins(fixture_dir, fixture_data, flags, target):
 
         # no offset means no change necessary
         elif data.fix_id.offset == (0, 0):
-            new_inserts[coord] = data
+        
+            if data.brc.startswith("*"):
+                fix_id = data.fix_id
+            
+                new_brc = fm.create_brc_loc(fix_id.brc)
+                
+                new_data = data._replace(brc=new_brc, insert_type="Pin")
+                new_inserts[coord] = new_data
+            else:
+                
+                new_inserts[coord] = data
         else:
             brc = data.brc
             fix_id = data.fix_id
