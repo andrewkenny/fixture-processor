@@ -716,7 +716,7 @@ def get_automatic_line(line, inserts):
     # get the from_brc and update the token line
     # the from_brc could be a pin or a terminal
     token_line, from_brc, from_xy = get_brc_terminal(token_line, inserts)
-    print(token_line)
+
 
     # get the to_brc and update the token line
     # the to_brc could be a pin or a terminal
