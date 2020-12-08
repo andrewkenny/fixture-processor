@@ -14,7 +14,7 @@ if %Processor% == 64 (
     set CorrectArg=1
     
     
-    pyinstaller --distpath=.\bin\fixture_processor --onefile  --noupx wires_processor.py
+    pyinstaller --distpath=.\bin\fixture_processor --onefile  --icon=assets\index.ico --noupx wires_processor.py
 
 )
 
@@ -26,7 +26,7 @@ if %Processor% == 32 (
     SET PATH=%localappdata%\Programs\Python\Python37-32
     SET PATH=%PATH%;%localappdata%\Programs\Python\Python37-32\Scripts
     
-    "%localappdata%\Programs\Python\Python37-32\Scripts\pyinstaller.exe" --distpath=.\bin\fixture_processor_x86 --onefile  --noupx wires_processor.py
+    "%localappdata%\Programs\Python\Python37-32\Scripts\pyinstaller.exe" --distpath=.\bin\fixture_processor_x86 --onefile  --icon=assets\index.ico --noupx wires_processor.py
     
     set PATH=%InitialPath%
 )
