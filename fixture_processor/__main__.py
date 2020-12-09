@@ -371,7 +371,11 @@ def main():
         
     img = tk.PhotoImage(file=outputfile.name)
     root.call('wm', 'iconphoto', root._w, img)
-    os.unlink(outputfile.name)
+    
+    try:
+        os.unlink(outputfile.name)
+    except:
+        pass
     
     # create root object for tkinter
 
