@@ -3,8 +3,11 @@
 # Admin /stdlib library imports.
 import os
 import sys
+import base64
 import argparse
+import tempfile
 import logging
+
 
 
 # Admin / stdlib single imports.
@@ -68,6 +71,28 @@ except PermissionError:
         "program error",
         "    This program is already running.\n\n    Closing...")
     sys.exit()
+
+icon = "".join([\
+"iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAB4FBMVEUAAAD/02j/02j/02j/02j/",
+"02j/02j/02j/02j80Gb80Gb80Gb80Gb80Gb80Gb80Gb80Gb80Gb80Gb5zGT5zGT5zGT5zGT5zGT5",
+"zGT5zGT5zGT5zGT5zGT5zGT5zGT5zGT1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1",
+"x2Hwwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3rvFnrvFnrvFnrvFnrvFnrvFnr",
+"vFnrvFnrvFnmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbgsFLgsFLgsFLgsFLgsFLg",
+"sFLgsFLgsFLgsFLgsFLgsFLgsFLgsFLaqU7aqU7aqU7aqU7aqU7aqU7aqU7aqU7aqU7Vo0rVo0rV",
+"o0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rQnkbQnkbQnkbQnkbQnkbQnkbQnkbQnkbQ",
+"nkbQnkbQnkbQnkbQnkbLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPHlD/HlD/HlD/H",
+"lD/HlD/HlD/HlD/HlD/HlD/HlD/HlD/EkD3EkD3EkD3EkD3EkD3EkD3EkD3EkD3BjTvBjTvBjTvB",
+"jTvBjTvBjTslMwBZAAAAoHRSTlMALYK81cvDgSlspd7l0cPj7Khna3winR5ycRGNQoFlBTXUMZxK",
+"Al0GqdMqCo5xitWQj7rInXaGBxaXMHNdRGKUIiWZKnCCK3gsVJc4Hr5+rLV/r66BocG8NRiSMHFf",
+"YEqRJpZ5kdaPjrm6kNlyiwlDySOZQFdWSZYp0DcKfGkkmRx5oBpzeAoBf6vg2L3O2tSifUWSztzn",
+"wZFBGFB0ck4XWZ6FzwAAAOlJREFUGNNjYMAGGJmYWVjZ2DlgfE4ubh5ePn4BQSEIX1hEVExcQlJK",
+"WkZWjkGegUFBUUlZRVVNTV1JQ0FTS5uBQUdXT9/A0MhIR8fYxNTMnMHCksHKmoHBxoaBwdaOwd6B",
+"wdHJ2cXVzdnd3c3D08nZy5vBx9fPPyAwMCg4MCQ0zC88giEyiiE6hoEhNg6I4xkSEhkYkpJTUtPS",
+"MzLTsrLTcnLzGBjyCwqLihlKShnKyisqq6qBDqupratvaGysa2puaWVoAwq0d3R2dff09vVPmAjz",
+"zKTJU6ZOmz5jJsK7s2bPmTtvPpgJAGJIN0wyMhTbAAAAAElFTkSuQmCC"\
+])
+
+
 
 
 class Window(tk.Frame):
@@ -338,9 +363,18 @@ def main():
         logging.info("path argument provided: '%s'", str_fixture_path)
         fixture_path = Path(str_fixture_path)
 
-    # create root object for tkinter
     root = tk.Tk()
     root.resizable(False, False)
+
+    with tempfile.NamedTemporaryFile('w+b',delete=False) as outputfile:
+        outputfile.write(base64.b64decode(icon))
+        
+    img = tk.PhotoImage(file=outputfile.name)
+    root.call('wm', 'iconphoto', root._w, img)
+    os.unlink(outputfile.name)
+    
+    # create root object for tkinter
+
 
     logging.basicConfig(filename=FULL_LOGGING_PATH,
                         level=logging.DEBUG)
