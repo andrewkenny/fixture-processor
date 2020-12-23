@@ -40,7 +40,7 @@ if %Processor% == 32 (
     xcopy .\build\wires_processor_32 .\build\wires_processor /E >nul 2>&1
     set CorrectArg=1
 
-    SET "%localappdata%\Programs\Python\Python37-32"
+    SET "PATH=%localappdata%\Programs\Python\Python37-32"
     SET "PATH=%PATH%;%localappdata%\Programs\Python\Python37-32\Scripts"
     
     "%localappdata%\Programs\Python\Python37-32\Scripts\pyinstaller.exe" --distpath=.\bin\fixture_processor_x86 --onefile  --icon=assets\index.ico --noupx wires_processor.py
