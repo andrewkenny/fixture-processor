@@ -6,4 +6,4 @@ This file exists so that the main function can be imported externally
 allowing for pyinstaller builds.
 """
 
-from fixture_processor.__main__ import main
+from fixture_processor.main import main
