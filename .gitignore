@@ -1,7 +1,8 @@
 __pycache__/
 *.py[cod]
 
-
+references/*/verifier
+references/*/wiring_machine
 
 mypy_output.txt
 pylint_output.txt
