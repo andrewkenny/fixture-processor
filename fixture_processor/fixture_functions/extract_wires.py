@@ -45,8 +45,8 @@ from fixture_processor.fixture_functions.fixture_maths import CoordTuple
 from fixture_processor.options_lib import fixture_processing_options
 
 
-from pathlib import Path
-from collections import namedtuple, OrderedDict
+# from pathlib import Path
+from collections import OrderedDict # , namedtuple 
 
 from tkinter import messagebox as mb
 from decimal import Decimal
