@@ -12,36 +12,37 @@ import logging
 
 # Admin / stdlib single imports.
 from pathlib import Path
-
+from dotenv import load_dotenv
 
 # functional imports
 import tkinter as tk
 from tkinter import ttk
-from tkinter.filedialog import askdirectory
+# from tkinter.filedialog import askdirectory
 from tkinter.filedialog import askopenfilename
 from tkinter import messagebox as mb
-from pathlib import Path
 from typing import NamedTuple
 
 
 from fixture_processor.options_lib import program_option_functions as p_options
-from fixture_processor.options_lib import fixture_processing_options as fp_options
+# from fixture_processor.options_lib import fixture_processing_options as fp_options
 
-from fixture_processor.fixture_functions.fixture_input import get_outline_info
+# from fixture_processor.fixture_functions.fixture_input import get_outline_info
 
 from fixture_processor.fixture_processor_form import FixtureProcessingForm
 from fixture_processor.fixture_canvas_form import FixtureCanvas
 
-from fixture_processor.fixture_functions import extract_wires as ew
-from fixture_processor.fixture_functions import fixture_processing as fp
-from fixture_processor.fixture_functions import fixture_modifications as fmod
-from fixture_processor import file_operations as fo
+# from fixture_processor.fixture_functions import extract_wires as ew
+# from fixture_processor.fixture_functions import fixture_processing as fp
+# from fixture_processor.fixture_functions import fixture_modifications as fmod
+# from fixture_processor import file_operations as fo
+
+# dotenv initialisation
+load_dotenv()
 
 
 # -250 : 0 : 250
 CANVAS_SIZE = 570
 PROGRAM_CONFIG_FOLDER = Path(f"{os.getenv('APPDATA')}/ForwessunFixtures")
-print(PROGRAM_CONFIG_FOLDER)
 
 PROGRAM_CONFIG_FILE = "config.ini"
 PROGRAM_LOGGING_FILE = "ffp.log"
@@ -52,14 +53,12 @@ USER_OPTIONS_FILE = "user_options.ini"
 PROGRAM_CONFIG_FOLDER.mkdir(parents=True, exist_ok=True)
 
 FULL_LOGGING_PATH = Path(f"{PROGRAM_CONFIG_FOLDER}/{PROGRAM_LOGGING_FILE}")
-print("FULL_LOGGING_PATH:", FULL_LOGGING_PATH)
 
 
 try:
     if FULL_LOGGING_PATH.is_file():
         FULL_LOGGING_PATH.unlink()
-
-
+        
 except PermissionError:
     root = tk.Tk()
     root.withdraw()
@@ -145,7 +144,7 @@ class Window(tk.Frame):
             # config location.
             sys.exit()
 
-        config_path = PROGRAM_CONFIG_FOLDER / PROGRAM_CONFIG_FILE
+        config_path = Path(f"{PROGRAM_CONFIG_FOLDER}/{PROGRAM_CONFIG_FILE}")
 
         if not config_path.exists():
             with config_path.open("w") as f_config:
@@ -272,13 +271,9 @@ class Window(tk.Frame):
                 invalid_file = file.is_dir()
                 if not_present and invalid_file:
                     if not_present:
-                        logging.info(
-                            "'%s' cannot be found at '%s'", file.name, file.parent)
+                        logging.info(f"{file.name} cannot be found at {file.parent}")
                     if not_present:
-                        logging.info(
-                            "'%s' in '%s' is not a valid file",
-                            file.name,
-                            file.parent)
+                        logging.info(f"{file.name} in {file.parent} is not a valid file")
 
                     mb.showerror("ERROR", error_message)
                     fixture_path = None
@@ -289,8 +284,8 @@ class Window(tk.Frame):
                 continue
 
             if cancel_flag:
-                logging.info(
-                    "User Pressed Cancel or (x). Program will keep previous path.")
+                logging.info("User Pressed Cancel or (x). Program will keep previous path.")
+
             self.master.wm_title(fixture_path.as_posix())
             return fixture_path
 
@@ -328,9 +323,7 @@ def main():
     "The main entry point to the program"
 
     # get the programs arguments.
-    parser = argparse.ArgumentParser(
-        description='Loads fixture related documents for processing'
-        )
+    parser = argparse.ArgumentParser(description='Loads fixture related documents for processing')
 
     help_text = "The path to the fixture directory you want to open."
     parser.add_argument('-P', '--Path', 

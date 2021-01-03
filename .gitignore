@@ -21,4 +21,6 @@ Git Bash.lnk
 .history
 .DS_Store
 /APPDATA
-/None
+.env
+
+Pipfile.lock

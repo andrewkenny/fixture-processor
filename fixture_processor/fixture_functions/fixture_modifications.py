@@ -11,7 +11,7 @@ import logging
 
 from tkinter import messagebox as mb
 from typing import NamedTuple, Optional
-from decimal import Decimal
+# from decimal import Decimal
 
 from fixture_processor.options_lib import fixture_processing_options
 from fixture_processor.helper_functions import error_message_header
@@ -718,10 +718,7 @@ def generate_explicit_power_supply_comparison(argument):
 
     token_match = re.fullmatch(IMP_PS_PATTERN, token, re.VERBOSE)
     if token_match is None:
-        err_msg = \
-            f"    invalid power supply description.\n" \
-            f"    '{token}'\n" \
-            f"    Check syntax rules and edit."
+        err_msg = f"invalid power supply description.\n {token}\n Check syntax rules and edit."
         raise ValueError(err_msg)
 
 
@@ -733,9 +730,7 @@ def generate_explicit_power_supply_comparison(argument):
     try:
         power_supply_tuple = power_supply_dict[power_supply_lookup.upper()]
     except LookupError:
-        err_msg = \
-            f"    {power_supply_lookup} / {power_supply_lookup.upper()}\n" \
-            f"    is not a valid power supply.\n"
+        err_msg = f"{power_supply_lookup}/{power_supply_lookup.upper()}\n is not a valid power supply.\n"
         raise ValueError(err_msg)
 
     # get the brc of the power supply.
@@ -1123,7 +1118,7 @@ def get_custom_functions(fixture_dir, target, filename,
                   f"    '{filename}' is required for\n"\
                   f"    '{description}'. "
 
-        raise ValueError(err_message)
+        raise ValueError(err_msg)
         
     # get the contents of the csv, and store it to list of lines.
     with csv_path.open(newline="") as remove_wires:
@@ -1587,7 +1582,7 @@ def generate_addition_wire_functions(csv_line_list, line_list, target, filename)
 
         if value_count not in range(3, 5 + len(flags)):
             err_msg = error_header + f"Wrong number of values ({value_count})."
-            raise ValueError(err_message)
+            raise ValueError(err_msg)
 
         # extract the from and to token, stripping them of l and r
         # whitespace.

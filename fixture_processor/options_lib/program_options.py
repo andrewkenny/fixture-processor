@@ -31,7 +31,7 @@ The current settings will be:
 
 """
 
-from collections import namedtuple, OrderedDict
+from collections import OrderedDict # , namedtuple
 from pathlib import Path
 from string import hexdigits
 
