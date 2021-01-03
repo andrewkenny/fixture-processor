@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
 Fixture Type : Agilent No-Wire
@@ -22,18 +22,18 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.0 28  Blue  (2 15.00  30.0) [2 13.63  30.1]   91611   16275   91406    6700
    1.0 28  Blue  (2 15.00  23.0) [2 13.63  22.6]  102111   16275  102745    6700
    1.0 28  Blue  (2 09.50  25.0) [2 10.15  22.6]   99111  -22225  102745  -17710
-   1.0 28  Blue  (2 09.00  14.0) [2 10.15  15.0]  115611  -25725  114084  -17710
+   1.5 28  Blue  (2 09.00  14.0) [2 10.15  15.0]  115611  -25725  114084  -17710
    1.0 28  Blue  (2 10.00  09.0) [2 10.15  07.5]  123111  -18725  125423  -17710
    1.0 28  Blue  (2 10.50  03.0) [2 10.15 -00.1]  132111  -15225  136762  -17710
    1.0 28  Blue  (2 09.50  04.0) [2 08.78  01.6]  130611  -22225  134275  -27257
    1.0 28  Blue  (2 09.50  10.0) [2 08.78  09.1]  121611  -22225  122936  -27257
    1.0 28  Blue  (2 08.00  17.0) [2 08.78  16.7]  111111  -32725  111597  -27257
-   1.0 28  Blue  (2 08.50  24.0) [2 08.78  24.2]  100611  -29225  100258  -27257
+   0.5 28  Blue  (2 08.50  24.0) [2 08.78  24.2]  100611  -29225  100258  -27257
    1.0 28  Blue  (2 08.50  33.0) [2 08.78  31.8]   87111  -29225   88919  -27257
-   1.0 28  Blue  (2 08.00  30.0) [2 08.01  30.2]   91611  -32725   91308  -32651
-   1.0 28  Blue  (2 08.00  23.0) [2 08.01  22.6]  102111  -32725  102647  -32651
-   1.0 28  Blue  (2 08.00  15.0) [2 08.01  15.1]  114111  -32725  113986  -32651
-   1.0 28  Blue  (2 08.00  08.0) [2 08.01  07.5]  124611  -32725  125325  -32651
+   0.5 28  Blue  (2 08.00  30.0) [2 08.01  30.2]   91611  -32725   91308  -32651
+   0.5 28  Blue  (2 08.00  23.0) [2 08.01  22.6]  102111  -32725  102647  -32651
+   0.5 28  Blue  (2 08.00  15.0) [2 08.01  15.1]  114111  -32725  113986  -32651
+   0.5 28  Blue  (2 08.00  08.0) [2 08.01  07.5]  124611  -32725  125325  -32651
    1.0 28  Blue  (2 08.50  01.0) [2 08.01 -00.0]  135111  -29225  136664  -32651
    1.0 28  Blue  (2 07.50  05.0) [2 06.66 -00.1]  129111  -36225  136762  -42120
    1.0 28  Blue  (2 07.00  10.0) [2 06.66  07.5]  121611  -39725  125423  -42120
@@ -47,7 +47,7 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.0 28  Blue  (2 07.00  70.0) [2 06.66  67.9]   31611  -39725   34711  -42120
    1.0 28  Blue  (2 05.00  71.0) [2 05.29  69.6]   30111  -53725   32224  -51667
    1.0 28  Blue  (2 05.00  64.0) [2 05.29  62.0]   40611  -53725   43563  -51667
-   1.0 28  Blue  (2 05.50  55.0) [2 05.29  54.5]   54111  -50225   54902  -51667
+   0.5 28  Blue  (2 05.50  55.0) [2 05.29  54.5]   54111  -50225   54902  -51667
    1.0 28  Blue  (2 05.00  48.0) [2 05.29  46.9]   64611  -53725   66241  -51667
    1.0 28  Blue  (2 05.50  41.0) [2 05.29  39.4]   75111  -50225   77580  -51667
    1.0 28  Blue  (2 05.50  38.0) [2 04.52  37.8]   79611  -50225   79969  -57061
@@ -59,9 +59,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 2
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -114,9 +114,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 3
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -169,9 +169,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 4
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -224,9 +224,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 5
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -279,9 +279,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 6
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -334,9 +334,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 7
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -389,9 +389,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 8
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -444,9 +444,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 9
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -484,79 +484,79 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.0 28  Blue  (2 10.50  02.0) [2 10.24 -00.3]  133611  -15225  137125  -17029
    1.0 28  Blue  (2 10.00  01.0) [2 10.07 -00.5]  135111  -18725  137392  -18226
    1.0 28  Blue  (2 10.50  01.0) [2 10.07 -00.5]  135111  -15225  137392  -18226
-   1.0 28  Blue  (2 09.00  01.0) [2 09.00 -00.5]  135111  -25725  137400  -25702
+   0.5 28  Blue  (2 09.00  01.0) [2 09.00 -00.5]  135111  -25725  137400  -25702
    1.0 28  Blue  (2 09.00  03.0) [2 08.85  00.6]  132111  -25725  135710  -26801
    1.0 28  Blue  (2 09.00  04.0) [2 08.85  00.6]  130611  -25725  135710  -26801
    1.0 28  Blue  (2 09.50  01.0) [2 09.22  00.6]  135111  -22225  135691  -24206
    1.0 28  Blue  (2 09.50  05.0) [2 08.67  01.6]  129111  -22225  134275  -28045
-   1.0 28  Blue  (2 09.00  02.0) [2 08.92  01.6]  133611  -25725  134275  -26257
-   1.0 28  Blue  (2 09.00  07.0) [2 09.00  07.0]  126111  -25725  126061  -25702
+   0.5 28  Blue  (2 09.00  02.0) [2 08.92  01.6]  133611  -25725  134275  -26257
+   0.5 28  Blue  (2 09.00  07.0) [2 09.00  07.0]  126111  -25725  126061  -25702
    1.0 28  Blue  (2 09.50  07.0) [2 08.85  08.2]  126111  -22225  124371  -26801
    1.0 28  Blue  (2 09.00  08.0) [2 09.22  08.2]  124611  -25725  124352  -24206
    1.0 28  Blue  (2 09.00  10.0) [2 08.85  08.2]  121611  -25725  124371  -26801
-   1.0 28  Blue  (2 08.50  09.0) [2 08.20  08.8]  123111  -29225  123396  -31356
-   1.0 28  Blue  (2 09.00  09.0) [2 08.92  09.1]  123111  -25725  122936  -26257
+   0.5 28  Blue  (2 08.50  09.0) [2 08.20  08.8]  123111  -29225  123396  -31356
+   0.5 28  Blue  (2 09.00  09.0) [2 08.92  09.1]  123111  -25725  122936  -26257
 
 Page 10
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
 Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 ------|--|------|---------------|---------------|-------|-------|-------|-------
    1.0 28  Blue  (2 09.50  11.0) [2 08.67  09.1]  120111  -22225  122936  -28045
-   1.0 28  Blue  (2 09.00  15.0) [2 09.00  14.6]  114111  -25725  114722  -25702
+   0.5 28  Blue  (2 09.00  15.0) [2 09.00  14.6]  114111  -25725  114722  -25702
    1.0 28  Blue  (2 09.00  18.0) [2 08.85  15.7]  109611  -25725  113032  -26801
    1.0 28  Blue  (2 09.50  18.0) [2 08.85  15.7]  109611  -22225  113032  -26801
    1.0 28  Blue  (2 09.00  16.0) [2 09.22  15.7]  112611  -25725  113013  -24206
    1.0 28  Blue  (2 08.00  18.0) [2 08.67  16.7]  109611  -32725  111597  -28045
-   1.0 28  Blue  (2 09.00  17.0) [2 08.92  16.7]  111111  -25725  111597  -26257
-   1.0 28  Blue  (2 09.00  22.0) [2 09.00  22.2]  103611  -25725  103383  -25702
+   0.5 28  Blue  (2 09.00  17.0) [2 08.92  16.7]  111111  -25725  111597  -26257
+   0.5 28  Blue  (2 09.00  22.0) [2 09.00  22.2]  103611  -25725  103383  -25702
    1.0 28  Blue  (2 09.00  23.0) [2 09.22  23.3]  102111  -25725  101674  -24206
    1.0 28  Blue  (2 08.50  21.0) [2 08.85  23.3]  105111  -29225  101693  -26801
    1.0 28  Blue  (2 09.50  26.0) [2 08.85  23.3]   97611  -22225  101693  -26801
    1.0 28  Blue  (2 08.00  24.0) [2 08.85  23.3]  100611  -32725  101693  -26801
-   1.0 28  Blue  (2 09.00  24.0) [2 08.92  24.2]  100611  -25725  100258  -26257
+   0.5 28  Blue  (2 09.00  24.0) [2 08.92  24.2]  100611  -25725  100258  -26257
    1.0 28  Blue  (2 08.00  26.0) [2 08.67  24.2]   97611  -32725  100258  -28045
-   1.0 28  Blue  (2 09.00  30.0) [2 09.00  29.7]   91611  -25725   92044  -25702
+   0.5 28  Blue  (2 09.00  30.0) [2 09.00  29.7]   91611  -25725   92044  -25702
    1.0 28  Blue  (2 08.50  32.0) [2 08.85  30.8]   88611  -29225   90354  -26801
    1.0 28  Blue  (2 08.00  32.0) [2 08.85  30.8]   88611  -32725   90354  -26801
    1.0 28  Blue  (2 09.00  31.0) [2 09.22  30.9]   90111  -25725   90335  -24206
    1.0 28  Blue  (2 08.00  35.0) [2 08.67  31.8]   84111  -32725   88919  -28045
-   1.0 28  Blue  (2 09.00  32.0) [2 08.92  31.8]   88611  -25725   88919  -26257
-   1.0 28  Blue  (2 08.00  54.0) [2 06.76  52.6]   55611  -32725   57752  -41439
+   0.5 28  Blue  (2 09.00  32.0) [2 08.92  31.8]   88611  -25725   88919  -26257
+   1.5 28  Blue  (2 08.00  54.0) [2 06.76  52.6]   55611  -32725   57752  -41439
    1.0 28  Blue  (2 08.50  35.0) [2 08.36  31.6]   84111  -29225   89143  -30210
    1.0 28  Blue  (2 08.00  34.0) [2 08.07  31.4]   85611  -32725   89477  -32261
    1.0 28  Blue  (2 08.50  34.0) [2 08.20  31.5]   85611  -29225   89379  -31356
-   1.0 28  Blue  (2 08.00  31.0) [2 08.01  30.7]   90111  -32725   90521  -32651
+   0.5 28  Blue  (2 08.00  31.0) [2 08.01  30.7]   90111  -32725   90521  -32651
    1.0 28  Blue  (2 08.50  29.0) [2 08.01  29.5]   93111  -29225   92391  -32655
-   1.0 28  Blue  (2 08.00  29.0) [2 08.26  29.2]   93111  -32725   92879  -30879
+   0.5 28  Blue  (2 08.00  29.0) [2 08.26  29.2]   93111  -32725   92879  -30879
    1.0 28  Blue  (2 08.50  26.0) [2 08.36  24.1]   97611  -29225  100482  -30210
    1.0 28  Blue  (2 08.00  25.0) [2 08.07  23.9]   99111  -32725  100816  -32261
    1.0 28  Blue  (2 08.50  25.0) [2 08.20  23.9]   99111  -29225  100718  -31356
    1.0 28  Blue  (2 08.50  23.0) [2 08.01  23.2]  102111  -29225  101860  -32651
-   1.0 28  Blue  (2 08.00  22.0) [2 08.26  21.6]  103611  -32725  104218  -30879
+   0.5 28  Blue  (2 08.00  22.0) [2 08.26  21.6]  103611  -32725  104218  -30879
    1.0 28  Blue  (2 08.50  22.0) [2 08.01  21.9]  103611  -29225  103730  -32655
    1.0 28  Blue  (2 08.50  18.0) [2 08.36  16.5]  109611  -29225  111821  -30210
    1.0 28  Blue  (2 08.50  17.0) [2 08.20  16.4]  111111  -29225  112057  -31356
    1.0 28  Blue  (2 08.50  16.0) [2 08.07  16.3]  112611  -29225  112155  -32261
-   1.0 28  Blue  (2 08.00  16.0) [2 08.01  15.6]  112611  -32725  113199  -32651
+   0.5 28  Blue  (2 08.00  16.0) [2 08.01  15.6]  112611  -32725  113199  -32651
    1.0 28  Blue  (2 08.50  14.0) [2 08.01  14.4]  115611  -29225  115069  -32655
-   1.0 28  Blue  (2 08.00  14.0) [2 08.26  14.0]  115611  -32725  115557  -30879
+   0.5 28  Blue  (2 08.00  14.0) [2 08.26  14.0]  115611  -32725  115557  -30879
    1.0 28  Blue  (2 08.00  10.0) [2 08.36  09.0]  121611  -32725  123160  -30210
-   1.0 28  Blue  (2 08.00  09.0) [2 08.07  08.7]  123111  -32725  123494  -32261
+   0.5 28  Blue  (2 08.00  09.0) [2 08.07  08.7]  123111  -32725  123494  -32261
    1.0 28  Blue  (2 08.50  08.0) [2 08.01  08.0]  124611  -29225  124538  -32651
-   1.0 28  Blue  (2 08.00  07.0) [2 08.01  06.8]  126111  -32725  126408  -32655
+   0.5 28  Blue  (2 08.00  07.0) [2 08.01  06.8]  126111  -32725  126408  -32655
    1.0 28  Blue  (2 08.00  06.0) [2 08.26  06.5]  127611  -32725  126896  -30879
 
 Page 11
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -609,9 +609,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 12
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -644,17 +644,17 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.0 28  Blue  (2 07.00  69.0) [2 05.73  68.6]   33111  -39725   33640  -48616
    1.0 28  Blue  (2 05.50  72.0) [2 04.87  69.4]   28611  -50225   32448  -54620
    1.0 28  Blue  (2 05.50  71.0) [2 04.71  69.3]   30111  -50225   32684  -55766
-   1.0 28  Blue  (2 05.50  70.0) [2 05.36  68.6]   31611  -50225   33659  -51211
+   0.5 28  Blue  (2 05.50  70.0) [2 05.36  68.6]   31611  -50225   33659  -51211
    1.0 28  Blue  (2 05.00  72.0) [2 05.18  69.6]   28611  -53725   32224  -52455
    1.0 28  Blue  (2 05.00  70.0) [2 05.44  69.6]   31611  -53725   32224  -50667
-   1.0 28  Blue  (2 05.50  69.0) [2 05.36  68.6]   33111  -50225   33659  -51211
+   0.5 28  Blue  (2 05.50  69.0) [2 05.36  68.6]   33111  -50225   33659  -51211
    1.0 28  Blue  (2 05.50  68.0) [2 04.58  69.2]   34611  -50225   32782  -56671
    1.0 28  Blue  (2 05.50  67.0) [2 04.52  67.3]   36111  -50225   35696  -57065
    1.0 28  Blue  (2 05.50  65.0) [2 05.18  62.0]   39111  -50225   43563  -52455
    1.0 28  Blue  (2 05.50  64.0) [2 04.58  61.7]   40611  -50225   44121  -56671
    1.0 28  Blue  (2 05.50  63.0) [2 05.36  61.1]   42111  -50225   44998  -51211
    1.0 28  Blue  (2 05.00  62.0) [2 05.44  62.0]   43611  -53725   43563  -50667
-   1.0 28  Blue  (2 05.50  62.0) [2 04.52  59.7]   43611  -50225   47035  -57065
+   1.5 28  Blue  (2 05.50  62.0) [2 04.52  59.7]   43611  -50225   47035  -57065
    1.0 28  Blue  (2 05.00  63.0) [2 05.36  61.1]   42111  -53725   44998  -51211
    1.0 28  Blue  (2 05.50  61.0) [2 04.52  61.0]   45111  -50225   45165  -57061
    1.0 28  Blue  (2 05.50  57.0) [2 04.87  54.3]   51111  -50225   55126  -54620
@@ -664,23 +664,23 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 13
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
 Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 ------|--|------|---------------|---------------|-------|-------|-------|-------
-   1.0 28  Blue  (2 05.50  54.0) [2 05.36  53.5]   55611  -50225   56337  -51211
+   0.5 28  Blue  (2 05.50  54.0) [2 05.36  53.5]   55611  -50225   56337  -51211
    1.0 28  Blue  (2 05.00  55.0) [2 05.36  53.5]   54111  -53725   56337  -51211
    1.0 28  Blue  (2 05.50  53.0) [2 04.52  53.4]   57111  -50225   56504  -57061
    1.0 28  Blue  (2 05.50  52.0) [2 04.52  52.2]   58611  -50225   58374  -57065
    1.0 28  Blue  (2 05.50  49.0) [2 05.18  46.9]   63111  -50225   66241  -52455
    1.0 28  Blue  (2 05.50  48.0) [2 04.58  46.5]   64611  -50225   66799  -56671
-   1.0 28  Blue  (2 05.50  47.0) [2 05.36  46.0]   66111  -50225   67676  -51211
+   0.5 28  Blue  (2 05.50  47.0) [2 05.36  46.0]   66111  -50225   67676  -51211
    1.0 28  Blue  (2 05.00  47.0) [2 05.44  46.9]   66111  -53725   66241  -50667
-   1.0 28  Blue  (2 05.50  46.0) [2 05.36  46.0]   67611  -50225   67676  -51211
+   0.5 28  Blue  (2 05.50  46.0) [2 05.36  46.0]   67611  -50225   67676  -51211
    1.0 28  Blue  (2 05.50  45.0) [2 04.52  44.6]   69111  -50225   69713  -57065
    1.0 28  Blue  (2 05.50  43.0) [2 04.87  39.2]   72111  -50225   77804  -54620
    1.0 28  Blue  (2 05.50  42.0) [2 04.71  39.0]   73611  -50225   78040  -55766
@@ -691,7 +691,7 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.0 28  Blue  (2 05.50  37.0) [2 04.52  38.3]   81111  -50225   79182  -57061
    1.0 28  Blue  (2 05.50  34.0) [2 04.87  31.6]   85611  -50225   89143  -54620
    1.0 28  Blue  (2 05.50  33.0) [2 04.71  31.5]   87111  -50225   89379  -55766
-   1.0 28  Blue  (2 05.50  32.0) [2 05.36  30.8]   88611  -50225   90354  -51211
+   0.5 28  Blue  (2 05.50  32.0) [2 05.36  30.8]   88611  -50225   90354  -51211
    1.0 28  Blue  (2 05.00  34.0) [2 05.18  31.8]   85611  -53725   88919  -52455
    1.0 28  Blue  (2 05.00  32.0) [2 05.44  31.8]   88611  -53725   88919  -50667
    1.0 28  Blue  (2 05.50  31.0) [2 05.36  30.8]   90111  -50225   90354  -51211
@@ -701,14 +701,14 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.0 28  Blue  (2 05.50  26.0) [2 04.71  23.9]   97611  -50225  100718  -55766
    1.0 28  Blue  (2 05.00  27.0) [2 05.18  24.2]   96111  -53725  100258  -52455
    1.0 28  Blue  (2 05.00  24.0) [2 05.44  24.2]  100611  -53725  100258  -50667
-   1.0 28  Blue  (2 05.50  24.0) [2 05.36  23.3]  100611  -50225  101693  -51211
+   0.5 28  Blue  (2 05.50  24.0) [2 05.36  23.3]  100611  -50225  101693  -51211
    1.0 28  Blue  (2 05.00  25.0) [2 05.36  23.3]   99111  -53725  101693  -51211
    1.0 28  Blue  (2 05.00  28.0) [2 05.36  23.3]   94611  -53725  101693  -51211
    1.0 28  Blue  (2 05.50  23.0) [2 04.52  23.2]  102111  -50225  101860  -57061
    1.0 28  Blue  (2 05.50  22.0) [2 04.52  21.9]  103611  -50225  103730  -57065
    1.0 28  Blue  (2 05.50  21.0) [2 04.87  16.5]  105111  -50225  111821  -54620
    1.0 28  Blue  (2 05.50  18.0) [2 04.71  16.4]  109611  -50225  112057  -55766
-   1.0 28  Blue  (2 05.50  17.0) [2 05.36  15.7]  111111  -50225  113032  -51211
+   0.5 28  Blue  (2 05.50  17.0) [2 05.36  15.7]  111111  -50225  113032  -51211
    1.0 28  Blue  (2 05.00  21.0) [2 05.18  16.7]  105111  -53725  111597  -52455
    1.0 28  Blue  (2 05.00  17.0) [2 05.44  16.7]  111111  -53725  111597  -50667
    1.0 28  Blue  (2 05.50  16.0) [2 05.36  15.7]  112611  -50225  113032  -51211
@@ -719,9 +719,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 14
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -729,7 +729,7 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 ------|--|------|---------------|---------------|-------|-------|-------|-------
    1.0 28  Blue  (2 05.50  07.0) [2 05.18  09.1]  126111  -50225  122936  -52455
    1.0 28  Blue  (2 05.00  09.0) [2 05.44  09.1]  123111  -53725  122936  -50667
-   1.0 28  Blue  (2 05.50  09.0) [2 05.36  08.2]  123111  -50225  124371  -51211
+   0.5 28  Blue  (2 05.50  09.0) [2 05.36  08.2]  123111  -50225  124371  -51211
    1.0 28  Blue  (2 05.00  10.0) [2 05.36  08.2]  121611  -53725  124371  -51211
    1.0 28  Blue  (2 05.50  08.0) [2 04.52  08.0]  124611  -50225  124538  -57061
    1.0 28  Blue  (2 05.50  06.0) [2 05.18  01.6]  127611  -50225  134275  -52455
@@ -774,9 +774,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 15
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -829,9 +829,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 16
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -884,9 +884,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 17
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -939,9 +939,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 18
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -994,9 +994,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 19
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1049,9 +1049,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 20
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1104,9 +1104,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 21
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1159,9 +1159,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 22
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1214,9 +1214,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 23
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1269,9 +1269,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 24
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1305,12 +1305,12 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    5.5 28  Blue  (2 14.50  77.0) [2 08.01  67.3]   21111   12775   35696  -32655
    5.5 28  Blue  (2 15.00  47.0) [2 08.01  37.0]   66111   16275   81052  -32655
    6.0 28  Blue  (2 20.00  04.0) [2 12.16  01.6]  130611   51275  134275   -3635
-   6.0 28  Blue  (2 11.50  15.0) [2 19.71  15.3]  114111   -8225  113611   49275
+   6.5 28  Blue  (2 11.50  15.0) [2 19.71  15.3]  114111   -8225  113611   49275
    6.0 28  Blue  (2 20.50  21.0) [2 12.33  23.3]  105111   54775  101693   -2391
    6.0 28  Blue  (2 20.00  23.0) [2 11.85  24.1]  102111   51275  100482   -5800
-   6.0 28  Blue  (2 11.50  30.0) [2 19.71  30.3]   91611   -8225   91111   49275
+   6.5 28  Blue  (2 11.50  30.0) [2 19.71  30.3]   91611   -8225   91111   49275
    6.0 28  Blue  (2 20.00  33.0) [2 12.16  31.8]   87111   51275   88919   -3635
-   6.0 28  Blue  (2 11.50  38.0) [2 19.71  39.3]   79611   -8225   77611   49275
+   6.5 28  Blue  (2 11.50  38.0) [2 19.71  39.3]   79611   -8225   77611   49275
    6.0 28  Blue  (2 19.50  77.0) [2 11.85  69.4]   21111   47775   32448   -5800
    6.0 28  Blue  (2 19.00  76.0) [2 11.55  69.2]   22611   44275   32782   -7851
    6.0 28  Blue  (2 19.50  76.0) [2 11.68  69.3]   22611   47775   32684   -6946
@@ -1324,9 +1324,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 25
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1379,9 +1379,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 26
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1434,9 +1434,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 27
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1489,9 +1489,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 28
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1544,9 +1544,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 29
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1599,9 +1599,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 30
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1654,9 +1654,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 31
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1709,9 +1709,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 32
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1764,9 +1764,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 33
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1819,9 +1819,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 34
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1855,7 +1855,7 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.0 28 Black  (2 09.50  24.0) [2 09.29  22.7]  100611  -22225  102529  -23718
    1.0 28 Black  (2 09.50  33.0) [2 09.29  30.3]   87111  -22225   91190  -23718
    1.0 28 Black  (2 08.50  59.0) (2 09.00  59.0)   48111  -29225   48111  -25725
-   1.0 28 Black  (2 09.00  60.0) (2 07.50  62.0)   46611  -25725   43611  -36225
+   1.5 28 Black  (2 09.00  60.0) (2 07.50  62.0)   46611  -25725   43611  -36225
    1.0 28 Black  (2 08.50  60.0) (2 08.00  59.0)   46611  -29225   48111  -32725
    1.0 28 Black  (2 08.50  19.0) (2 08.00  20.0)  108111  -29225  106611  -32725
    1.0 28 Black  (2 07.00  11.0) (2 07.50  08.0)  120111  -39725  124611  -36225
@@ -1874,9 +1874,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 35
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1929,9 +1929,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 36
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -1964,7 +1964,7 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    2.5 28 Black  (2 14.00  19.0) [2 12.77  07.6]  108111    9275  125207     692
    2.5 28 Black  (2 11.00  60.0) (2 08.00  59.0)   46611  -11725   48111  -32725
    2.5 28 Black  (2 09.00  20.0) (2 09.50  33.0)  106611  -25725   87111  -22225
-   2.5 28 Black  (2 09.00  39.0) (2 09.50  24.0)   78111  -25725  100611  -22225
+   3.0 28 Black  (2 09.00  39.0) (2 09.50  24.0)   78111  -25725  100611  -22225
    2.5 28 Black  (2 09.50  39.0) (2 07.00  40.0)   78111  -22225   76611  -39725
    2.5 28 Black  (2 05.00  39.0) (2 07.50  37.0)   78111  -53725   81111  -36225
    2.5 28 Black  (2 05.50  60.0) (2 07.50  69.0)   46611  -50225   33111  -36225
@@ -1984,9 +1984,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 37
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2039,9 +2039,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 38
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2094,9 +2094,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 39
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2149,9 +2149,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 40
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2204,9 +2204,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 41
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2252,16 +2252,16 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
   10.0 28 Black  (2 15.50  69.0) [2 02.79  44.3]   33111   19775   70111  -69225
   10.0 28 Black  (2 15.00  39.0) [2 02.79  24.3]   78111   16275  100111  -69225
   10.0 28 Black  (2 01.00  50.0) [2 09.29  00.0]   61611  -81725  136546  -23718
-  11.0 28 Black  (2 05.50  39.0) [2 19.71  35.3]   78111  -50225   83611   49275
+  10.5 28 Black  (2 05.50  39.0) [2 19.71  35.3]   78111  -50225   83611   49275
   11.0 28 Black  (2 07.00  02.0) [2 19.71  35.3]  133611  -39725   83611   49275
   11.0 28 Black  (2 07.50  15.0) [2 19.29  53.3]  114111  -36225   56611   46275
   11.0 28 Black  (2 15.00  51.0) [2 02.79  14.3]   60111   16275  115111  -69225
 
 Page 42
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2314,9 +2314,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 43
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2369,9 +2369,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 44
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2424,9 +2424,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 45
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2479,9 +2479,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 46
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2534,9 +2534,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 47
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2589,9 +2589,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 48
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2644,9 +2644,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 49
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2699,9 +2699,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 50
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2754,9 +2754,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 51
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2809,9 +2809,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 52
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2864,9 +2864,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 53
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2919,9 +2919,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 54
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -2974,9 +2974,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 55
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -3029,9 +3029,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 56
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -3084,9 +3084,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 57
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -3139,9 +3139,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 58
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed Jun 03 15:27:25 2020
+AGILENT ICT FIXTURE WIRING REPORT          Sun Jan 03 10:09:48 2021
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/inline_panel/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/inline_panel/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To

@@ -1,14 +1,14 @@
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
 Fixture Type : Agilent SimPlate Express
 Fixture Size : Bank 2
 Fixture Part Number : 44200S
 Top Probes Allowed : Enabled
-Autofile : Autofile : 2001
+Autofile : 2001
 Units : English
 Wiring Method : Automatic
 ------------------------------------------------------------------------------
@@ -59,9 +59,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 2
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -114,9 +114,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 3
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -169,9 +169,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 4
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -224,9 +224,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 5
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -279,9 +279,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 6
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -334,9 +334,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 7
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -389,9 +389,9 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 
 Page 8
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
@@ -418,7 +418,6 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    2.0 28  Blue  (2 09.00  32.0) [2 10.77  29.3]   88611  -25725   92658  -13309
    2.0 28  Blue  (2 09.00  33.0) [2 10.77  29.3]   87111  -25725   92658  -13309
    2.0 28  Blue  (2 10.50  47.0) [2 10.77  36.9]   66111  -15225   81233  -13309
-   2.0 28  Blue  (2 06.00  21.0) [2 06.21  32.3]  105111  -46725   88111  -45225
    2.5 28  Blue  (2 17.50  41.0) [2 14.49  40.1]   75111   33775   76490   12719
    2.5 28  Blue  (2 17.00  53.0) [2 14.49  52.7]   57111   30275   57592   12719
    2.5 28  Blue  (2 16.50  54.0) [2 13.39  53.7]   55611   26775   56122    5031
@@ -441,18 +440,18 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    2.5 28  Blue  (2 14.00  61.0) [2 11.58  54.6]   45111    9275   54732   -7649
    2.5 28  Blue  (2 14.00  58.0) [2 11.67  52.8]   49611    9275   57412   -7049
    2.5 28  Blue  (2 14.00  52.0) [2 11.33  50.6]   58611    9275   60748   -9404
+   2.5 28  Blue  (2 13.86  30.0) [2 13.47  41.9]   91611    8299   73760    5589
 
 Page 9
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
 Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 ------|--|------|---------------|---------------|-------|-------|-------|-------
-   2.5 28  Blue  (2 13.86  30.0) [2 13.47  41.9]   91611    8299   73760    5589
    2.5 28  Blue  (2 10.50  33.0) [2 13.47  29.3]   87111  -15225   92658    5589
    2.5 28  Blue  (2 10.50  28.0) [2 13.21  25.7]   94611  -15225   98078    3722
    2.5 28  Blue  (2 11.00  21.0) [2 13.52  23.5]  105111  -11725  101319    5899
@@ -496,18 +495,18 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    3.5 28  Blue  (2 14.50  35.0) [2 11.30  49.9]   84111   12775   61704   -9594
    3.5 28  Blue  (2 15.00  46.0) [2 10.77  49.5]   67611   16275   62335  -13309
    3.5 28  Blue  (2 15.00  47.0) [2 10.77  49.5]   66111   16275   62335  -13309
+   3.5 28  Blue  (2 14.63  53.0) [2 10.56  52.6]   57111   13664   57758  -14823
 
 Page 10
 ------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
 
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
 ------------------------------------------------------------------------------
 
                 |     From      |     To        |     From      |      To
 Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
 ------|--|------|---------------|---------------|-------|-------|-------|-------
-   3.5 28  Blue  (2 14.63  53.0) [2 10.56  52.6]   57111   13664   57758  -14823
    3.5 28  Blue  (2 15.00  58.0) [2 10.77  54.5]   49611   16275   54862  -13309
    3.5 28  Blue  (2 14.50  61.0) [2 10.51  50.9]   45111   12775   60282  -15176
    3.5 28  Blue  (2 10.50  16.0) [2 13.39  28.5]  112611  -15225   93918    5031
@@ -525,43 +524,17 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    4.0 28  Blue  (2 15.00  66.0) [2 10.45  55.1]   37611   16275   53902  -15549
    4.0 28  Blue  (2 09.00  42.0) [2 13.55  29.8]   73611  -25725   91981    6120
    4.0 28  Blue  (2 06.00  48.0) (2 10.39  36.0)   64611  -46725   82611  -16009
-   4.0 28  Blue  (2 06.00  23.0) [2 06.21  46.3]  102111  -46725   67111  -45225
-   4.0 28  Blue  (2 01.00  32.0) [2 06.21  33.3]   88611  -81725   86611  -45225
    4.5 28  Blue  (2 16.50  62.0) [2 10.82  53.7]   43611   26775   56122  -12983
    4.5 28  Blue  (2 09.00  15.0) [2 14.49  27.5]  114111  -25725   95388   12719
    4.5 28  Blue  (2 09.00  21.0) [2 14.70  28.4]  105111  -25725   93998   14149
    4.5 28  Blue  (2 07.00  17.0) [2 06.21  44.3]  111111  -39725   70111  -45225
-   4.5 28  Blue  (2 06.00  19.0) [2 06.21  45.3]  108111  -46725   68611  -45225
-   5.0 28  Blue  (2 06.00  18.0) [2 06.21  48.3]  109611  -46725   64111  -45225
-   5.5 28  Blue  (2 13.00  32.0) [2 06.21  38.3]   88611    2275   79111  -45225
-   6.0 28  Blue  (2 01.00  76.0) [2 06.21  47.3]   22611  -81725   65611  -45225
    7.0 28  Blue  (2 14.00  17.0) [2 06.21  39.3]  111111    9275   77611  -45225
-   7.5 28  Blue  (2 13.00  72.0) [2 06.21  36.3]   28611    2275   82111  -45225
-   7.5 28  Blue  (2 13.00  76.0) [2 06.21  42.3]   22611    2275   73111  -45225
-   7.5 28  Blue  (2 01.00  72.0) [2 06.21  31.3]   28611  -81725   89611  -45225
-   8.0 28  Blue  (2 13.00  75.0) [2 06.21  35.3]   24111    2275   83611  -45225
-   8.0 28  Blue  (2 01.00  75.0) [2 06.21  30.3]   24111  -81725   91111  -45225
-   9.0 28  Blue  (2 18.00  23.0) [2 06.21  41.3]  102111   37275   74611  -45225
-   9.0 28  Blue  (2 18.00  21.0) [2 06.21  37.3]  105111   37275   80611  -45225
    9.0 28  Blue  (2 13.00  77.0) [2 06.21  34.3]   21111    2275   85111  -45225
    9.0 28  Blue  (2 01.00  77.0) [2 06.21  29.3]   21111  -81725   92611  -45225
-  10.0 28  Blue  (2 18.00  19.0) [2 06.21  40.3]  108111   37275   76111  -45225
-  10.0 28  Blue  (2 18.00  18.0) [2 06.21  43.3]  109611   37275   71611  -45225
    1.0 28 Black  (2 18.00  78.0) (2 18.00  76.0)   19611   37275   22611   37275
    1.0 28 Black  (2 18.00  76.0) (2 18.00  75.0)   22611   37275   24111   37275
    1.0 28 Black  (2 18.00  75.0) (2 18.00  74.0)   24111   37275   25611   37275
    1.0 28 Black  (2 18.00  74.0) (2 18.00  73.0)   25611   37275   27111   37275
-
-Page 11
-------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
-
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
-------------------------------------------------------------------------------
-
-                |     From      |     To        |     From      |      To
-Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
-------|--|------|---------------|---------------|-------|-------|-------|-------
    1.0 28 Black  (2 18.00  73.0) (2 18.00  72.0)   27111   37275   28611   37275
    1.0 28 Black  (2 18.00  72.0) (2 18.00  70.0)   28611   37275   31611   37275
    1.0 28 Black  (2 18.00  70.0) (2 18.00  66.0)   31611   37275   37611   37275
@@ -578,6 +551,17 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.0 28 Black  (2 16.50  40.0) (2 17.00  40.0)   76611   26775   76611   30275
    1.0 28 Black  (2 16.50  59.0) (2 16.00  59.0)   48111   26775   48111   23275
    1.0 28 Black  (2 15.50  60.0) (2 16.00  59.0)   46611   19775   48111   23275
+
+Page 11
+------------------------------------------------------------------------------
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
+
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
+------------------------------------------------------------------------------
+
+                |     From      |     To        |     From      |      To
+Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
+------|--|------|---------------|---------------|-------|-------|-------|-------
    1.0 28 Black  (2 15.50  59.0) (2 15.00  59.0)   48111   19775   48111   16275
    1.0 28 Black  (2 15.50  40.0) (2 16.00  39.0)   76611   19775   78111   23275
    1.0 28 Black  (2 16.00  40.0) (2 15.00  40.0)   76611   23275   76611   16275
@@ -606,17 +590,6 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.0 28 Black  (2 08.50  39.0) (2 09.00  40.0)   78111  -29225   76611  -25725
    1.0 28 Black  (2 09.50  20.0) (2 09.00  20.0)  106611  -22225  106611  -25725
    1.0 28 Black  (2 08.50  19.0) (2 09.00  20.0)  108111  -29225  106611  -25725
-
-Page 12
-------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
-
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
-------------------------------------------------------------------------------
-
-                |     From      |     To        |     From      |      To
-Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
-------|--|------|---------------|---------------|-------|-------|-------|-------
    1.0 28 Black  (2 09.00  19.0) (2 08.00  19.0)  108111  -25725  108111  -32725
    1.0 28 Black  (2 08.00  19.0) (2 07.00  19.0)  108111  -32725  108111  -39725
    1.0 28 Black  (2 08.00  20.0) (2 07.00  20.0)  106611  -32725  106611  -39725
@@ -633,6 +606,17 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    1.5 28 Black  (2 16.50  60.0) (2 15.00  59.0)   46611   26775   48111   16275
    1.5 28 Black  (2 13.00  17.0) [2 13.11  25.2]  111111    2275   98800    3055
    1.5 28 Black  (2 09.50  19.0) (2 11.00  19.0)  108111  -22225  108111  -11725
+
+Page 12
+------------------------------------------------------------------------------
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
+
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
+------------------------------------------------------------------------------
+
+                |     From      |     To        |     From      |      To
+Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
+------|--|------|---------------|---------------|-------|-------|-------|-------
    1.5 28 Black  (2 09.50  39.0) (2 10.93  39.0)   78111  -22225   78111  -12216
    1.5 28 Black  (2 08.50  40.0) (2 07.00  39.0)   76611  -29225   78111  -39725
    2.0 28 Black  (2 14.00  19.0) (2 13.00  11.0)  108111    9275  120111    2275
@@ -661,17 +645,6 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    3.5 28 Black  (2 17.50  40.0) (2 17.00  20.0)   76611   33775  106611   30275
    3.5 28 Black  (2 17.00  39.0) (2 17.00  19.0)   78111   30275  108111   30275
    3.5 28 Black  (2 17.00  60.0) (2 17.00  40.0)   46611   30275   76611   30275
-
-Page 13
-------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
-
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
-------------------------------------------------------------------------------
-
-                |     From      |     To        |     From      |      To
-Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
-------|--|------|---------------|---------------|-------|-------|-------|-------
    3.5 28 Black  (2 17.00  40.0) (2 16.00  20.0)   76611   30275  106611   23275
    3.5 28 Black  (2 17.00  59.0) (2 16.00  40.0)   48111   30275   76611   23275
    3.5 28 Black  (2 16.00  60.0) (2 16.00  40.0)   46611   23275   76611   23275
@@ -688,6 +661,17 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    3.5 28 Black  (2 11.12  40.0) (2 10.00  19.0)   76611  -10876  108111  -18725
    3.5 28 Black  (2 10.00  40.0) (2 10.00  19.0)   76611  -18725  108111  -18725
    3.5 28 Black  (2 08.00  13.0) [2 10.95  29.0]  117111  -32725   93101  -12079
+
+Page 13
+------------------------------------------------------------------------------
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
+
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
+------------------------------------------------------------------------------
+
+                |     From      |     To        |     From      |      To
+Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
+------|--|------|---------------|---------------|-------|-------|-------|-------
    3.5 28 Black  (2 10.00  59.0) (2 08.00  40.0)   48111  -18725   76611  -32725
    3.5 28 Black  (2 09.00  59.0) (2 07.00  40.0)   48111  -25725   76611  -39725
    3.5 28 Black  (2 09.00  40.0) (2 09.00  19.0)   76611  -25725  108111  -25725
@@ -716,17 +700,6 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    5.0 28 Black  (2 07.00  19.0) (2 06.00  49.0)  108111  -39725   63111  -46725
    5.5 28 Black  (2 18.00  55.0) [2 10.95  54.2]   54111   37275   55305  -12079
    5.5 28 Black  (2 16.00  20.0) (2 18.00  53.0)  106611   23275   57111   37275
-
-Page 14
-------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
-
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
-------------------------------------------------------------------------------
-
-                |     From      |     To        |     From      |      To
-Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
-------|--|------|---------------|---------------|-------|-------|-------|-------
    5.5 28 Black  (2 14.50  05.0) [2 13.45  39.2]  129111   12775   77825    5451
    5.5 28 Black  (2 13.00  05.0) [2 13.11  37.8]  129111    2275   79902    3055
    5.5 28 Black  (2 08.50  01.0) [2 13.11  25.2]  135111  -29225   98800    3055
@@ -743,6 +716,17 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
    6.0 28 Black  (2 13.00  01.0) [2 13.15  39.2]  135111    2275   77750    3309
    6.0 28 Black  (2 14.00  01.0) [2 13.81  39.1]  135111    9275   78000    7949
    6.0 28 Black  (2 07.00  05.0) [2 13.11  27.3]  129111  -39725   95642    3069
+
+Page 14
+------------------------------------------------------------------------------
+AGILENT ICT FIXTURE WIRING REPORT          Wed Dec 30 22:17:31 2020
+
+/Users/talhasehgal/Desktop/_dev/fixture-processor/references/reference_example1/wires
+------------------------------------------------------------------------------
+
+                |     From      |     To        |     From      |      To
+Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
+------|--|------|---------------|---------------|-------|-------|-------|-------
    6.0 28 Black  (2 07.50  05.0) [2 10.41  39.9]  129111  -36225   76744  -15829
    6.0 28 Black  (2 07.00  40.0) (2 01.00  17.0)   76611  -39725  111111  -81725
    6.5 28 Black  (2 13.00  11.0) [2 13.11  50.4]  120111    2275   61004    3055
@@ -771,17 +755,6 @@ Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
   10.0 28 Black  (2 14.00  19.0) (2 01.00  11.0)  108111    9275  120111  -81725
   10.0 28 Black  (2 01.00  02.0) [2 10.45  39.2]  133611  -81725   77750  -15589
   10.0 28 Black  (2 01.00  01.0) [2 10.45  39.2]  135111  -81725   77750  -15589
-
-Page 15
-------------------------------------------------------------------------------
-AGILENT ICT FIXTURE WIRING REPORT          Wed May 13 17:34:31 2020
-
-C:/Users/Andrew Kenny/Dropbox/Andrew/fixture_processor_source/references/reference_example1/wires
-------------------------------------------------------------------------------
-
-                |     From      |     To        |     From      |      To
-Length|Ga|Color |(b   r      c )|(b   r      c )|    X       Y  |    X       Y
-------|--|------|---------------|---------------|-------|-------|-------|-------
   10.0 28 Black  (2 01.00  11.0) [2 10.41  50.4]  120111  -81725   61004  -15843
   10.0 28 Black  (2 01.00  08.0) [2 10.45  51.8]  124611  -81725   58852  -15589
   10.0 28 Black  (2 01.00  07.0) [2 10.45  51.8]  126111  -81725   58852  -15589
