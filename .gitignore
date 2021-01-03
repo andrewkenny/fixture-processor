@@ -1,7 +1,7 @@
 __pycache__/
 *.py[cod]
 
-
+*.vscode
 
 mypy_output.txt
 pylint_output.txt
@@ -13,3 +13,5 @@ Git Bash.lnk
 
 .history
 .DS_Store
+/APPDATA
+/None

@@ -10,7 +10,7 @@ from turtle import Vec2D
 
 import tkinter as tk
 
-from .fixture_functions import fixture_input as fi
+from fixture_processor.fixture_functions import fixture_input as fi
 
 
 class FixtureCanvas(tk.Frame):  # pylint: disable=too-many-ancestors

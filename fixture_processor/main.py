@@ -37,14 +37,11 @@ from fixture_processor.fixture_functions import fixture_processing as fp
 from fixture_processor.fixture_functions import fixture_modifications as fmod
 from fixture_processor import file_operations as fo
 
-# ---------
-
-# ---------
 
 # -250 : 0 : 250
-CANVAS_SIZE = 650
+CANVAS_SIZE = 570
 PROGRAM_CONFIG_FOLDER = Path(f"{os.getenv('APPDATA')}/ForwessunFixtures")
-# PROGRAM_CONFIG_FOLDER = Path( "./APPDATA/ForwessunFixtures")
+print(PROGRAM_CONFIG_FOLDER)
 
 PROGRAM_CONFIG_FILE = "config.ini"
 PROGRAM_LOGGING_FILE = "ffp.log"
@@ -92,9 +89,9 @@ icon = "".join([
     ])
 
 
-# class ModeTuple(NamedTuple):
-#     design: bool = False
-#     debug: bool = False
+class ModeTuple(NamedTuple):
+    design: bool = False
+    debug: bool = False
 
 class Window(tk.Frame):
     """
@@ -357,12 +354,12 @@ def main():
     str_fixture_path = args.Path
     engineering_flag = args.Engineering
 
-    # if args.Mode is None:
-    #     mode = ModeTuple()
-    # elif args.Mode == "design":
-    #     mode = ModeTuple(design=True)
-    # elif args.Mode == "debug":
-    #     mode = ModeTuple(debug=True)
+    if args.Mode is None:
+        mode = ModeTuple()
+    elif args.Mode == "design":
+        mode = ModeTuple(design=True)
+    elif args.Mode == "debug":
+        mode = ModeTuple(debug=True)
 
     if str_fixture_path is None:
         fixture_path = None
