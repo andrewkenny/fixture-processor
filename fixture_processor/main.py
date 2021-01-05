@@ -24,30 +24,28 @@ from pathlib import Path
 from typing import NamedTuple
 
 
-from .options_lib import program_option_functions as p_options
-from .options_lib import fixture_processing_options as fp_options
+from fixture_processor.options_lib import program_option_functions as p_options
+from fixture_processor.options_lib import fixture_processing_options as fp_options
 
-from .fixture_functions.fixture_input import get_outline_info
+from fixture_processor.fixture_functions.fixture_input import get_outline_info
 
-from .fixture_processor_form import FixtureProcessingForm
-from .fixture_canvas_form import FixtureCanvas
+from fixture_processor.fixture_processor_form import FixtureProcessingForm
+from fixture_processor.fixture_canvas_form import FixtureCanvas
 
-from .fixture_functions import extract_wires as ew
-from .fixture_functions import fixture_processing as fp
-from .fixture_functions import fixture_modifications as fmod
-from . import file_operations as fo
+from fixture_processor.fixture_functions import extract_wires as ew
+from fixture_processor.fixture_functions import fixture_processing as fp
+from fixture_processor.fixture_functions import fixture_modifications as fmod
+from fixture_processor import file_operations as fo
 
+# ---------
 
-class ModeTuple(NamedTuple):
-    design: bool = False
-    debug: bool = False
-
+# ---------
 
 # -250 : 0 : 250
-CANVAS_SIZE = 500
+CANVAS_SIZE = 650
+PROGRAM_CONFIG_FOLDER = Path(f"{os.getenv('APPDATA')}/ForwessunFixtures")
+# PROGRAM_CONFIG_FOLDER = Path( "./APPDATA/ForwessunFixtures")
 
-
-PROGRAM_CONFIG_FOLDER = Path(os.getenv('APPDATA')) / "ForwessunFixtures"
 PROGRAM_CONFIG_FILE = "config.ini"
 PROGRAM_LOGGING_FILE = "ffp.log"
 
@@ -56,7 +54,8 @@ USER_OPTIONS_FILE = "user_options.ini"
 # ensure the program folder exists.
 PROGRAM_CONFIG_FOLDER.mkdir(parents=True, exist_ok=True)
 
-FULL_LOGGING_PATH = PROGRAM_CONFIG_FOLDER / PROGRAM_LOGGING_FILE
+FULL_LOGGING_PATH = Path(f"{PROGRAM_CONFIG_FOLDER}/{PROGRAM_LOGGING_FILE}")
+print("FULL_LOGGING_PATH:", FULL_LOGGING_PATH)
 
 
 try:
@@ -72,27 +71,31 @@ except PermissionError:
         "    This program is already running.\n\n    Closing...")
     sys.exit()
 
-icon = "".join([\
-"iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAB4FBMVEUAAAD/02j/02j/02j/02j/",\
-"02j/02j/02j/02j80Gb80Gb80Gb80Gb80Gb80Gb80Gb80Gb80Gb80Gb5zGT5zGT5zGT5zGT5zGT5",\
-"zGT5zGT5zGT5zGT5zGT5zGT5zGT5zGT1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1",\
-"x2Hwwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3rvFnrvFnrvFnrvFnrvFnrvFnr",\
-"vFnrvFnrvFnmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbgsFLgsFLgsFLgsFLgsFLg",\
-"sFLgsFLgsFLgsFLgsFLgsFLgsFLgsFLaqU7aqU7aqU7aqU7aqU7aqU7aqU7aqU7aqU7Vo0rVo0rV",\
-"o0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rQnkbQnkbQnkbQnkbQnkbQnkbQnkbQnkbQ",\
-"nkbQnkbQnkbQnkbQnkbLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPHlD/HlD/HlD/H",\
-"lD/HlD/HlD/HlD/HlD/HlD/HlD/HlD/EkD3EkD3EkD3EkD3EkD3EkD3EkD3EkD3BjTvBjTvBjTvB",\
-"jTvBjTvBjTslMwBZAAAAoHRSTlMALYK81cvDgSlspd7l0cPj7Khna3winR5ycRGNQoFlBTXUMZxK",\
-"Al0GqdMqCo5xitWQj7rInXaGBxaXMHNdRGKUIiWZKnCCK3gsVJc4Hr5+rLV/r66BocG8NRiSMHFf",\
-"YEqRJpZ5kdaPjrm6kNlyiwlDySOZQFdWSZYp0DcKfGkkmRx5oBpzeAoBf6vg2L3O2tSifUWSztzn",\
-"wZFBGFB0ck4XWZ6FzwAAAOlJREFUGNNjYMAGGJmYWVjZ2DlgfE4ubh5ePn4BQSEIX1hEVExcQlJK",\
-"WkZWjkGegUFBUUlZRVVNTV1JQ0FTS5uBQUdXT9/A0MhIR8fYxNTMnMHCksHKmoHBxoaBwdaOwd6B",\
-"wdHJ2cXVzdnd3c3D08nZy5vBx9fPPyAwMCg4MCQ0zC88giEyiiE6hoEhNg6I4xkSEhkYkpJTUtPS",\
-"MzLTsrLTcnLzGBjyCwqLihlKShnKyisqq6qBDqupratvaGysa2puaWVoAwq0d3R2dff09vVPmAjz",\
-"zKTJU6ZOmz5jJsK7s2bPmTtvPpgJAGJIN0wyMhTbAAAAAElFTkSuQmCC"\
-])
+
+icon = "".join([
+    "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAB4FBMVEUAAAD/02j/02j/02j/02j/",
+    "02j/02j/02j/02j80Gb80Gb80Gb80Gb80Gb80Gb80Gb80Gb80Gb80Gb5zGT5zGT5zGT5zGT5zGT5",
+    "zGT5zGT5zGT5zGT5zGT5zGT5zGT5zGT1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1x2H1",
+    "x2Hwwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3wwl3rvFnrvFnrvFnrvFnrvFnrvFnr",
+    "vFnrvFnrvFnmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbmtlbgsFLgsFLgsFLgsFLgsFLg",
+    "sFLgsFLgsFLgsFLgsFLgsFLgsFLgsFLaqU7aqU7aqU7aqU7aqU7aqU7aqU7aqU7aqU7Vo0rVo0rV",
+    "o0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rVo0rQnkbQnkbQnkbQnkbQnkbQnkbQnkbQnkbQ",
+    "nkbQnkbQnkbQnkbQnkbLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPLmEPHlD/HlD/HlD/H",
+    "lD/HlD/HlD/HlD/HlD/HlD/HlD/HlD/EkD3EkD3EkD3EkD3EkD3EkD3EkD3EkD3BjTvBjTvBjTvB",
+    "jTvBjTvBjTslMwBZAAAAoHRSTlMALYK81cvDgSlspd7l0cPj7Khna3winR5ycRGNQoFlBTXUMZxK",
+    "Al0GqdMqCo5xitWQj7rInXaGBxaXMHNdRGKUIiWZKnCCK3gsVJc4Hr5+rLV/r66BocG8NRiSMHFf",
+    "YEqRJpZ5kdaPjrm6kNlyiwlDySOZQFdWSZYp0DcKfGkkmRx5oBpzeAoBf6vg2L3O2tSifUWSztzn",
+    "wZFBGFB0ck4XWZ6FzwAAAOlJREFUGNNjYMAGGJmYWVjZ2DlgfE4ubh5ePn4BQSEIX1hEVExcQlJK",
+    "WkZWjkGegUFBUUlZRVVNTV1JQ0FTS5uBQUdXT9/A0MhIR8fYxNTMnMHCksHKmoHBxoaBwdaOwd6B",
+    "wdHJ2cXVzdnd3c3D08nZy5vBx9fPPyAwMCg4MCQ0zC88giEyiiE6hoEhNg6I4xkSEhkYkpJTUtPS",
+    "MzLTsrLTcnLzGBjyCwqLihlKShnKyisqq6qBDqupratvaGysa2puaWVoAwq0d3R2dff09vVPmAjz",
+    "zKTJU6ZOmz5jJsK7s2bPmTtvPpgJAGJIN0wyMhTbAAAAAElFTkSuQmCC"
+    ])
 
 
+class ModeTuple(NamedTuple):
+    design: bool = False
+    debug: bool = False
 
 
 class Window(tk.Frame):
@@ -118,7 +121,8 @@ class Window(tk.Frame):
         self.pack()
 
         self.width_ratio = 1.6
-        logging.info("Window Width radio = %.2f" % (self.width_ratio))
+
+        logging.info(f"Window Width radio = {self.width_ratio:.2f}")
 
         self.create_widgets()
         self.load_fixture(fixture_path)
@@ -327,40 +331,45 @@ def main():
 
     # get the programs arguments.
     parser = argparse.ArgumentParser(
-        description='Loads fixture related documents for processing')
+        description='Loads fixture related documents for processing'
+        )
 
     help_text = "The path to the fixture directory you want to open."
-    parser.add_argument('-P', '--Path', type=str,
-                        help=help_text,
-                        default=None)
+    parser.add_argument('-P', '--Path', 
+        type=str,
+        help=help_text,
+        default=None
+        )
 
     help_text = "Enables extra Engineering specific options (not recomended)."
     parser.add_argument('-E', '--Engineering',
-                        help=help_text,
-                        action='store_true',
-                        default=False)
+        help=help_text,
+        action='store_true',
+        default=False
+        )
 
     help_text = "Enables the programs extra functions"
     parser.add_argument('-M', '--Mode',
-                        type=str,
-                        choices=["design", "debug"],
-                        default=None)
+        type=str,
+        choices=["design", "debug"],
+        default=None
+        )
 
     args = parser.parse_args()
     str_fixture_path = args.Path
     engineering_flag = args.Engineering
 
-    if args.Mode is None:
-        mode = ModeTuple()
-    elif args.Mode == "design":
-        mode = ModeTuple(design=True)
-    elif args.Mode == "debug":
-        mode = ModeTuple(debug=True)
+    # if args.Mode is None:
+    #     mode = ModeTuple()
+    # elif args.Mode == "design":
+    #     mode = ModeTuple(design=True)
+    # elif args.Mode == "debug":
+    #     mode = ModeTuple(debug=True)
 
     if str_fixture_path is None:
         fixture_path = None
     else:
-        logging.info("path argument provided: '%s'", str_fixture_path)
+        logging.info(f"path argument provided: {str_fixture_path}")
         fixture_path = Path(str_fixture_path)
 
     root = tk.Tk()
@@ -390,6 +399,6 @@ def main():
     app.mainloop()
 
 
-# begin the main program.
-if __name__ == "__main__":
-    main()
+# # begin the main program.
+# if __name__ == "__main__":
+#     main()
