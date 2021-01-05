@@ -1,3 +1,3 @@
 @echo off
 
-start python wires_processor.py -E
+start python run.py -E
