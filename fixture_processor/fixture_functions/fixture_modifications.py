@@ -1150,7 +1150,7 @@ def get_custom_functions(fixture_dir, target, filename,
                   f"    Any wire descriptions.\n" \
                   f"    Uncheck '{description}', or \n"\
                   f"    Add valid entries."
-        raise ValueError(err_message)
+        raise ValueError(err_msg)
 
     return function_dict
 
