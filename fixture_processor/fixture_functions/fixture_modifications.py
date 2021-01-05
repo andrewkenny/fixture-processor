@@ -4,19 +4,22 @@ adding / removing wires, and
 adding / modifying inserts.
 """
 
-from tkinter import messagebox as mb
+import re
 import csv
 import logging
-import re
 
-from ..options_lib import fixture_processing_options
-from ..helper_functions import error_message_header
 
-from . import fixture_maths as fm
-from . import extract_wires as ew
-
+from tkinter import messagebox as mb
 from typing import NamedTuple, Optional
 from decimal import Decimal
+
+from fixture_processor.options_lib import fixture_processing_options
+from fixture_processor.helper_functions import error_message_header
+
+from fixture_processor.fixture_functions import fixture_maths as fm
+from fixture_processor.fixture_functions import extract_wires as ew
+
+
 
 
 fp_logger = logging.getLogger('fixture_processing.fixture_modifications')

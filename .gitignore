@@ -1,11 +1,13 @@
 __pycache__/
 *.py[cod]
 
+
 references/*/verifier/
 references/*/wiring_machine/
 references/*/full_fixture_plot.dxf
 references/*/ground_brc_list.txt
 references/*/ground_brc_plot.dxf
+
 
 
 mypy_output.txt
@@ -18,3 +20,5 @@ Git Bash.lnk
 
 .history
 .DS_Store
+/APPDATA
+/None

@@ -1,5 +1,5 @@
 from datetime import datetime
-from . import fixture_maths as fm
+from fixture_processor.fixture_functions import fixture_maths as fm
 
 import logging
 

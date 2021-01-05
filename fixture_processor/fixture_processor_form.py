@@ -10,16 +10,16 @@ from collections import namedtuple
 
 from pathlib import Path
 
-from .options_lib import fixture_processing_options
+from fixture_processor.options_lib import fixture_processing_options
 
-from .options_lib import fp_option_functions as fp_options
+from fixture_processor.options_lib import fp_option_functions as fp_options
 
-from .options_lib.options_functions import OptionsForm
-from .options_lib.fixture_processing_options import WIDGET_LIST
+from fixture_processor.options_lib.options_functions import OptionsForm
+from fixture_processor.options_lib.fixture_processing_options import WIDGET_LIST
 
-from . import file_operations as fo
-from .fixture_functions import fixture_modifications as fm
-from .fixture_functions import extract_wires as ew
+from fixture_processor import file_operations as fo
+from fixture_processor.fixture_functions import fixture_modifications as fm
+from fixture_processor.fixture_functions import extract_wires as ew
 
 from typing import NamedTuple
 
