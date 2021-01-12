@@ -2,6 +2,13 @@ __pycache__/
 *.py[cod]
 
 
+references/*/verifier/
+references/*/wiring_machine/
+references/*/full_fixture_plot.dxf
+references/*/ground_brc_list.txt
+references/*/ground_brc_plot.dxf
+
+
 
 mypy_output.txt
 pylint_output.txt
@@ -10,3 +17,10 @@ bin/fixture_processor/
 bin/fixture_processor_x86/
 build/
 Git Bash.lnk
+
+.history
+.DS_Store
+/APPDATA
+.env
+
+Pipfile.lock

@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import Dict, Tuple
+from typing import Tuple # , Dict
 
 import operator as op
 

@@ -33,20 +33,20 @@ The Aim behind generating a seperate set of files for the verifier is:
 
 """
 
-from . import fixture_maths as fm
-from . import fixture_input as fi
-from . import output_data as od
-from . import fixture_processing as fp
+from fixture_processor.fixture_functions import fixture_maths as fm
+from fixture_processor.fixture_functions import fixture_input as fi
+from fixture_processor.fixture_functions import output_data as od
+from fixture_processor.fixture_functions import fixture_processing as fp
 
 
-from .fixture_output import output_wires_inserts
-from .fixture_maths import CoordTuple
+from fixture_processor.fixture_functions.fixture_output import output_wires_inserts
+from fixture_processor.fixture_functions.fixture_maths import CoordTuple
 
-from ..options_lib import fixture_processing_options
+from fixture_processor.options_lib import fixture_processing_options
 
 
-from pathlib import Path
-from collections import namedtuple, OrderedDict
+# from pathlib import Path
+from collections import OrderedDict # , namedtuple 
 
 from tkinter import messagebox as mb
 from decimal import Decimal
