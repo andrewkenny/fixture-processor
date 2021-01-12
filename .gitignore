@@ -17,3 +17,12 @@ Git Bash.lnk
 .env
 
 Pipfile.lock
+.env
+references/inline_panel/verifier/inserts
+.env
+references/inline_panel/wiring_machine/inserts
+references/inline_panel/wiring_machine/wires
+references/inline_panel/verifier/wires
+.env
+src/APPDATA/ForwessunFixtures/config.ini
+src/APPDATA/ForwessunFixtures/ffp.log
