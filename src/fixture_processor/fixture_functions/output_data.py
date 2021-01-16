@@ -15,7 +15,7 @@ from dxfwrite import DXFEngine as dxf
 from turtle import Vec2D
 from itertools import product
 
-from fixture_processor.fixture_functions import fixture_maths as fm
+from src.fixture_processor.fixture_functions import fixture_maths as fm
 # from fixture_processor.fixture_functions import fixture_processing as fp
 
 fp_logger = logging.getLogger('fixture_processing.output_data')

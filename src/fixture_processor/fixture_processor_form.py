@@ -6,23 +6,26 @@ create the options form.
 import tkinter as tk
 from tkinter import messagebox as mb
 from collections import namedtuple
-
-
+from typing import NamedTuple
 from pathlib import Path
 
-from fixture_processor.options_lib import fixture_processing_options
+from src.fixture_processor.options_lib import fixture_processing_options
 
-from fixture_processor.options_lib import fp_option_functions as fp_options
+from src.fixture_processor.options_lib.options_functions import OptionsForm
+from src.fixture_processor.options_lib.fixture_processing_options import WIDGET_LIST
 
-from fixture_processor.options_lib.options_functions import OptionsForm
-from fixture_processor.options_lib.fixture_processing_options import WIDGET_LIST
+from src.fixture_processor import file_operations as fo
+from src.fixture_processor.fixture_functions import fixture_modifications as fm
+from src.fixture_processor.fixture_functions import extract_wires as ew
 
-from fixture_processor import file_operations as fo
-from fixture_processor.fixture_functions import fixture_modifications as fm
-from fixture_processor.fixture_functions import extract_wires as ew
 
-from typing import NamedTuple
+# ====== TS: Extract from __init__ ==========
+from src.fixture_processor.options_lib.options_functions import generate_option_functions
+from src.fixture_processor.options_lib.fixture_processing_options import get_section_comments
+from src.fixture_processor.options_lib.fixture_processing_options import get_options
 
+fp_options = generate_option_functions(get_section_comments(), get_options())
+# ====== TS ==========
 
 USER_OPTIONS_FILE = "user_options.ini"
 

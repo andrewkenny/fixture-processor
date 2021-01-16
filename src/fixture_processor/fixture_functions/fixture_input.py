@@ -5,7 +5,7 @@ import typing
 from dataclasses import dataclass
 from collections import namedtuple
 
-from fixture_processor.fixture_functions import fixture_maths as fm
+from src.fixture_processor.fixture_functions import fixture_maths as fm
 
 
 fp_logger = logging.getLogger('fixture_processing.fixture_input')

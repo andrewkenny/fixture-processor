@@ -35,7 +35,7 @@ from collections import OrderedDict # , namedtuple
 from pathlib import Path
 from string import hexdigits
 
-from fixture_processor.options_lib.options_functions import Optiontuple, get_sections
+from src.fixture_processor.options_lib.options_functions import Optiontuple, get_sections
 
 
 def get_section_comments():

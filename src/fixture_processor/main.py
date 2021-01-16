@@ -20,19 +20,24 @@ from tkinter.filedialog import askopenfilename
 from tkinter import messagebox as mb
 from typing import NamedTuple
 
+# from src.fixture_processor.options_lib import fixture_processing_options as fp_options
+# from src.fixture_processor.fixture_functions.fixture_input import get_outline_info
 
-from fixture_processor.options_lib import program_option_functions as p_options
-# from fixture_processor.options_lib import fixture_processing_options as fp_options
+from src.fixture_processor.fixture_processor_form import FixtureProcessingForm
+from src.fixture_processor.fixture_canvas_form import FixtureCanvas
 
-# from fixture_processor.fixture_functions.fixture_input import get_outline_info
+# from src.fixture_processor.fixture_functions import extract_wires as ew
+# from src.fixture_processor.fixture_functions import fixture_processing as fp
+# from src.fixture_processor.fixture_functions import fixture_modifications as fmod
+# from src.fixture_processor import file_operations as fo
 
-from fixture_processor.fixture_processor_form import FixtureProcessingForm
-from fixture_processor.fixture_canvas_form import FixtureCanvas
+# ========= TS: Extract from __init__ ==========
+from src.fixture_processor.options_lib.options_functions import generate_option_functions
+from src.fixture_processor.options_lib.program_options import get_section_comments
+from src.fixture_processor.options_lib.program_options import get_options
 
-# from fixture_processor.fixture_functions import extract_wires as ew
-# from fixture_processor.fixture_functions import fixture_processing as fp
-# from fixture_processor.fixture_functions import fixture_modifications as fmod
-# from fixture_processor import file_operations as fo
+p_options = generate_option_functions(get_section_comments(), get_options())
+# ========= TS ==========
 
 # dotenv initialisation
 load_dotenv()

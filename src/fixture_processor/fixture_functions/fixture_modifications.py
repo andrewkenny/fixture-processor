@@ -13,11 +13,11 @@ from tkinter import messagebox as mb
 from typing import NamedTuple, Optional
 # from decimal import Decimal
 
-from fixture_processor.options_lib import fixture_processing_options
-from fixture_processor.helper_functions import error_message_header
+from src.fixture_processor.options_lib import fixture_processing_options
+from src.fixture_processor.helper_functions import error_message_header
 
-from fixture_processor.fixture_functions import fixture_maths as fm
-from fixture_processor.fixture_functions import extract_wires as ew
+from src.fixture_processor.fixture_functions import fixture_maths as fm
+from src.fixture_processor.fixture_functions import extract_wires as ew
 
 
 

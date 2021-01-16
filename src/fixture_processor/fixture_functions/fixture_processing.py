@@ -25,11 +25,11 @@ from tkinter import messagebox as mb
 import logging
 
 
-from fixture_processor.options_lib import fixture_processing_options
+from src.fixture_processor.options_lib import fixture_processing_options
 
-from fixture_processor.fixture_functions import fixture_maths as fm
-from fixture_processor.fixture_functions import fixture_modifications as fmod
-from fixture_processor.fixture_functions import extract_wires as ew
+from src.fixture_processor.fixture_functions import fixture_maths as fm
+from src.fixture_processor.fixture_functions import fixture_modifications as fmod
+from src.fixture_processor.fixture_functions import extract_wires as ew
 
 
 fp_logger = logging.getLogger('fixture_processing.fixture_processing')

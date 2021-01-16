@@ -32,17 +32,17 @@ The Aim behind generating a seperate set of files for the verifier is:
        connected to the BRCs below.
 
 """
+from src.fixture_processor.fixture_functions.fixture_maths import CoordTuple
 
-from fixture_processor.fixture_functions import fixture_maths as fm
-from fixture_processor.fixture_functions import fixture_input as fi
-from fixture_processor.fixture_functions import output_data as od
-from fixture_processor.fixture_functions import fixture_processing as fp
+from src.fixture_processor.fixture_functions import fixture_maths as fm
+from src.fixture_processor.fixture_functions import fixture_input as fi
+from src.fixture_processor.fixture_functions import output_data as od
+from src.fixture_processor.fixture_functions import fixture_processing as fp
+
+from src.fixture_processor.fixture_functions.fixture_output import output_wires_inserts
 
 
-from fixture_processor.fixture_functions.fixture_output import output_wires_inserts
-from fixture_processor.fixture_functions.fixture_maths import CoordTuple
-
-from fixture_processor.options_lib import fixture_processing_options
+from src.fixture_processor.options_lib import fixture_processing_options
 
 
 # from pathlib import Path
