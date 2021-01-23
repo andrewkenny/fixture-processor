@@ -1,5 +1,5 @@
 @echo off
 
-start python -m unittest
+python -m unittest
 
 :: RUN python -m unittest to run all the tests from terminal/ CMD

@@ -220,6 +220,9 @@ def remove_ground_wires(fixture_dir, fixture_data, flags, target):
     ground to bround BRCs.
     """
 
+    if target == "verifier":
+        return fixture_data
+
     remove_count = 0
     # get the bottom wires and inserts
     wires, inserts = fixture_data._bottom
@@ -258,6 +261,9 @@ def remove_ground_wires(fixture_dir, fixture_data, flags, target):
             continue
 
         new_wires.append(wire_data)
+    
+
+
 
     fp_logger.info(
         "%d ground related wires have been removed from the fixture.", remove_count)
@@ -762,7 +768,7 @@ def get_transforms():
     # wires from soldered brc to soldered brc are not required on
     # ground plane fixtures. This removes them on the wiring machine.
     name = "remove_ground_wires"
-    targets = ("wiring_machine")
+    targets = ("wiring_machine", "verifier")
 
     # this is only to be run when the ground plane pin is
     # selected.
