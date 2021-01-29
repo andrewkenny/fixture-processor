@@ -28,7 +28,7 @@ TOOLING_TUPLE = namedtuple("Tooling", ["point", "diameter"])
 
 # Handy Regex
 PLACEMENT_RE = re.compile(
-    r"PLACEMENT +(?P<x>-?\d+), +(?P<y>-?\d+) +(?P<rotation>\d+(\.\d+))?;")
+    r"PLACEMENT +(?P<x>-?\d+), +(?P<y>-?\d+) +(?P<rotation>-?\d+(\.\d+))?;")
 
 
 class PinsTuple(typing.NamedTuple):

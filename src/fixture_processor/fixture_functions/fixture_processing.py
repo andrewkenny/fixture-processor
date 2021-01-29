@@ -165,6 +165,45 @@ def remove_terminal_wires(fixture_dir, fixture_data, flags, target):
     return fixture_data._replace(bottom_wires=new_bottom_wires)
 
 
+def sort_pins(inserts_dict):
+    """
+    Given an inserts object (dictionary), 
+    filter everything but the pins out,
+    
+    then sorts it in the following order
+    module 0, module 1, module 2, module 3
+    Then within each module:
+    top to bottom,
+    left to right.
+    
+    Has the option to reverse the module order.
+    """
+    
+
+    sorted_inserts_dict = {key: value for 
+                           key, value in inserts_dict.items()
+                           if value._is_pin}
+                               
+    # when sortting accross multiple domains,
+    # (in this case by module, then row, then column)
+    # The column sorting must be done first.
+    sorted_by_columns = sorted(sorted_inserts_dict.items(), key=lambda pair: pair[0][0], reverse=True)
+    
+    # then the rows are sorted.
+    sorted_by_rows = sorted(sorted_by_columns, key=lambda pair: pair[0][1])
+    
+    # then sorted by modules
+    sorted_by_modules = sorted(sorted_by_rows,key=lambda pair: pair[1].fix_id.brc.module)
+    
+    
+    return {key: value for 
+            key, value in sorted_by_modules}
+    
+    
+        
+
+
+
 def remove_testjet_wires(fixture_dir, fixture_data, flags, target):
     """
     When producing fixtures, testjet/ vtep transfer tend to be
@@ -220,8 +259,6 @@ def remove_ground_wires(fixture_dir, fixture_data, flags, target):
     ground to bround BRCs.
     """
 
-    if target == "verifier":
-        return fixture_data
 
     remove_count = 0
     # get the bottom wires and inserts
@@ -262,11 +299,44 @@ def remove_ground_wires(fixture_dir, fixture_data, flags, target):
 
         new_wires.append(wire_data)
     
+    # if the target is a verifier, then dummy wires need to be added
+    if target == "verifier":
 
+        ground_inserts = {key: value for 
+                          key, value in inserts.items()
+                          if value._is_fixture_ground(include_asru)}
 
+        sorted_ground_pins = sort_pins(ground_inserts)
+        
+        for from_coord, to_coord in zip(sorted_ground_pins.keys(), list(sorted_ground_pins.keys())[1:]):
+            
+            from_insert = sorted_ground_pins[from_coord]
+            to_insert = sorted_ground_pins[to_coord]
+            
+            from_pin = from_insert.fix_id.brc
+            to_pin = to_insert.fix_id.brc
+            
+            from_module, to_module = from_pin.module, to_pin.module
+            
+            # in throughput multiplier mode, there must not be a link between modules.
+            if (from_module != to_module) and flags.throughput_multiplier:
+                continue
+            
+            # get the wire length (for consistancy)
+            wire_length = fm.get_wire_length(from_insert, to_insert)
+            
+            wire_info = ew.WireInfo(wire_length, "28", "black")
+            
+            new_wires.append(ew.WireTuple(wire_info, from_insert.brc,
+                                          to_insert.brc, from_coord, to_coord, False))
 
-    fp_logger.info(
-        "%d ground related wires have been removed from the fixture.", remove_count)
+                
+        
+        
+
+    if target == "wiring_machine":
+        fp_logger.info(
+            "%d ground related wires have been removed from the fixture.", remove_count)
     return fixture_data._replace(bottom_wires=new_wires)
 
 def calculate_TJ_Mux_pins(mod_flags, flags):
